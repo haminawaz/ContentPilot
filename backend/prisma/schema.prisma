@@ -1,0 +1,41 @@
+generator client {
+  provider = "prisma-client-js"
+  output   = "../src/generated/prisma"
+}
+
+datasource db {
+  provider = "postgresql"
+}
+
+model Admin {
+  id                            Int       @id @default(autoincrement())
+  email                         String    @unique @db.VarChar(50)
+  password                      String    @db.Text
+  createdAt                     DateTime  @default(now())
+  updatedAt                     DateTime  @updatedAt
+
+  @@index([email])
+  @@map("admin")
+}
+
+model Users {
+  id                            Int       @id @default(autoincrement())
+  first_name                    String    @db.VarChar(50)
+  last_name                     String    @db.VarChar(50)
+  email                         String    @unique @db.VarChar(50)
+  phone                         String    @db.VarChar(50)
+  password                      String    @db.Text
+  email_verified                Boolean   @default(false)
+  email_verification_otp        String?   @db.VarChar(6)
+  email_verification_expires_at DateTime?
+  reset_password_otp            String?   @db.VarChar(6)
+  reset_password_expires_at     DateTime?
+  status                        String    @default("active") @db.VarChar(20)
+  last_login_at                 DateTime?
+  createdAt                     DateTime  @default(now())
+  updatedAt                     DateTime  @updatedAt
+
+  @@index([email])
+  @@index([status])
+  @@map("users")
+}
