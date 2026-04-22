@@ -1,0 +1,102 @@
+@import "tailwindcss";
+
+@theme inline {
+  /* Colors */
+  --color-canvas-cream: #f3f0ee;
+  --color-lifted-cream: #fcfbfa;
+  --color-ink-black: #141413;
+  --color-signal-orange: #cf4500;
+  --color-light-signal-orange: #f37338;
+  --color-charcoal: #262627;
+  --color-slate-gray: #696969;
+  --color-dust-taupe: #d1cdc7;
+  --color-link-blue: #3860be;
+
+  /* Radius */
+  --radius-mc-pill: 999px;
+  --radius-mc-stadium: 40px;
+  --radius-mc-button: 20px;
+  --radius-mc-consent: 24px;
+
+  /* Tracking */
+  --letter-spacing-mc-tight: -0.02em;
+  --letter-spacing-mc-wide: 0.04em;
+
+  /* Shadows */
+  --shadow-mc-soft: 0 4px 24px 0 rgba(0, 0, 0, 0.04);
+  --shadow-mc-heavy: 0 24px 48px 0 rgba(0, 0, 0, 0.08);
+
+  /* Fonts */
+  --font-sans: var(--font-geist-sans), Inter, "Sofia Sans", Arial, sans-serif;
+  --font-mono: var(--font-geist-mono);
+}
+
+@utility portrait-circle {
+  width: 320px;
+  height: 320px;
+  border-radius: 50%;
+  overflow: hidden;
+  position: relative;
+  border: 1px solid rgba(20, 20, 19, 0.05);
+}
+
+@utility satellite-cta {
+  position: absolute;
+  bottom: 0px;
+  right: 0px;
+  width: 56px;
+  height: 56px;
+  border-radius: 50%;
+  background: white;
+  color: #141413;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transform: translate(30%, 30%);
+  z-index: 10;
+  transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+@utility ghost-watermark {
+  font-size: 128px;
+  font-weight: 500;
+  letter-spacing: -0.04em;
+  color: #e8e2da;
+  user-select: none;
+  pointer-events: none;
+  white-space: nowrap;
+  line-height: 1;
+}
+
+@utility eyebrow {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  color: #141413;
+  font-weight: 700;
+  font-size: 14px;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+}
+
+@utility eyebrow-dot {
+  width: 8px;
+  height: 8px;
+  background-color: #cf4500;
+  border-radius: 50%;
+}
+
+:root {
+  --background: #f3f0ee; /* Canvas Cream */
+  --foreground: #141413; /* Ink Black */
+}
+
+* {
+  scroll-behavior: smooth;
+}
+
+body {
+  background: var(--background);
+  color: var(--foreground);
+  font-feature-settings: "ss01", "ss02", "cv01", "cv02";
+}
