@@ -39,16 +39,16 @@ export default function Home() {
               </h2>
 
               <p className="text-slate-gray text-[18px] md:text-[22px] mb-16 max-w-2xl mx-auto leading-relaxed border-t border-ink-black/5 pt-12">
-                Join high-performing teams using ContentPilot to scale with
+                Join high-performing SEO teams using ContentPilot to scale with
                 integrity and surgical precision.
               </p>
 
               <div className="flex flex-col sm:flex-row gap-6 justify-center">
                 <button className="bg-ink-black text-canvas-cream px-10 py-5 rounded-mc-button font-medium text-[16px] tracking-mc-tight hover:opacity-90 transition-all active:scale-95 shadow-lg">
-                  Begin your flight
+                  Initiate launch
                 </button>
                 <button className="bg-white border-1.5 border-ink-black text-ink-black px-10 py-5 rounded-mc-button font-medium text-[16px] tracking-mc-tight hover:bg-ink-black hover:text-white transition-all active:scale-95">
-                  View documentation
+                  Talk to a content pilot
                 </button>
               </div>
             </div>

@@ -7,28 +7,28 @@ const solutions = [
   {
     title: "SEO Specialists",
     description:
-      "Deep-dive SERP analysis for data-backed generation. Identify content gaps with surgical precision.",
+      "Deep-dive SERP analysis for data-backed generation. Identify high-value keywords and content gaps with surgical precision.",
     icon: Zap,
     color: "bg-signal-orange text-white",
   },
   {
     title: "Content Teams",
     description:
-      "Scale production without sacrificing editorial voice. Collaborative workflows for high-volume pipelines.",
+      "Scale high-quality production without sacrificing your brand's unique editorial voice. Collaborative tools for high-volume pipelines.",
     icon: Layout,
     color: "bg-ink-black text-canvas-cream",
   },
   {
     title: "E-commerce",
     description:
-      "Automated product descriptions that actually convert. Turn your catalog into a conversion engine.",
+      "Automated, SEO-optimized product descriptions that actually drive traffic and convert visitors into loyal customers.",
     icon: Globe,
     color: "bg-link-blue text-white",
   },
   {
     title: "Agencies",
     description:
-      "White-label reports and multi-client management for the most demanding content workflows.",
+      "White-label reports and multi-client management built for the most demanding SEO and content marketing agency workflows.",
     icon: MousePointer2,
     color: "bg-clay-brown text-white",
   },

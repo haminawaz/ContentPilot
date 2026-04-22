@@ -1,12 +1,6 @@
 "use client";
 
-import {
-  // Linkedin,
-  // Facebook,
-  // Twitter,
-  // Youtube,
-  ChevronDown,
-} from "lucide-react";
+import { ChevronDown } from "lucide-react";
 
 export default function Footer() {
   return (
@@ -16,7 +10,7 @@ export default function Footer() {
           Ready to chart your content's trajectory?
         </h2>
 
-        <div className="grid grid-cols-2 lg:grid-cols-4 gap-12 mb-[120px]">
+        <div className="grid grid-cols-2 md:grid-cols-3 gap-12 mb-[120px]">
           <div>
             <h4 className="text-[12px] font-bold tracking-mc-wide uppercase text-slate-gray mb-8">
               Capabilities
@@ -70,32 +64,12 @@ export default function Footer() {
               ))}
             </ul>
           </div>
-          <div>
-            <h4 className="text-[12px] font-bold tracking-mc-wide uppercase text-slate-gray mb-8">
-              Connect
-            </h4>
-            {/* <div className="flex gap-4">
-              {[Linkedin, Twitter, Youtube].map((Icon, i) => (
-                <a
-                  key={i}
-                  href="#"
-                  className="w-12 h-12 rounded-full border border-canvas-cream/10 flex items-center justify-center hover:bg-canvas-cream/10 transition-all duration-500">
-                  <Icon size={18} />
-                </a>
-              ))}
-            </div> */}
-          </div>
         </div>
 
         <div className="pt-8 border-t border-canvas-cream/10 flex flex-col md:flex-row justify-between items-center gap-6">
           <div className="flex flex-wrap gap-8 text-[12px] text-slate-gray font-medium tracking-mc-wide">
-            <span>© 2026 CONTENTPILOT // STRUCTURAL SYSTEMS</span>
-            <span className="text-signal-orange">SIGNAL: ACTIVE</span>
+            <span>© 2026 CONTENTPILOT</span>
           </div>
-
-          <button className="flex items-center gap-4 px-6 py-3 rounded-full border border-canvas-cream/20 text-[13px] hover:bg-canvas-cream/5 transition-all text-slate-gray hover:text-canvas-cream">
-            Global Systems (EN-US) <ChevronDown size={14} />
-          </button>
         </div>
       </div>
     </footer>

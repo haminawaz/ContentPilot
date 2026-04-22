@@ -1,6 +1,8 @@
 "use client";
 
 import { motion } from "framer-motion";
+import Image from "next/image";
+import Link from "next/link";
 
 export default function Navbar() {
   return (
@@ -9,8 +11,20 @@ export default function Navbar() {
         initial={{ y: -100, opacity: 0 }}
         animate={{ y: 0, opacity: 1 }}
         transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
-        className="w-full max-w-[1400px] bg-white/95 backdrop-blur-md rounded-mc-pill px-6 md:px-10 py-3 md:py-4 border border-ink-black/5 shadow-mc-soft flex items-center justify-between pointer-events-auto">
-        <div className="hidden lg:flex items-center gap-10">
+        className="w-full bg-white/95 backdrop-blur-md rounded-mc-pill px-6 md:px-10 py-2 border border-ink-black/5 shadow-mc-soft flex items-center justify-between pointer-events-auto relative">
+        
+        <Link href="/" className="flex items-center shrink-0">
+          <Image
+            src="/logo.png"
+            alt="ContentPilot Logo"
+            width={350}
+            height={350}
+            className="h-16 md:h-20 w-auto object-contain"
+            priority
+          />
+        </Link>
+
+        <div className="hidden lg:flex items-center gap-10 absolute left-1/2 -translate-x-1/2">
           {["Features", "Solutions", "Process", "Contact"].map((link) => (
             <a
               key={link}

@@ -7,7 +7,7 @@ const steps = [
   {
     title: "Market Analysis",
     description:
-      "Deep scan of SERPs and competitor content strategies to identify performance gaps.",
+      "Our system performs a deep scan of SERPs and competitor clusters to identify the exact search intent and performance gaps.",
     icon: Search,
     image:
       "https://images.unsplash.com/photo-1460925895917-afdab827c52f?auto=format&fit=crop&w=800&q=80",
@@ -16,7 +16,7 @@ const steps = [
   {
     title: "Structural Pilot",
     description:
-      "AI-driven generation using token-level precision to maintain brand voice and SEO integrity.",
+      "Content is generated using advanced OpenAI models, fine-tuned to maintain your brand's unique trajectory and SEO integrity.",
     icon: PenTool,
     image:
       "https://images.unsplash.com/photo-1550751827-4bd374c3f58b?auto=format&fit=crop&w=800&q=80",
@@ -25,7 +25,7 @@ const steps = [
   {
     title: "Final Launch",
     description:
-      "Refine, export in native markdown, and watch your search performance scale.",
+      "Refine your masterpiece, export in native markdown, and deploy your content to steer your organic growth.",
     icon: Rocket,
     image:
       "https://images.unsplash.com/photo-1559136555-9303baea8ebd?auto=format&fit=crop&w=800&q=80",
