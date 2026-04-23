@@ -36,13 +36,13 @@ const steps = [
 export default function HowItWorks() {
   return (
     <section id="process" className="relative overflow-hidden">
-      <div className="w-7xl mx-auto py-[60px] px-6 md:px-[100px] relative">
+      <div className="max-w-7xl w-full mx-auto py-[60px] px-6 md:px-[100px] relative">
         <div className="text-center mb-20 md:mb-32">
           <div className="eyebrow justify-center mb-8">
             <span className="eyebrow-dot" />
             The Methodology
           </div>
-          <h2 className="text-[48px] md:text-[64px] mb-8 font-medium leading-none tracking-mc-tight">
+          <h2 className="text-[32px] sm:text-[48px] md:text-[64px] mb-8 font-medium leading-none tracking-mc-tight">
             Trajectory of a Masterpiece.
           </h2>
           <p className="text-slate-gray text-[18px] md:text-[20px] max-w-2xl mx-auto leading-relaxed opacity-80">
@@ -55,7 +55,7 @@ export default function HowItWorks() {
           {steps.map((step, idx) => (
             <div
               key={idx}
-              className={`flex flex-col md:flex-row items-center gap-24 ${
+              className={`flex flex-col md:flex-row items-center gap-10 md:gap-24 ${
                 step.side === "right" ? "md:flex-row-reverse" : ""
               }`}>
               <motion.div

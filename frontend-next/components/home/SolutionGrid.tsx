@@ -30,7 +30,7 @@ const solutions = [
     description:
       "White-label reports and multi-client management built for the most demanding SEO and content marketing agency workflows.",
     icon: MousePointer2,
-    color: "bg-clay-brown text-white",
+    color: "bg-slate-gray text-white",
   },
 ];
 
@@ -39,13 +39,13 @@ export default function SolutionGrid() {
     <section
       className="py-[80px] bg-canvas-cream overflow-hidden"
       id="solutions">
-      <div className="w-7xl mx-auto px-6 md:px-[100px]">
+      <div className="max-w-7xl w-full mx-auto px-6 md:px-[100px]">
         <div className="text-center mb-20 md:mb-32">
           <div className="eyebrow justify-center mb-8">
             <span className="eyebrow-dot" />
             Bespoke Solutions
           </div>
-          <h2 className="text-[48px] md:text-[64px] mb-8 font-medium leading-none tracking-mc-tight">
+          <h2 className="text-[32px] sm:text-[48px] md:text-[64px] mb-8 font-medium leading-none tracking-mc-tight">
             Built for Every Scale of Ambition.
           </h2>
           <p className="text-slate-gray text-[18px] md:text-[20px] max-w-2xl mx-auto leading-relaxed opacity-80">
@@ -54,8 +54,7 @@ export default function SolutionGrid() {
           </p>
         </div>
 
-        <div className="perspective-[2000px]">
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-12 transform-gpu rotate-x-15 rotate-z-2">
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8 md:gap-12 md:perspective-[2000px] md:transform-gpu md:rotate-x-15 md:rotate-z-2">
             {solutions.map((item, idx) => (
               <motion.div
                 key={idx}
@@ -89,7 +88,6 @@ export default function SolutionGrid() {
               </motion.div>
             ))}
           </div>
-        </div>
       </div>
     </section>
   );

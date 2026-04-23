@@ -38,14 +38,14 @@ export default function Features() {
       whileInView={{ opacity: 1, y: 0 }}
       viewport={{ once: true }}
       transition={{ duration: 1, ease: [0.16, 1, 0.3, 1] }}
-      className="w-7xl mx-auto bg-white rounded-mc-stadium p-12 md:p-24 shadow-mc-heavy border border-ink-black/5 relative overflow-hidden">
+      className="max-w-7xl w-full mx-auto bg-white rounded-mc-consent md:rounded-mc-stadium p-6 sm:p-12 md:p-24 shadow-mc-heavy border border-ink-black/5 relative overflow-hidden">
       <div className="flex flex-col md:flex-row justify-between items-end gap-12 mb-20 md:mb-32">
         <div className="max-w-2xl">
           <div className="eyebrow mb-8">
             <span className="eyebrow-dot" />
             Atomic Capabilities
           </div>
-          <h2 className="text-[48px] md:text-[64px] leading-none font-medium tracking-mc-tight">
+          <h2 className="text-[32px] sm:text-[48px] md:text-[64px] leading-none font-medium tracking-mc-tight">
             Everything you need to pilot your content at scale.
           </h2>
         </div>

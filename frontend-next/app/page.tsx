@@ -1,5 +1,5 @@
 import { Metadata } from "next";
-import HomeClient from "../components/ui/HomeClient";
+import HomeClient from "../components/home/HomeClient";
 
 export const metadata: Metadata = {
   title: "ContentPilot | AI SEO & Structural Content Strategy",
