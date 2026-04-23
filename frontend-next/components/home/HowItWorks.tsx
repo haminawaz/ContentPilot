@@ -35,70 +35,138 @@ const steps = [
 
 export default function HowItWorks() {
   return (
-    <section id="process" className="relative overflow-hidden">
-      <div className="max-w-7xl w-full mx-auto py-[60px] px-6 md:px-[100px] relative">
+    <section
+      id="process"
+      className="relative overflow-hidden py-[60px] md:py-[100px] bg-canvas-cream">
+      <div className="max-w-7xl w-full mx-auto px-6 md:px-[100px] relative">
         <div className="text-center mb-20 md:mb-32">
           <div className="eyebrow justify-center mb-8">
             <span className="eyebrow-dot" />
             The Methodology
           </div>
-          <h2 className="text-[32px] sm:text-[48px] md:text-[64px] mb-8 font-medium leading-none tracking-mc-tight">
-            Trajectory of a Masterpiece.
+          <h2 className="text-[32px] sm:text-[48px] md:text-[60px] mb-8 font-medium leading-[1.05] tracking-mc-tight text-ink-black">
+            Trajectory of a{" "}
+            <span className="italic font-normal text-signal-orange">
+              masterpiece.
+            </span>
           </h2>
-          <p className="text-slate-gray text-[18px] md:text-[20px] max-w-2xl mx-auto leading-relaxed opacity-80">
+          <p className="text-slate-gray text-[17px] md:text-[19px] max-w-2xl mx-auto leading-relaxed">
             A precise, step-by-step workflow designed to integrate with your
             existing systems.
           </p>
         </div>
 
-        <div className="space-y-[50px]">
-          {steps.map((step, idx) => (
-            <div
-              key={idx}
-              className={`flex flex-col md:flex-row items-center gap-10 md:gap-24 ${
-                step.side === "right" ? "md:flex-row-reverse" : ""
-              }`}>
-              <motion.div
-                initial={{ opacity: 0, scale: 0.8 }}
-                whileInView={{ opacity: 1, scale: 1 }}
-                viewport={{ once: true }}
-                transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
-                className="relative shrink-0">
-                <div className="w-[280px] h-[280px] md:w-[360px] md:h-[360px] rounded-full overflow-hidden border border-ink-black/5 shadow-mc-heavy">
-                  <img
-                    src={step.image}
-                    alt={step.title}
-                    className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700"
+        <div className="space-y-24 md:space-y-40 relative">
+          {/* Vertical dashed path */}
+          <div
+            aria-hidden
+            className="hidden md:block absolute left-1/2 top-0 bottom-0 w-px pointer-events-none"
+            style={{
+              backgroundImage:
+                "linear-gradient(to bottom, #cf450055 0, #cf450055 8px, transparent 8px, transparent 16px)",
+              backgroundSize: "1px 16px",
+            }}
+          />
+
+          {steps.map((step, idx) => {
+            const Icon = step.icon;
+            const isRight = step.side === "right";
+            return (
+              <div
+                key={idx}
+                className={`flex flex-col md:flex-row items-center gap-10 md:gap-20 relative ${
+                  isRight ? "md:flex-row-reverse" : ""
+                }`}>
+                {/* 3D circular image with rotating ring */}
+                <motion.div
+                  initial={{ opacity: 0, scale: 0.7, rotateY: -30 }}
+                  whileInView={{ opacity: 1, scale: 1, rotateY: 0 }}
+                  viewport={{ once: true, amount: 0.4 }}
+                  transition={{ duration: 1, ease: [0.16, 1, 0.3, 1] }}
+                  style={{
+                    transformStyle: "preserve-3d",
+                    perspective: "1200px",
+                  }}
+                  className="relative shrink-0 group">
+                  {/* Outer rotating dashed ring */}
+                  <motion.div
+                    aria-hidden
+                    animate={{ rotate: 360 }}
+                    transition={{
+                      duration: 30,
+                      repeat: Infinity,
+                      ease: "linear",
+                    }}
+                    className="absolute inset-[-20px] rounded-full border-2 border-dashed border-light-signal-orange/25 pointer-events-none"
                   />
-                </div>
+                  {/* Middle slow ring */}
+                  <motion.div
+                    aria-hidden
+                    animate={{ rotate: -360 }}
+                    transition={{
+                      duration: 60,
+                      repeat: Infinity,
+                      ease: "linear",
+                    }}
+                    className="absolute inset-[-8px] rounded-full border border-ink-black/10 pointer-events-none">
+                    <span className="absolute top-0 left-1/2 -translate-x-1/2 -translate-y-1/2 w-2 h-2 rounded-full bg-signal-orange shadow-[0_0_10px_rgba(207,69,0,0.6)]" />
+                  </motion.div>
 
-                <div className="absolute bottom-4 right-4 md:bottom-8 md:right-8 w-20 h-20 bg-white rounded-full flex items-center justify-center shadow-mc-heavy border border-ink-black/5 z-20">
-                  <step.icon size={32} className="text-signal-orange" />
-                </div>
+                  {/* Image disc */}
+                  <div className="w-[260px] h-[260px] md:w-[340px] md:h-[340px] rounded-full overflow-hidden border border-ink-black/5 shadow-[0_40px_80px_-20px_rgba(20,20,19,0.3)] relative bg-white">
+                    <img
+                      src={step.image}
+                      alt={step.title}
+                      className="w-full h-full object-cover transition-transform duration-[1.5s] group-hover:scale-110"
+                    />
+                    <div className="absolute inset-0 bg-gradient-to-t from-ink-black/30 via-transparent to-transparent pointer-events-none" />
+                  </div>
 
-                {idx < steps.length - 1 && (
-                  <div className="hidden md:block absolute bottom-[-120px] left-1/2 w-[2px] h-[100px] bg-linear-to-b from-light-signal-orange/30 to-transparent" />
-                )}
-              </motion.div>
+                  {/* Floating icon badge */}
+                  <motion.div
+                    animate={{ y: [0, -6, 0] }}
+                    transition={{
+                      duration: 3,
+                      repeat: Infinity,
+                      ease: "easeInOut",
+                    }}
+                    className="absolute bottom-3 right-3 md:bottom-6 md:right-6 w-20 h-20 bg-white rounded-full flex items-center justify-center shadow-[0_20px_40px_-10px_rgba(20,20,19,0.3)] border border-ink-black/5 z-20">
+                    <span className="absolute inset-0 rounded-full bg-signal-orange/15 animate-ping" />
+                    <Icon
+                      size={28}
+                      className="relative text-signal-orange"
+                    />
+                  </motion.div>
 
-              <motion.div
-                initial={{ opacity: 0, x: step.side === "left" ? 40 : -40 }}
-                whileInView={{ opacity: 1, x: 0 }}
-                viewport={{ once: true }}
-                transition={{ duration: 0.8, delay: 0.2 }}
-                className="max-w-md">
-                <div className="text-[14px] font-bold text-signal-orange mb-4">
-                  0{idx + 1} // PHASE
-                </div>
-                <h3 className="text-[32px] mb-6 font-medium tracking-mc-tight">
-                  {step.title}
-                </h3>
-                <p className="text-slate-gray text-[18px] leading-relaxed opacity-90">
-                  {step.description}
-                </p>
-              </motion.div>
-            </div>
-          ))}
+                  {/* Phase number */}
+                  <div className="absolute -top-2 -left-2 md:-top-4 md:-left-4 bg-ink-black text-canvas-cream w-14 h-14 rounded-full flex items-center justify-center text-[15px] font-medium tracking-mc-tight shadow-[0_16px_32px_-10px_rgba(20,20,19,0.4)] z-20">
+                    0{idx + 1}
+                  </div>
+                </motion.div>
+
+                {/* Copy */}
+                <motion.div
+                  initial={{
+                    opacity: 0,
+                    x: isRight ? -40 : 40,
+                  }}
+                  whileInView={{ opacity: 1, x: 0 }}
+                  viewport={{ once: true, amount: 0.4 }}
+                  transition={{ duration: 0.9, delay: 0.2 }}
+                  className="max-w-md relative z-10">
+                  <div className="text-[12px] font-mono font-bold text-signal-orange mb-4 tracking-[0.2em] uppercase">
+                    Phase 0{idx + 1} // {step.title.split(" ")[0]}
+                  </div>
+                  <h3 className="text-[30px] md:text-[36px] mb-6 font-medium tracking-mc-tight leading-[1.1] text-ink-black">
+                    {step.title}
+                  </h3>
+                  <p className="text-slate-gray text-[17px] leading-relaxed">
+                    {step.description}
+                  </p>
+                </motion.div>
+              </div>
+            );
+          })}
         </div>
       </div>
     </section>
