@@ -40,7 +40,7 @@ export function Sidebar() {
           className={`w-auto object-contain transition-all duration-500`}
           priority
         />
-        <div className="leading-tight">
+        <div className="leading-tight cursor-default">
           <p className="text-[15px] font-bold text-[#d12329] tracking-mc-tight">
             Content<span className=" text-[#ef9b1a]">Pilot</span>
           </p>
