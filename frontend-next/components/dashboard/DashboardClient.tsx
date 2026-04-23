@@ -10,9 +10,6 @@ import {
   ArrowUpRight,
   Zap,
   Clock,
-  Link2,
-  CheckCircle2,
-  BarChart3,
 } from "lucide-react";
 
 const STATS = [
@@ -77,38 +74,15 @@ const RECENT = [
   },
 ];
 
-const ACTIVITY = [
-  {
-    icon: Sparkles,
-    text: "Generated article on ‘link velocity strategy'",
-    time: "24 minutes ago",
-  },
-  {
-    icon: Link2,
-    text: "18 internal link opportunities surfaced",
-    time: "1 hour ago",
-  },
-  {
-    icon: CheckCircle2,
-    text: "FAQ schema approved for 3 articles",
-    time: "3 hours ago",
-  },
-  {
-    icon: BarChart3,
-    text: "Keyword ‘content ops' moved to position #4",
-    time: "Today, 09:12",
-  },
-];
-
 export function DashboardClient() {
   return (
     <div className="max-w-7xl mx-auto flex flex-col gap-8">
-      {/* Hero banner */}
       <motion.section
         initial={{ opacity: 0, y: 16 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.5 }}
-        className="relative overflow-hidden rounded-3xl bg-ink-black text-canvas-cream px-8 py-10">
+        className="relative overflow-hidden rounded-3xl bg-ink-black text-canvas-cream px-8 py-10"
+      >
         <div className="absolute -top-24 -right-24 w-80 h-80 rounded-full bg-signal-orange/25 blur-3xl" />
         <div className="absolute bottom-0 left-1/3 w-64 h-64 rounded-full bg-link-blue/20 blur-3xl" />
         <div
@@ -138,7 +112,8 @@ export function DashboardClient() {
           </div>
           <Link
             href="/dashboard/generate-article"
-            className="group inline-flex items-center gap-2 bg-signal-orange text-white px-5 py-3 rounded-mc-button font-semibold text-[14px] hover:bg-light-signal-orange transition-colors">
+            className="group inline-flex items-center gap-2 bg-signal-orange text-white px-5 py-3 rounded-mc-button font-semibold text-[14px] hover:bg-light-signal-orange transition-colors"
+          >
             <Sparkles className="w-4 h-4" />
             New article
             <ArrowUpRight className="w-4 h-4 transition-transform group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
@@ -146,7 +121,6 @@ export function DashboardClient() {
         </div>
       </motion.section>
 
-      {/* Stats */}
       <section className="grid grid-cols-2 lg:grid-cols-4 gap-4">
         {STATS.map((s, i) => {
           const Icon = s.icon;
@@ -156,9 +130,11 @@ export function DashboardClient() {
               initial={{ opacity: 0, y: 16 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.4, delay: i * 0.06 }}
-              className="relative bg-lifted-cream border border-ink-black/5 rounded-2xl p-5 shadow-mc-soft">
+              className="relative bg-lifted-cream border border-ink-black/5 rounded-2xl p-5 shadow-mc-soft"
+            >
               <div
-                className={`w-9 h-9 rounded-xl grid place-items-center ${s.accent}`}>
+                className={`w-9 h-9 rounded-xl grid place-items-center ${s.accent}`}
+              >
                 <Icon className="w-4 h-4" />
               </div>
               <p className="mt-4 text-[28px] font-semibold text-ink-black tracking-mc-tight leading-none">
@@ -175,14 +151,13 @@ export function DashboardClient() {
         })}
       </section>
 
-      {/* Grid: recent articles + activity */}
-      <section className="grid grid-cols-1 lg:grid-cols-3 gap-6">
-        {/* Recent articles */}
+      <section className="w-full gap-6">
         <motion.div
           initial={{ opacity: 0, y: 16 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.5, delay: 0.2 }}
-          className="lg:col-span-2 bg-lifted-cream border border-ink-black/5 rounded-2xl shadow-mc-soft overflow-hidden">
+          className="lg:col-span-2 bg-lifted-cream border border-ink-black/5 rounded-2xl shadow-mc-soft overflow-hidden"
+        >
           <div className="flex items-center justify-between px-6 py-5 border-b border-ink-black/5">
             <div>
               <h2 className="text-[16px] font-semibold text-ink-black tracking-mc-tight">
@@ -194,7 +169,8 @@ export function DashboardClient() {
             </div>
             <Link
               href="/dashboard/generate-article"
-              className="text-[12px] font-semibold text-ink-black hover:text-signal-orange transition-colors flex items-center gap-1">
+              className="text-[12px] font-semibold text-ink-black hover:text-signal-orange transition-colors flex items-center gap-1"
+            >
               View all
               <ArrowUpRight className="w-3.5 h-3.5" />
             </Link>
@@ -203,7 +179,8 @@ export function DashboardClient() {
             {RECENT.map((r, i) => (
               <li
                 key={i}
-                className="px-6 py-4 flex items-center gap-4 hover:bg-canvas-cream transition-colors">
+                className="px-6 py-4 flex items-center gap-4 hover:bg-canvas-cream transition-colors"
+              >
                 <div className="w-10 h-10 rounded-xl bg-ink-black/5 grid place-items-center shrink-0">
                   <FileText className="w-4 h-4 text-ink-black" />
                 </div>
@@ -220,7 +197,8 @@ export function DashboardClient() {
                     r.status === "Published"
                       ? "bg-emerald-100 text-emerald-700"
                       : "bg-ink-black/5 text-slate-gray"
-                  }`}>
+                  }`}
+                >
                   {r.status}
                 </span>
                 <span className="text-[11px] text-slate-gray flex items-center gap-1 shrink-0">
@@ -230,50 +208,6 @@ export function DashboardClient() {
               </li>
             ))}
           </ul>
-        </motion.div>
-
-        {/* Activity */}
-        <motion.div
-          initial={{ opacity: 0, y: 16 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.5, delay: 0.3 }}
-          className="bg-lifted-cream border border-ink-black/5 rounded-2xl shadow-mc-soft p-6 flex flex-col">
-          <div className="flex items-center justify-between mb-5">
-            <h2 className="text-[16px] font-semibold text-ink-black tracking-mc-tight">
-              Activity
-            </h2>
-            <span className="text-[11px] font-semibold text-slate-gray px-2 py-0.5 rounded-full bg-ink-black/5">
-              Live
-            </span>
-          </div>
-
-          <ol className="relative flex flex-col gap-5 before:absolute before:left-3.75 before:top-1 before:bottom-1 before:w-px before:bg-ink-black/10">
-            {ACTIVITY.map((a, i) => {
-              const Icon = a.icon;
-              return (
-                <li key={i} className="relative flex items-start gap-3">
-                  <div className="relative z-10 w-8 h-8 rounded-full bg-canvas-cream border border-ink-black/10 grid place-items-center shrink-0">
-                    <Icon className="w-3.5 h-3.5 text-ink-black" />
-                  </div>
-                  <div className="pt-0.5">
-                    <p className="text-[13px] text-ink-black leading-snug">
-                      {a.text}
-                    </p>
-                    <p className="text-[11px] text-slate-gray mt-0.5">
-                      {a.time}
-                    </p>
-                  </div>
-                </li>
-              );
-            })}
-          </ol>
-
-          <Link
-            href="/dashboard/generate-article"
-            className="mt-6 inline-flex items-center justify-center gap-2 text-[13px] font-semibold text-ink-black bg-canvas-cream border border-ink-black/10 rounded-mc-button py-2.5 hover:bg-white transition-colors">
-            <Sparkles className="w-4 h-4 text-signal-orange" />
-            Start a new draft
-          </Link>
         </motion.div>
       </section>
     </div>
