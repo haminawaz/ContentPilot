@@ -100,18 +100,17 @@ function TiltCard({
         transformStyle: "preserve-3d",
         transformPerspective: 1200,
       }}
-      className="relative group rounded-mc-consent bg-canvas-cream/50 border border-ink-black/5 p-8 md:p-10 overflow-hidden hover:border-ink-black/10 transition-colors">
-      {/* Mouse-following glow */}
+      className="relative group rounded-mc-consent bg-canvas-cream/50 border border-ink-black/5 p-8 md:p-10 overflow-hidden hover:border-ink-black/10 transition-colors"
+    >
       <motion.div
         aria-hidden
         className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none"
         style={{ background: glow }}
       />
-
-      {/* Number watermark */}
       <span
         className="absolute top-6 right-6 text-[13px] font-mono text-ink-black/20 tracking-widest"
-        style={{ transform: "translateZ(30px)" }}>
+        style={{ transform: "translateZ(30px)" }}
+      >
         {feature.number}
       </span>
 
@@ -125,7 +124,6 @@ function TiltCard({
             size={28}
             className="relative z-10 text-ink-black group-hover:text-white transition-colors duration-500"
           />
-          {/* Halo ring */}
           <motion.span
             aria-hidden
             className={`absolute inset-0 rounded-mc-button border-2 ${feature.accent.replace(
@@ -155,17 +153,17 @@ function TiltCard({
 
 export default function Features() {
   return (
-    <section id="features" className="px-6 pt-[40px] pb-[40px]">
+    <section id="features" className="px-6 pt-10 pb-10">
       <motion.div
         initial={{ opacity: 0, y: 40 }}
         whileInView={{ opacity: 1, y: 0 }}
         viewport={{ once: true }}
         transition={{ duration: 1, ease: [0.16, 1, 0.3, 1] }}
-        className="max-w-7xl w-full mx-auto bg-white rounded-mc-consent md:rounded-mc-stadium p-6 sm:p-12 md:p-20 shadow-mc-heavy border border-ink-black/5 relative overflow-hidden">
-        {/* Decorative background */}
+        className="max-w-7xl w-full mx-auto bg-white rounded-mc-consent md:rounded-mc-stadium p-6 sm:p-12 md:p-20 shadow-mc-heavy border border-ink-black/5 relative overflow-hidden"
+      >
         <div
           aria-hidden
-          className="absolute -top-40 -right-40 w-[500px] h-[500px] rounded-full pointer-events-none"
+          className="absolute -top-40 -right-40 w-125 h-125 rounded-full pointer-events-none"
           style={{
             background:
               "radial-gradient(circle, rgba(243,115,56,0.08) 0%, transparent 60%)",
@@ -173,7 +171,7 @@ export default function Features() {
         />
         <div
           aria-hidden
-          className="absolute -bottom-40 -left-40 w-[500px] h-[500px] rounded-full pointer-events-none"
+          className="absolute -bottom-40 -left-40 w-125 h-125 rounded-full pointer-events-none"
           style={{
             background:
               "radial-gradient(circle, rgba(56,96,190,0.06) 0%, transparent 60%)",

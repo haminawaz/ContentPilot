@@ -247,7 +247,7 @@ export function DashboardClient() {
             </span>
           </div>
 
-          <ol className="relative flex flex-col gap-5 before:absolute before:left-[15px] before:top-1 before:bottom-1 before:w-px before:bg-ink-black/10">
+          <ol className="relative flex flex-col gap-5 before:absolute before:left-3.75 before:top-1 before:bottom-1 before:w-px before:bg-ink-black/10">
             {ACTIVITY.map((a, i) => {
               const Icon = a.icon;
               return (

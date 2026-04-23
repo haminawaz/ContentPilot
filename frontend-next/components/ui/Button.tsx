@@ -40,7 +40,7 @@ export const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
     };
 
     const commonClasses = cn(
-      "rounded-mc-button font-medium tracking-mc-tight transition-all flex items-center justify-center gap-2 disabled:opacity-50 disabled:pointer-events-none",
+      "rounded-mc-button cursor-pointer font-medium tracking-mc-tight transition-all flex items-center justify-center gap-2 disabled:opacity-50 disabled:pointer-events-none",
       variants[variant],
       sizes[size],
     );

@@ -2,6 +2,7 @@
 
 import { ArrowRight } from "lucide-react";
 import { motion } from "framer-motion";
+import Image from "next/image";
 
 interface PortraitCardProps {
   image: string;
@@ -27,14 +28,21 @@ export default function PortraitCard({
       className={`flex flex-col ${index % 2 === 0 ? "mt-0" : "mt-24"} items-center text-center`}>
       <div className="relative mb-10 group">
         <div className="portrait-circle shadow-2xl transition-transform duration-700 group-hover:scale-[1.02]">
-          <img src={image} alt={title} className="w-full h-full object-cover" />
+          <Image
+            src={image}
+            alt={title}
+            width={350}
+            height={350}
+            className="w-full h-full object-cover"
+            priority
+          />
         </div>
         <button className="satellite-cta shadow-xl group-hover:scale-110 group-hover:bg-(--ink-black) group-hover:text-white transition-all duration-300">
           <ArrowRight size={24} />
         </button>
       </div>
 
-      <div className="max-w-[300px]">
+      <div className="max-w-75">
         <div className="eyebrow mb-3 justify-center">
           <span className="eyebrow-dot" />
           {eyebrow}

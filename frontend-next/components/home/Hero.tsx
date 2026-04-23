@@ -36,8 +36,8 @@ export default function Hero() {
   return (
     <section
       ref={ref}
-      className="relative px-6 md:px-[100px] pt-[160px] md:pt-[200px] pb-[80px] md:pb-[140px] min-h-[90vh] flex items-center overflow-hidden bg-canvas-cream">
-      {/* Animated dot grid background */}
+      className="relative px-6 md:px-25 pt-40 md:pt-50 pb-20 md:pb-35 min-h-[90vh] flex items-center overflow-hidden bg-canvas-cream"
+    >
       <div
         className="absolute inset-0 opacity-[0.35] pointer-events-none"
         style={{
@@ -51,7 +51,6 @@ export default function Hero() {
         }}
       />
 
-      {/* Signal-orange halo glow */}
       <motion.div
         aria-hidden
         initial={{ opacity: 0 }}
@@ -65,37 +64,38 @@ export default function Hero() {
         }}
       />
 
-      {/* Orbital rings */}
       <motion.div
         aria-hidden
         animate={{ rotate: 360 }}
         transition={{ duration: 120, repeat: Infinity, ease: "linear" }}
-        className="absolute right-[-15vw] top-[8vh] w-[55vw] h-[55vw] pointer-events-none">
+        className="absolute right-[-15vw] top-[8vh] w-[55vw] h-[55vw] pointer-events-none"
+      >
         <div className="absolute inset-0 border border-ink-black/10 rounded-full" />
         <div className="absolute inset-[6%] border border-light-signal-orange/20 rounded-full" />
         <div className="absolute inset-[14%] border border-ink-black/8 rounded-full" />
         <div className="absolute inset-[22%] border-2 border-dashed border-light-signal-orange/15 rounded-full" />
-        {/* Orbital dots */}
         <div className="absolute top-[6%] left-1/2 -translate-x-1/2 w-3 h-3 bg-signal-orange rounded-full shadow-[0_0_20px_rgba(207,69,0,0.6)]" />
         <div className="absolute bottom-[14%] right-[18%] w-2 h-2 bg-ink-black rounded-full" />
       </motion.div>
 
       <div className="w-full mx-auto relative z-10 grid lg:grid-cols-[1.1fr_1fr] gap-16 items-center">
-        {/* LEFT — Copy */}
         <motion.div
           initial={{ opacity: 0, y: 30 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
-          className="max-w-[700px]">
+          className="max-w-175"
+        >
           <motion.div
             initial={{ opacity: 0, x: -20 }}
             animate={{ opacity: 1, x: 0 }}
             transition={{ duration: 0.6, delay: 0.1 }}
-            className="eyebrow mb-8 md:mb-10">
+            className="eyebrow mb-8 md:mb-10"
+          >
             <span className="eyebrow-dot" />
             <motion.span
               animate={{ opacity: [1, 0.4, 1] }}
-              transition={{ duration: 2.5, repeat: Infinity }}>
+              transition={{ duration: 2.5, repeat: Infinity }}
+            >
               INTELLIGENT CONTENT NAVIGATION
             </motion.span>
           </motion.div>
@@ -112,7 +112,8 @@ export default function Hero() {
                   ease: [0.16, 1, 0.3, 1],
                 }}
                 className="inline-block mr-[0.22em]"
-                style={{ transformOrigin: "bottom" }}>
+                style={{ transformOrigin: "bottom" }}
+              >
                 {word === "Structural" ? (
                   <span className="relative inline-block">
                     <span className="relative z-10 italic font-normal">
@@ -123,7 +124,7 @@ export default function Hero() {
                       animate={{ scaleX: 1 }}
                       transition={{ duration: 0.8, delay: 1.2 }}
                       style={{ transformOrigin: "left" }}
-                      className="absolute bottom-[6%] left-0 right-0 h-[6px] md:h-[10px] bg-signal-orange/80 -z-0 rounded-full"
+                      className="absolute bottom-[6%] left-0 right-0 h-1.5 md:h-2.5 bg-signal-orange/80 z-0 rounded-full"
                     />
                   </span>
                 ) : (
@@ -137,7 +138,8 @@ export default function Hero() {
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8, delay: 0.9 }}
-            className="text-slate-gray text-[17px] md:text-[20px] mb-10 md:mb-12 max-w-xl leading-relaxed font-normal">
+            className="text-slate-gray text-[17px] md:text-[20px] mb-10 md:mb-12 max-w-xl leading-relaxed font-normal"
+          >
             An AI-powered engine designed to help you scale organic reach with
             surgical precision and structural integrity. Built for those who
             demand performance, not just volume.
@@ -147,10 +149,12 @@ export default function Hero() {
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8, delay: 1.1 }}
-            className="flex flex-col sm:flex-row gap-4 md:gap-5">
+            className="flex flex-col sm:flex-row gap-4 md:gap-5"
+          >
             <Link
               href="/auth/signup"
-              className="group relative bg-ink-black text-canvas-cream px-9 py-5 rounded-mc-button font-medium text-[16px] tracking-mc-tight overflow-hidden transition-all active:scale-95 shadow-[0_18px_40px_-12px_rgba(20,20,19,0.55)] hover:shadow-[0_24px_60px_-12px_rgba(207,69,0,0.45)]">
+              className="group relative bg-ink-black text-canvas-cream px-9 py-5 rounded-mc-button font-medium text-[16px] tracking-mc-tight overflow-hidden transition-all active:scale-95 shadow-[0_18px_40px_-12px_rgba(20,20,19,0.55)] hover:shadow-[0_24px_60px_-12px_rgba(207,69,0,0.45)]"
+            >
               <span className="relative z-10 flex items-center justify-center gap-2">
                 Start your first flight
                 <ArrowUpRight
@@ -158,21 +162,22 @@ export default function Hero() {
                   className="transition-transform duration-300 group-hover:translate-x-1 group-hover:-translate-y-1"
                 />
               </span>
-              <span className="absolute inset-0 bg-gradient-to-r from-signal-orange to-light-signal-orange translate-y-full group-hover:translate-y-0 transition-transform duration-500" />
+              <span className="absolute inset-0 bg-linear-to-r from-signal-orange to-light-signal-orange translate-y-full group-hover:translate-y-0 transition-transform duration-500" />
             </Link>
             <Link
               href="/capabilities"
-              className="bg-white/70 backdrop-blur border border-ink-black/15 text-ink-black px-9 py-5 rounded-mc-button font-medium text-[16px] tracking-mc-tight hover:bg-ink-black hover:text-white hover:border-ink-black transition-all active:scale-95 text-center">
+              className="bg-white/70 backdrop-blur border border-ink-black/15 text-ink-black px-9 py-5 rounded-mc-button font-medium text-[16px] tracking-mc-tight hover:bg-ink-black hover:text-white hover:border-ink-black transition-all active:scale-95 text-center"
+            >
               Explore capabilities
             </Link>
           </motion.div>
 
-          {/* Stats ticker */}
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8, delay: 1.3 }}
-            className="mt-14 md:mt-20 flex flex-wrap gap-x-10 gap-y-6 pt-8 border-t border-ink-black/10 max-w-xl">
+            className="mt-14 md:mt-20 flex flex-wrap gap-x-10 gap-y-6 pt-8 border-t border-ink-black/10 max-w-xl"
+          >
             {[
               { value: "284%", label: "avg. organic lift" },
               { value: "3.2s", label: "to draft publishable copy" },
@@ -190,10 +195,10 @@ export default function Hero() {
           </motion.div>
         </motion.div>
 
-        {/* RIGHT — 3D floating dashboard mockup */}
         <div
-          className="relative hidden lg:block h-[620px]"
-          style={{ perspective: "1800px" }}>
+          className="relative hidden lg:block h-155"
+          style={{ perspective: "1800px" }}
+        >
           <motion.div
             initial={{ opacity: 0, y: 60, rotateY: -20 }}
             animate={{ opacity: 1, y: 0, rotateY: 0 }}
@@ -205,8 +210,8 @@ export default function Hero() {
               y: translateY,
               transformStyle: "preserve-3d",
             }}
-            className="absolute inset-0">
-            {/* Main dashboard card */}
+            className="absolute inset-0"
+          >
             <motion.div
               animate={{ y: [0, -12, 0] }}
               transition={{
@@ -215,8 +220,8 @@ export default function Hero() {
                 ease: "easeInOut",
               }}
               style={{ transform: "translateZ(40px)" }}
-              className="absolute top-[8%] right-[5%] w-[420px] bg-white rounded-mc-consent border border-ink-black/5 shadow-[0_40px_80px_-20px_rgba(20,20,19,0.25)] overflow-hidden">
-              {/* Window chrome */}
+              className="absolute top-[8%] right-[5%] w-105 bg-white rounded-mc-consent border border-ink-black/5 shadow-[0_40px_80px_-20px_rgba(20,20,19,0.25)] overflow-hidden"
+            >
               <div className="flex items-center justify-between px-5 py-4 border-b border-ink-black/5 bg-canvas-cream/60">
                 <div className="flex items-center gap-1.5">
                   <span className="w-2.5 h-2.5 rounded-full bg-ink-black/15" />
@@ -229,7 +234,6 @@ export default function Hero() {
                 </div>
               </div>
 
-              {/* Body */}
               <div className="p-6">
                 <div className="flex items-center justify-between mb-5">
                   <div>
@@ -253,26 +257,40 @@ export default function Hero() {
                           i === 1
                             ? "bg-ink-black text-canvas-cream"
                             : "text-slate-gray"
-                        }`}>
+                        }`}
+                      >
                         {t}
                       </span>
                     ))}
                   </div>
                 </div>
 
-                {/* Chart */}
-                <div className="relative h-[130px] mb-5">
+                <div className="relative h-32.5 mb-5">
                   <svg
                     viewBox="0 0 300 130"
                     className="w-full h-full"
-                    preserveAspectRatio="none">
+                    preserveAspectRatio="none"
+                  >
                     <defs>
-                      <linearGradient id="chartFill" x1="0" x2="0" y1="0" y2="1">
-                        <stop offset="0%" stopColor="#cf4500" stopOpacity="0.25" />
-                        <stop offset="100%" stopColor="#cf4500" stopOpacity="0" />
+                      <linearGradient
+                        id="chartFill"
+                        x1="0"
+                        x2="0"
+                        y1="0"
+                        y2="1"
+                      >
+                        <stop
+                          offset="0%"
+                          stopColor="#cf4500"
+                          stopOpacity="0.25"
+                        />
+                        <stop
+                          offset="100%"
+                          stopColor="#cf4500"
+                          stopOpacity="0"
+                        />
                       </linearGradient>
                     </defs>
-                    {/* Gridlines */}
                     {[0, 1, 2, 3].map((i) => (
                       <line
                         key={i}
@@ -321,8 +339,6 @@ export default function Hero() {
                     />
                   </svg>
                 </div>
-
-                {/* Keyword rows */}
                 <div className="space-y-2.5">
                   {[
                     { kw: "structural content seo", score: 94, pos: "+12" },
@@ -334,7 +350,8 @@ export default function Hero() {
                       initial={{ opacity: 0, x: 20 }}
                       animate={{ opacity: 1, x: 0 }}
                       transition={{ duration: 0.6, delay: 1.4 + i * 0.15 }}
-                      className="flex items-center justify-between text-[12px]">
+                      className="flex items-center justify-between text-[12px]"
+                    >
                       <div className="flex items-center gap-2 flex-1 min-w-0">
                         <span className="w-1.5 h-1.5 rounded-full bg-signal-orange shrink-0" />
                         <span className="text-ink-black font-medium truncate">
@@ -359,8 +376,6 @@ export default function Hero() {
                 </div>
               </div>
             </motion.div>
-
-            {/* Floating KPI card — top-left */}
             <motion.div
               animate={{ y: [0, 14, 0] }}
               transition={{
@@ -370,7 +385,8 @@ export default function Hero() {
                 delay: 0.5,
               }}
               style={{ transform: "translateZ(80px)" }}
-              className="absolute top-[0%] left-[0%] w-[220px] bg-ink-black text-canvas-cream rounded-mc-button p-5 shadow-[0_30px_60px_-15px_rgba(20,20,19,0.45)]">
+              className="absolute top-[0%] left-[0%] w-55 bg-ink-black text-canvas-cream rounded-mc-button p-5 shadow-[0_30px_60px_-15px_rgba(20,20,19,0.45)]"
+            >
               <div className="flex items-center justify-between mb-3">
                 <div className="w-9 h-9 rounded-full bg-signal-orange flex items-center justify-center">
                   <Sparkles size={16} className="text-white" />
@@ -390,7 +406,6 @@ export default function Hero() {
               </div>
             </motion.div>
 
-            {/* Floating pill — bottom-right */}
             <motion.div
               animate={{ y: [0, -10, 0] }}
               transition={{
@@ -400,7 +415,8 @@ export default function Hero() {
                 delay: 1,
               }}
               style={{ transform: "translateZ(120px)" }}
-              className="absolute bottom-[6%] right-[-2%] bg-white rounded-mc-pill pl-2 pr-5 py-2 flex items-center gap-3 shadow-[0_24px_50px_-15px_rgba(20,20,19,0.3)] border border-ink-black/5">
+              className="absolute bottom-[6%] right-[-2%] bg-white rounded-mc-pill pl-2 pr-5 py-2 flex items-center gap-3 shadow-[0_24px_50px_-15px_rgba(20,20,19,0.3)] border border-ink-black/5"
+            >
               <span className="relative flex items-center justify-center w-8 h-8 rounded-full bg-canvas-cream">
                 <span className="absolute inset-0 rounded-full bg-signal-orange/30 animate-ping" />
                 <span className="relative w-2.5 h-2.5 rounded-full bg-signal-orange" />
@@ -415,7 +431,6 @@ export default function Hero() {
               </div>
             </motion.div>
 
-            {/* Floating tag — left-bottom */}
             <motion.div
               animate={{ y: [0, 8, 0], rotate: [-2, 2, -2] }}
               transition={{
@@ -424,7 +439,8 @@ export default function Hero() {
                 ease: "easeInOut",
               }}
               style={{ transform: "translateZ(100px)" }}
-              className="absolute bottom-[14%] left-[4%] bg-canvas-cream rounded-mc-button px-4 py-3 border border-ink-black/10 shadow-[0_20px_40px_-15px_rgba(20,20,19,0.2)]">
+              className="absolute bottom-[14%] left-[4%] bg-canvas-cream rounded-mc-button px-4 py-3 border border-ink-black/10 shadow-[0_20px_40px_-15px_rgba(20,20,19,0.2)]"
+            >
               <div className="text-[10px] uppercase tracking-wider text-slate-gray mb-1">
                 E-E-A-T Score
               </div>
@@ -441,19 +457,19 @@ export default function Hero() {
         </div>
       </div>
 
-      {/* Marquee/scroll indicator */}
       <motion.div
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
         transition={{ duration: 1, delay: 1.8 }}
-        className="absolute bottom-8 left-1/2 -translate-x-1/2 flex flex-col items-center gap-2 pointer-events-none">
+        className="absolute bottom-8 left-1/2 -translate-x-1/2 flex flex-col items-center gap-2 pointer-events-none"
+      >
         <span className="text-[10px] uppercase tracking-[0.2em] text-slate-gray">
           Scroll
         </span>
         <motion.div
           animate={{ y: [0, 8, 0] }}
           transition={{ duration: 1.8, repeat: Infinity }}
-          className="w-[1px] h-8 bg-gradient-to-b from-ink-black/30 to-transparent"
+          className="w-px h-8 bg-linear-to-b from-ink-black/30 to-transparent"
         />
       </motion.div>
     </section>

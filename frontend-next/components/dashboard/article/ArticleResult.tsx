@@ -43,7 +43,6 @@ export function ArticleResult({ data }: Props) {
 
   return (
     <div className="max-w-5xl mx-auto flex flex-col gap-5">
-      {/* Stats */}
       <motion.div
         initial={{ opacity: 0, y: 16 }}
         animate={{ opacity: 1, y: 0 }}
@@ -62,7 +61,6 @@ export function ArticleResult({ data }: Props) {
         />
       </motion.div>
 
-      {/* Tabs */}
       <motion.div
         initial={{ opacity: 0, y: 16 }}
         animate={{ opacity: 1, y: 0 }}
@@ -99,7 +97,7 @@ export function ArticleResult({ data }: Props) {
         initial={{ opacity: 0, y: 16 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ delay: 0.1 }}
-        className="bg-lifted-cream border border-ink-black/5 rounded-3xl shadow-mc-soft p-6 md:p-8 min-h-[420px]">
+        className="bg-lifted-cream border border-ink-black/5 rounded-3xl shadow-mc-soft p-6 md:p-8 min-h-105">
         <AnimatePresence mode="wait">
           {activeTab === "content" && (
             <motion.div

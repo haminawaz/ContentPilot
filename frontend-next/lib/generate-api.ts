@@ -8,7 +8,7 @@ export async function generateContent(
   language: string,
   wordCount: number,
 ): Promise<ContentResponse> {
-  const res = await fetch(`${API_URL}/ai-search`, {
+  const res = await fetch(`${API_URL}/user/ai-search`, {
     method: "POST",
     headers: { "Content-Type": "application/json" },
     body: JSON.stringify({ topic, language, word_count: wordCount }),

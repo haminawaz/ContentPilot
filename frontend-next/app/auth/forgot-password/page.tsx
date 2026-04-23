@@ -78,7 +78,7 @@ export default function ForgotPasswordPage() {
           <h2 className="text-[24px] font-medium text-ink-black mb-3 tracking-mc-tight">
             Check your inbox
           </h2>
-          <p className="text-slate-gray mb-8 max-w-[280px] mx-auto text-[14px]">
+          <p className="text-slate-gray mb-8 max-w-70 mx-auto text-[14px]">
             We&apos;ve sent recovery instructions to{" "}
             <span className="text-ink-black font-medium">{submittedEmail}</span>
           </p>

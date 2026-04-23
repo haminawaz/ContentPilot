@@ -1,13 +1,7 @@
 "use client";
 
 import { motion } from "framer-motion";
-import {
-  MousePointer2,
-  Zap,
-  Layout,
-  Globe,
-  ArrowUpRight,
-} from "lucide-react";
+import { MousePointer2, Zap, Layout, Globe } from "lucide-react";
 
 const solutions = [
   {
@@ -17,7 +11,6 @@ const solutions = [
     icon: Zap,
     accentBg: "bg-signal-orange",
     accentText: "text-white",
-    meta: "SERP · Gap Analysis",
   },
   {
     title: "Content Teams",
@@ -26,7 +19,6 @@ const solutions = [
     icon: Layout,
     accentBg: "bg-ink-black",
     accentText: "text-canvas-cream",
-    meta: "Editorial · Workflow",
   },
   {
     title: "E-commerce",
@@ -35,7 +27,6 @@ const solutions = [
     icon: Globe,
     accentBg: "bg-link-blue",
     accentText: "text-white",
-    meta: "PDP · Conversion",
   },
   {
     title: "Agencies",
@@ -44,21 +35,20 @@ const solutions = [
     icon: MousePointer2,
     accentBg: "bg-charcoal",
     accentText: "text-canvas-cream",
-    meta: "Multi-client · Reports",
   },
 ];
 
 export default function SolutionGrid() {
   return (
     <section
-      className="relative py-[80px] md:py-[120px] bg-canvas-cream overflow-hidden"
-      id="solutions">
-      {/* Ambient glowing orbs */}
+      className="relative py-20 md:py-30 bg-canvas-cream overflow-hidden"
+      id="solutions"
+    >
       <motion.div
         aria-hidden
         animate={{ x: [0, 40, 0], y: [0, -30, 0] }}
         transition={{ duration: 14, repeat: Infinity, ease: "easeInOut" }}
-        className="absolute top-[10%] left-[-5%] w-[400px] h-[400px] rounded-full pointer-events-none"
+        className="absolute top-[10%] left-[-5%] w-100 h-100 rounded-full pointer-events-none"
         style={{
           background:
             "radial-gradient(circle, rgba(243,115,56,0.18) 0%, transparent 65%)",
@@ -69,7 +59,7 @@ export default function SolutionGrid() {
         aria-hidden
         animate={{ x: [0, -30, 0], y: [0, 30, 0] }}
         transition={{ duration: 16, repeat: Infinity, ease: "easeInOut" }}
-        className="absolute bottom-[5%] right-[-5%] w-[420px] h-[420px] rounded-full pointer-events-none"
+        className="absolute bottom-[5%] right-[-5%] w-105 h-105 rounded-full pointer-events-none"
         style={{
           background:
             "radial-gradient(circle, rgba(56,96,190,0.14) 0%, transparent 65%)",
@@ -77,7 +67,7 @@ export default function SolutionGrid() {
         }}
       />
 
-      <div className="max-w-7xl w-full mx-auto px-6 md:px-[100px] relative z-10">
+      <div className="max-w-7xl w-full mx-auto px-6 md:px-25 relative z-10">
         <div className="text-center mb-20 md:mb-28">
           <div className="eyebrow justify-center mb-8">
             <span className="eyebrow-dot" />
@@ -96,7 +86,8 @@ export default function SolutionGrid() {
 
         <div
           className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 md:gap-8"
-          style={{ perspective: "2000px" }}>
+          style={{ perspective: "2000px" }}
+        >
           {solutions.map((item, idx) => {
             const Icon = item.icon;
             return (
@@ -120,46 +111,34 @@ export default function SolutionGrid() {
                 style={{
                   transformStyle: "preserve-3d",
                 }}
-                className="group relative bg-white p-8 md:p-10 rounded-mc-consent border border-ink-black/5 shadow-[0_20px_50px_-20px_rgba(20,20,19,0.15)] hover:shadow-[0_40px_80px_-20px_rgba(20,20,19,0.25)] transition-shadow duration-500 cursor-default">
-                {/* Accent bar */}
+                className="group relative bg-white p-8 md:p-10 rounded-mc-consent border border-ink-black/5 shadow-[0_20px_50px_-20px_rgba(20,20,19,0.15)] hover:shadow-[0_40px_80px_-20px_rgba(20,20,19,0.25)] transition-shadow duration-500 cursor-default"
+              >
                 <motion.div
-                  className={`absolute top-0 left-8 right-8 h-[3px] ${item.accentBg} rounded-full origin-left scale-x-0 group-hover:scale-x-100 transition-transform duration-500`}
+                  className={`absolute top-0 left-8 right-8 h-0.75 ${item.accentBg} rounded-full origin-left scale-x-0 group-hover:scale-x-100 transition-transform duration-500`}
                 />
-
-                {/* Icon with 3D lift */}
                 <div
                   style={{ transform: "translateZ(30px)" }}
-                  className="relative">
+                  className="relative"
+                >
                   <div
-                    className={`w-16 h-16 rounded-mc-button ${item.accentBg} ${item.accentText} flex items-center justify-center mb-8 shadow-[0_12px_30px_-10px_rgba(20,20,19,0.3)] group-hover:shadow-[0_20px_40px_-10px_rgba(207,69,0,0.4)] transition-shadow duration-500`}>
+                    className={`w-16 h-16 rounded-mc-button ${item.accentBg} ${item.accentText} flex items-center justify-center mb-8 shadow-[0_12px_30px_-10px_rgba(20,20,19,0.3)] group-hover:shadow-[0_20px_40px_-10px_rgba(207,69,0,0.4)] transition-shadow duration-500`}
+                  >
                     <Icon size={28} />
                   </div>
                 </div>
 
                 <h3
                   style={{ transform: "translateZ(20px)" }}
-                  className="text-[22px] mb-4 font-medium tracking-mc-tight text-ink-black">
+                  className="text-[22px] mb-4 font-medium tracking-mc-tight text-ink-black"
+                >
                   {item.title}
                 </h3>
                 <p
                   style={{ transform: "translateZ(15px)" }}
-                  className="text-slate-gray text-[15px] leading-relaxed mb-6">
+                  className="text-slate-gray text-[15px] leading-relaxed"
+                >
                   {item.description}
                 </p>
-
-                {/* Meta + CTA */}
-                <div
-                  style={{ transform: "translateZ(10px)" }}
-                  className="flex items-center justify-between pt-5 border-t border-ink-black/5">
-                  <span className="text-[11px] uppercase tracking-[0.1em] text-slate-gray font-medium">
-                    {item.meta}
-                  </span>
-                  <div className="w-8 h-8 rounded-full bg-canvas-cream flex items-center justify-center group-hover:bg-ink-black group-hover:text-canvas-cream transition-colors duration-300">
-                    <ArrowUpRight size={14} />
-                  </div>
-                </div>
-
-                {/* Faded watermark icon */}
                 <div className="absolute top-4 right-4 opacity-[0.04] group-hover:opacity-[0.08] transition-opacity pointer-events-none">
                   <Icon size={110} />
                 </div>

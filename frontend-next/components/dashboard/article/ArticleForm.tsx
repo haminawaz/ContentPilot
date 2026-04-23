@@ -76,7 +76,7 @@ export function ArticleForm({ onSubmit, isLoading }: Props) {
               initial={{ scaleX: 0 }}
               animate={{ scaleX: 1 }}
               transition={{ delay: 0.4, duration: 0.6, ease: "easeOut" }}
-              className="absolute left-0 right-0 bottom-1 h-[6px] bg-signal-orange/30 -z-0 origin-left"
+              className="absolute left-0 right-0 bottom-1 h-1.5 bg-signal-orange/30 z-0 origin-left"
             />
           </span>{" "}
           article
@@ -95,7 +95,7 @@ export function ArticleForm({ onSubmit, isLoading }: Props) {
         transition={{ delay: 0.1, duration: 0.5 }}
         className="relative bg-lifted-cream border border-ink-black/5 rounded-3xl shadow-mc-soft p-6 md:p-8">
         <div
-          className="absolute inset-x-0 -top-px h-px bg-gradient-to-r from-transparent via-signal-orange/50 to-transparent"
+          className="absolute inset-x-0 -top-px h-px bg-linear-to-r from-transparent via-signal-orange/50 to-transparent"
           aria-hidden
         />
 

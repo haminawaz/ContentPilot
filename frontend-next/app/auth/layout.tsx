@@ -13,9 +13,7 @@ export default function AuthLayout({
 }) {
   return (
     <div className="min-h-screen flex font-sans selection:bg-signal-orange selection:text-white bg-canvas-cream">
-      {/* LEFT: form */}
       <div className="w-full lg:w-1/2 bg-white flex flex-col min-h-screen relative overflow-hidden">
-        {/* ambient decoration */}
         <div
           aria-hidden
           className="pointer-events-none absolute inset-0 opacity-[0.5]"
@@ -31,13 +29,13 @@ export default function AuthLayout({
         />
         <div
           aria-hidden
-          className="pointer-events-none absolute -bottom-40 -left-40 w-[420px] h-[420px] rounded-full bg-signal-orange/[0.06] blur-[100px]"
+          className="pointer-events-none absolute -bottom-40 -left-40 w-105 h-105 rounded-full bg-signal-orange/6 blur-[100px]"
         />
         <motion.div
           aria-hidden
           animate={{ rotate: 360 }}
           transition={{ duration: 80, ease: "linear", repeat: Infinity }}
-          className="pointer-events-none absolute -top-40 -right-40 w-[420px] h-[420px] rounded-full border border-light-signal-orange/20"
+          className="pointer-events-none absolute -top-40 -right-40 w-105 h-105 rounded-full border border-light-signal-orange/20"
         />
 
         <div className="relative z-10 px-8 pt-8 md:px-12 md:pt-10 flex items-center justify-between">
@@ -68,12 +66,12 @@ export default function AuthLayout({
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.7, ease: [0.16, 1, 0.3, 1] }}
-            className="w-full max-w-[420px]">
+            className="w-full max-w-105">
             <div className="relative">
               {/* soft card glow */}
               <div
                 aria-hidden
-                className="absolute -inset-6 rounded-[32px] bg-gradient-to-br from-signal-orange/5 via-transparent to-canvas-cream/40 blur-2xl pointer-events-none"
+                className="absolute -inset-6 rounded-4xl bg-linaer-to-br from-signal-orange/5 via-transparent to-canvas-cream/40 blur-2xl pointer-events-none"
               />
               <div className="relative bg-white border border-ink-black/5 rounded-mc-consent shadow-mc-soft p-8 md:p-10">
                 {children}
@@ -94,28 +92,24 @@ export default function AuthLayout({
           aria-hidden
           animate={{ rotate: 360 }}
           transition={{ duration: 90, ease: "linear", repeat: Infinity }}
-          className="absolute top-[-15%] right-[-10%] w-[520px] h-[520px] border border-white/5 rounded-full"
+          className="absolute top-[-15%] right-[-10%] w-130 h-130 border border-white/5 rounded-full"
         />
         <motion.div
           aria-hidden
           animate={{ rotate: -360 }}
           transition={{ duration: 120, ease: "linear", repeat: Infinity }}
-          className="absolute bottom-[-12%] left-[-18%] w-[440px] h-[440px] border border-white/5 rounded-full"
+          className="absolute bottom-[-12%] left-[-18%] w-110 h-110 border border-white/5 rounded-full"
         />
         <motion.div
           aria-hidden
           animate={{ rotate: 360 }}
           transition={{ duration: 60, ease: "linear", repeat: Infinity }}
-          className="absolute top-[28%] left-[8%] w-[220px] h-[220px] border border-signal-orange/15 rounded-full"
+          className="absolute top-[28%] left-[8%] w-55 h-55 border border-signal-orange/15 rounded-full"
         />
-
-        {/* ambient halo */}
         <div
           aria-hidden
-          className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[360px] h-[360px] bg-signal-orange/10 rounded-full blur-[120px]"
+          className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-90 h-90 bg-signal-orange/10 rounded-full blur-[120px]"
         />
-
-        {/* dot grid */}
         <div
           aria-hidden
           className="absolute inset-0 opacity-[0.4]"
@@ -192,11 +186,10 @@ export default function AuthLayout({
             </div>
           </motion.div>
 
-          {/* main analytics card */}
           <motion.div
             animate={{ y: [0, -6, 0] }}
             transition={{ duration: 7, ease: "easeInOut", repeat: Infinity }}
-            className="relative bg-white/[0.06] backdrop-blur-md border border-white/10 rounded-mc-stadium p-7 shadow-[0_30px_60px_-20px_rgba(0,0,0,0.6)]">
+            className="relative bg-white/6 backdrop-blur-md border border-white/10 rounded-mc-stadium p-7 shadow-[0_30px_60px_-20px_rgba(0,0,0,0.6)]">
             <div className="flex items-center justify-between mb-6">
               <div className="flex items-center gap-2">
                 <Sparkles className="w-3.5 h-3.5 text-signal-orange" />

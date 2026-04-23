@@ -83,7 +83,7 @@ export default function ResetPasswordPage() {
           <h2 className="text-[24px] font-medium text-ink-black mb-3 tracking-mc-tight">
             Security updated
           </h2>
-          <p className="text-slate-gray mb-8 max-w-[280px] mx-auto text-[14px]">
+          <p className="text-slate-gray mb-8 max-w-70 mx-auto text-[14px]">
             Your password has been successfully reset. You can now use your new
             credentials.
           </p>
