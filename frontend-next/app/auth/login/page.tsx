@@ -2,15 +2,19 @@
 
 import { useState } from "react";
 import Link from "next/link";
+import { useRouter, useSearchParams } from "next/navigation";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { Input } from "@/components/ui/Input";
 import { Button } from "@/components/ui/Button";
 import { Form } from "@/components/ui/Form";
 import { loginSchema, type LoginFormData } from "@/lib/validations/auth";
+import { setAuthCookie } from "@/lib/auth-client";
 
 export default function LoginPage() {
   const [isLoading, setIsLoading] = useState(false);
+  const router = useRouter();
+  const searchParams = useSearchParams();
 
   const {
     register,
@@ -24,7 +28,13 @@ export default function LoginPage() {
   const onSubmit = (data: LoginFormData) => {
     setIsLoading(true);
     console.log("Login data:", data);
-    setTimeout(() => setIsLoading(false), 1500);
+    // Set a dummy auth cookie so the middleware treats the user as signed in.
+    setAuthCookie();
+    const redirect = searchParams.get("redirect");
+    const target =
+      redirect && redirect.startsWith("/") ? redirect : "/dashboard";
+    router.push(target);
+    router.refresh();
   };
 
   return (
