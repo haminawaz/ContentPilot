@@ -1,11 +1,14 @@
 "use client";
 
 import { useState } from "react";
+import { useSearchParams } from "next/navigation";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { Input } from "@/components/ui/Input";
 import { Button } from "@/components/ui/Button";
 import { Form } from "@/components/ui/Form";
+import { useToast } from "@/components/ui/Toast";
+import { api } from "@/lib/api";
 import {
   resetPasswordSchema,
   type ResetPasswordFormData,
@@ -14,6 +17,8 @@ import {
 export default function ResetPasswordPage() {
   const [isSuccess, setIsSuccess] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
+  const searchParams = useSearchParams();
+  const { showToast, ToastContainer } = useToast();
 
   const {
     register,
@@ -24,13 +29,33 @@ export default function ResetPasswordPage() {
     defaultValues: { password: "", confirmPassword: "" },
   });
 
-  const onSubmit = (data: ResetPasswordFormData) => {
+  const onSubmit = async (data: ResetPasswordFormData) => {
     setIsLoading(true);
-    console.log("Reset password data:", data);
-    setTimeout(() => {
+    const email = searchParams.get("email");
+    const otp = searchParams.get("otp");
+
+    if (!email || !otp) {
+      showToast("Reset link is invalid or incomplete.", "error");
       setIsLoading(false);
+      return;
+    }
+
+    try {
+      await api.auth.resetPassword<{ message: string }>({
+        email,
+        otp,
+        password: data.password,
+        confirmPassword: data.confirmPassword,
+      });
       setIsSuccess(true);
-    }, 1500);
+    } catch (error) {
+      showToast(
+        error instanceof Error ? error.message : "Unable to reset password.",
+        "error",
+      );
+    } finally {
+      setIsLoading(false);
+    }
   };
 
   return (
@@ -92,6 +117,8 @@ export default function ResetPasswordPage() {
           </Button>
         </div>
       )}
+
+      <ToastContainer />
     </>
   );
 }

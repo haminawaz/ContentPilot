@@ -8,13 +8,23 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { Input } from "@/components/ui/Input";
 import { Button } from "@/components/ui/Button";
 import { Form } from "@/components/ui/Form";
+import { useToast } from "@/components/ui/Toast";
+import { api } from "@/lib/api";
 import { loginSchema, type LoginFormData } from "@/lib/validations/auth";
 import { setAuthCookie } from "@/lib/auth-client";
+
+interface LoginResponse {
+  message: string;
+  response: {
+    token: string;
+  };
+}
 
 export default function LoginPage() {
   const [isLoading, setIsLoading] = useState(false);
   const router = useRouter();
   const searchParams = useSearchParams();
+  const { showToast, ToastContainer } = useToast();
 
   const {
     register,
@@ -25,16 +35,26 @@ export default function LoginPage() {
     defaultValues: { email: "", password: "" },
   });
 
-  const onSubmit = (data: LoginFormData) => {
+  const onSubmit = async (data: LoginFormData) => {
     setIsLoading(true);
-    console.log("Login data:", data);
-    // Set a dummy auth cookie so the middleware treats the user as signed in.
-    setAuthCookie();
-    const redirect = searchParams.get("redirect");
-    const target =
-      redirect && redirect.startsWith("/") ? redirect : "/dashboard";
-    router.push(target);
-    router.refresh();
+    try {
+      const result = await api.auth.login<LoginResponse>(data);
+      setAuthCookie(result.response?.token);
+
+      const redirect = searchParams.get("redirect");
+      const target =
+        redirect && redirect.startsWith("/") ? redirect : "/dashboard";
+
+      router.push(target);
+      router.refresh();
+    } catch (error) {
+      showToast(
+        error instanceof Error ? error.message : "Unable to sign in.",
+        "error",
+      );
+    } finally {
+      setIsLoading(false);
+    }
   };
 
   return (
@@ -81,6 +101,8 @@ export default function LoginPage() {
           </Link>
         </p>
       </div>
+
+      <ToastContainer />
     </>
   );
 }

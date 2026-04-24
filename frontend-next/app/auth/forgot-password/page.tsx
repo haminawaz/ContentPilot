@@ -8,6 +8,8 @@ import { ArrowLeft } from "lucide-react";
 import { Input } from "@/components/ui/Input";
 import { Button } from "@/components/ui/Button";
 import { Form } from "@/components/ui/Form";
+import { useToast } from "@/components/ui/Toast";
+import { api } from "@/lib/api";
 import {
   forgotPasswordSchema,
   type ForgotPasswordFormData,
@@ -17,6 +19,7 @@ export default function ForgotPasswordPage() {
   const [isSubmitted, setIsSubmitted] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
   const [submittedEmail, setSubmittedEmail] = useState("");
+  const { showToast, ToastContainer } = useToast();
 
   const {
     register,
@@ -27,13 +30,22 @@ export default function ForgotPasswordPage() {
     defaultValues: { email: "" },
   });
 
-  const onSubmit = (data: ForgotPasswordFormData) => {
+  const onSubmit = async (data: ForgotPasswordFormData) => {
     setIsLoading(true);
-    setSubmittedEmail(data.email);
-    setTimeout(() => {
-      setIsLoading(false);
+    try {
+      await api.auth.forgotPassword<{ message: string }>(data);
+      setSubmittedEmail(data.email);
       setIsSubmitted(true);
-    }, 1500);
+    } catch (error) {
+      showToast(
+        error instanceof Error
+          ? error.message
+          : "Unable to send reset instructions.",
+        "error",
+      );
+    } finally {
+      setIsLoading(false);
+    }
   };
 
   return (
@@ -92,6 +104,8 @@ export default function ForgotPasswordPage() {
           </p>
         </div>
       )}
+
+      <ToastContainer />
     </>
   );
 }

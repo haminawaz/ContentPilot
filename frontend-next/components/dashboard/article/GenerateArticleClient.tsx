@@ -6,8 +6,8 @@ import { ArrowLeft, AlertCircle } from "lucide-react";
 import { ArticleForm } from "./ArticleForm";
 import { ArticleLoading } from "./ArticleLoading";
 import { ArticleResult } from "./ArticleResult";
-import { generateContent } from "@/lib/generate-api";
-import type { ContentResponse } from "@/types/content";
+import { generateContent, getApiUrl } from "@/lib/api";
+import type { ContentResponse } from "@/types/content-response";
 import { Toast } from "@/components/ui/Toast";
 
 type View = "form" | "loading" | "result";
@@ -135,9 +135,7 @@ export function GenerateArticleClient() {
           <p>
             Generation calls{" "}
             <code className="font-mono text-ink-black bg-ink-black/5 px-1.5 py-0.5 rounded">
-              {process.env.NEXT_PUBLIC_API_URL ||
-                "http://localhost:3001/api/v1"}
-              /ai-search
+              {getApiUrl("/user/ai-search")}
             </code>
             . Set{" "}
             <code className="font-mono text-ink-black bg-ink-black/5 px-1.5 py-0.5 rounded">

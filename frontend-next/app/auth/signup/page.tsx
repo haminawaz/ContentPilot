@@ -2,15 +2,20 @@
 
 import { useState } from "react";
 import Link from "next/link";
+import { useRouter } from "next/navigation";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { Input } from "@/components/ui/Input";
 import { Button } from "@/components/ui/Button";
 import { Form } from "@/components/ui/Form";
+import { useToast } from "@/components/ui/Toast";
+import { api } from "@/lib/api";
 import { signupSchema, type SignupFormData } from "@/lib/validations/auth";
 
 export default function SignupPage() {
   const [isLoading, setIsLoading] = useState(false);
+  const router = useRouter();
+  const { showToast, ToastContainer } = useToast();
 
   const {
     register,
@@ -31,10 +36,31 @@ export default function SignupPage() {
 
   const agreed = watch("agreed");
 
-  const onSubmit = (data: SignupFormData) => {
+  const onSubmit = async (data: SignupFormData) => {
     setIsLoading(true);
-    console.log("Signup data:", data);
-    setTimeout(() => setIsLoading(false), 1500);
+    try {
+      const result = await api.auth.signup<{ message: string }>({
+        name: data.name,
+        email: data.email,
+        phone: data.phone,
+        password: data.password,
+      });
+
+      showToast(
+        result.message ||
+          "Account created successfully. Please sign in to continue.",
+        "success",
+      );
+
+      router.push("/auth/login");
+    } catch (error) {
+      showToast(
+        error instanceof Error ? error.message : "Unable to create account.",
+        "error",
+      );
+    } finally {
+      setIsLoading(false);
+    }
   };
 
   return (
@@ -128,6 +154,8 @@ export default function SignupPage() {
           </p>
         </div>
       </Form>
+
+      <ToastContainer />
     </>
   );
 }
