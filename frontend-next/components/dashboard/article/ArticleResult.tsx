@@ -46,7 +46,8 @@ export function ArticleResult({ data }: Props) {
       <motion.div
         initial={{ opacity: 0, y: 16 }}
         animate={{ opacity: 1, y: 0 }}
-        className="grid grid-cols-2 gap-4">
+        className="grid grid-cols-2 gap-4"
+      >
         <StatCard
           icon={CheckCircle}
           accent="bg-emerald-500/10 text-emerald-600"
@@ -65,7 +66,8 @@ export function ArticleResult({ data }: Props) {
         initial={{ opacity: 0, y: 16 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ delay: 0.05 }}
-        className="bg-lifted-cream border border-ink-black/5 rounded-mc-stadium p-1.5 flex items-center gap-1 self-start">
+        className="bg-lifted-cream border border-ink-black/5 rounded-mc-stadium p-1.5 flex items-center gap-1 self-start"
+      >
         {TABS.map((t) => {
           const Icon = t.icon;
           const active = t.id === activeTab;
@@ -76,8 +78,11 @@ export function ArticleResult({ data }: Props) {
               onClick={() => setActiveTab(t.id)}
               className={cn(
                 "relative px-4 py-2 rounded-full text-[13px] font-semibold tracking-mc-tight transition-colors flex items-center gap-2",
-                active ? "text-canvas-cream" : "text-slate-gray hover:text-ink-black",
-              )}>
+                active
+                  ? "text-canvas-cream"
+                  : "text-slate-gray hover:text-ink-black",
+              )}
+            >
               {active && (
                 <motion.span
                   layoutId="result-tab"
@@ -91,13 +96,12 @@ export function ArticleResult({ data }: Props) {
           );
         })}
       </motion.div>
-
-      {/* Content panel */}
       <motion.div
         initial={{ opacity: 0, y: 16 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ delay: 0.1 }}
-        className="bg-lifted-cream border border-ink-black/5 rounded-3xl shadow-mc-soft p-6 md:p-8 min-h-105">
+        className="bg-lifted-cream border border-ink-black/5 rounded-3xl shadow-mc-soft p-6 md:p-8 min-h-105"
+      >
         <AnimatePresence mode="wait">
           {activeTab === "content" && (
             <motion.div
@@ -105,7 +109,8 @@ export function ArticleResult({ data }: Props) {
               initial={{ opacity: 0, x: -12 }}
               animate={{ opacity: 1, x: 0 }}
               exit={{ opacity: 0, x: 12 }}
-              transition={{ duration: 0.25 }}>
+              transition={{ duration: 0.25 }}
+            >
               <div className="flex items-center justify-between mb-4 gap-3 flex-wrap">
                 <div>
                   <p className="text-[11px] uppercase tracking-mc-wide font-bold text-slate-gray">
@@ -117,7 +122,8 @@ export function ArticleResult({ data }: Props) {
                 </div>
                 <button
                   onClick={handleCopy}
-                  className="inline-flex items-center gap-1.5 text-[12px] font-semibold px-3 py-2 rounded-mc-button bg-canvas-cream border border-ink-black/10 text-ink-black hover:bg-white transition-colors">
+                  className="inline-flex items-center gap-1.5 text-[12px] font-semibold px-3 py-2 rounded-mc-button bg-canvas-cream border border-ink-black/10 text-ink-black hover:bg-white transition-colors"
+                >
                   {copied ? (
                     <>
                       <Check className="w-3.5 h-3.5 text-emerald-600" />
@@ -143,7 +149,8 @@ export function ArticleResult({ data }: Props) {
               initial={{ opacity: 0, x: -12 }}
               animate={{ opacity: 1, x: 0 }}
               exit={{ opacity: 0, x: 12 }}
-              transition={{ duration: 0.25 }}>
+              transition={{ duration: 0.25 }}
+            >
               <section className="mb-7">
                 <h3 className="flex items-center gap-2 text-[14px] font-semibold text-ink-black mb-3">
                   <Tag className="w-4 h-4 text-signal-orange" /> Meta tags
@@ -175,7 +182,8 @@ export function ArticleResult({ data }: Props) {
                   {data.metadata.targetKeywords.map((kw, i) => (
                     <div
                       key={i}
-                      className="inline-flex items-center gap-2 bg-canvas-cream border border-ink-black/5 rounded-full px-3 py-1.5">
+                      className="inline-flex items-center gap-2 bg-canvas-cream border border-ink-black/5 rounded-full px-3 py-1.5"
+                    >
                       <span className="text-[13px] font-semibold text-ink-black">
                         {kw.keyword}
                       </span>
@@ -187,7 +195,8 @@ export function ArticleResult({ data }: Props) {
                             : kw.type === "secondary"
                               ? "bg-ink-black text-canvas-cream"
                               : "bg-ink-black/10 text-slate-gray",
-                        )}>
+                        )}
+                      >
                         {kw.type}
                       </span>
                       {kw.density && (
@@ -208,7 +217,8 @@ export function ArticleResult({ data }: Props) {
               initial={{ opacity: 0, x: -12 }}
               animate={{ opacity: 1, x: 0 }}
               exit={{ opacity: 0, x: 12 }}
-              transition={{ duration: 0.25 }}>
+              transition={{ duration: 0.25 }}
+            >
               <section className="mb-7">
                 <h3 className="flex items-center gap-2 text-[14px] font-semibold text-ink-black mb-3">
                   <LinkIcon className="w-4 h-4 text-emerald-600" /> Internal
@@ -218,7 +228,8 @@ export function ArticleResult({ data }: Props) {
                   {data.linkingStrategy.internalLinks.map((link, i) => (
                     <div
                       key={i}
-                      className="bg-canvas-cream border border-ink-black/5 rounded-2xl p-5 flex gap-3">
+                      className="bg-canvas-cream border border-ink-black/5 rounded-2xl p-5 flex gap-3"
+                    >
                       <CheckCircle className="w-4 h-4 text-emerald-600 mt-0.5 shrink-0" />
                       <div className="min-w-0">
                         <p className="text-[14px] font-semibold text-ink-black">
@@ -245,7 +256,8 @@ export function ArticleResult({ data }: Props) {
                   {data.linkingStrategy.externalLinks.map((link, i) => (
                     <div
                       key={i}
-                      className="bg-canvas-cream border border-ink-black/5 rounded-2xl p-5">
+                      className="bg-canvas-cream border border-ink-black/5 rounded-2xl p-5"
+                    >
                       <p className="text-[14px] font-semibold text-ink-black">
                         {link.anchorText}
                       </p>
@@ -254,7 +266,8 @@ export function ArticleResult({ data }: Props) {
                           href={link.url}
                           target="_blank"
                           rel="noopener noreferrer"
-                          className="text-[12px] text-link-blue hover:underline break-all block mt-1">
+                          className="text-[12px] text-link-blue hover:underline break-all block mt-1"
+                        >
                           {link.url}
                         </a>
                       )}
@@ -274,7 +287,8 @@ export function ArticleResult({ data }: Props) {
               initial={{ opacity: 0, x: -12 }}
               animate={{ opacity: 1, x: 0 }}
               exit={{ opacity: 0, x: 12 }}
-              transition={{ duration: 0.25 }}>
+              transition={{ duration: 0.25 }}
+            >
               <h3 className="flex items-center gap-2 text-[14px] font-semibold text-ink-black mb-4">
                 <HelpCircle className="w-4 h-4 text-signal-orange" /> Frequently
                 asked questions
@@ -283,7 +297,8 @@ export function ArticleResult({ data }: Props) {
                 {data.faq.map((item, i) => (
                   <div
                     key={i}
-                    className="bg-canvas-cream border border-ink-black/5 rounded-2xl p-5">
+                    className="bg-canvas-cream border border-ink-black/5 rounded-2xl p-5"
+                  >
                     <p className="text-[14px] font-semibold text-ink-black flex gap-2">
                       <span className="text-signal-orange">Q:</span>
                       <span>{item.question}</span>
@@ -315,7 +330,9 @@ function StatCard({
 }) {
   return (
     <div className="bg-lifted-cream border border-ink-black/5 rounded-2xl p-5 flex items-center gap-4">
-      <div className={cn("w-11 h-11 rounded-xl grid place-items-center", accent)}>
+      <div
+        className={cn("w-11 h-11 rounded-xl grid place-items-center", accent)}
+      >
         <Icon className="w-5 h-5" />
       </div>
       <div>

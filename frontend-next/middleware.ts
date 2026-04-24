@@ -3,11 +3,6 @@ import type { NextRequest } from "next/server";
 
 const AUTH_COOKIE = "auth_token";
 
-/**
- * Route guard:
- * - /dashboard/**: requires auth_token cookie. Missing → /auth/login
- * - /auth/**: must be signed-out. Has auth_token → /dashboard
- */
 export function middleware(request: NextRequest) {
   const { pathname, search } = request.nextUrl;
   const token = request.cookies.get(AUTH_COOKIE)?.value;

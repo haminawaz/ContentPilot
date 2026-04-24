@@ -1,7 +1,3 @@
-// Client-side helpers for the dummy cookie-based auth used by the middleware.
-// The real backend will replace this later — for now we only need a cookie
-// named `auth_token` to exist so the middleware treats the user as signed in.
-
 export const AUTH_COOKIE = "auth_token";
 const ONE_WEEK = 60 * 60 * 24 * 7;
 

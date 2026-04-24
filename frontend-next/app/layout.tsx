@@ -27,7 +27,7 @@ export const metadata: Metadata = {
     address: false,
     telephone: false,
   },
-  metadataBase: new URL("https://contentpilot.ai"), // Placeholder URL
+  metadataBase: new URL("https://contentpilot.ai"),
   alternates: {
     canonical: "/",
   },

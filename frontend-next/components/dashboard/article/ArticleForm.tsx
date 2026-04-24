@@ -61,8 +61,8 @@ export function ArticleForm({ onSubmit, isLoading }: Props) {
       initial={{ opacity: 0, y: 16 }}
       animate={{ opacity: 1, y: 0 }}
       transition={{ duration: 0.5 }}
-      className="max-w-3xl mx-auto">
-      {/* Header */}
+      className="max-w-3xl mx-auto"
+    >
       <div className="text-center mb-10">
         <span className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-signal-orange/10 text-signal-orange text-[11px] font-bold uppercase tracking-mc-wide">
           <Sparkles className="w-3 h-3" />
@@ -86,24 +86,22 @@ export function ArticleForm({ onSubmit, isLoading }: Props) {
           and optimization.
         </p>
       </div>
-
-      {/* Form */}
       <motion.form
         onSubmit={handleSubmit}
         initial={{ opacity: 0, y: 16 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ delay: 0.1, duration: 0.5 }}
-        className="relative bg-lifted-cream border border-ink-black/5 rounded-3xl shadow-mc-soft p-6 md:p-8">
+        className="relative bg-lifted-cream border border-ink-black/5 rounded-3xl shadow-mc-soft p-6 md:p-8"
+      >
         <div
           className="absolute inset-x-0 -top-px h-px bg-linear-to-r from-transparent via-signal-orange/50 to-transparent"
           aria-hidden
         />
-
-        {/* Topic */}
         <div>
           <label
             htmlFor="topic"
-            className="flex items-center gap-2 text-[12px] font-bold text-ink-black tracking-mc-wide mb-2 ml-1">
+            className="flex items-center gap-2 text-[12px] font-bold text-ink-black tracking-mc-wide mb-2 ml-1"
+          >
             <FileText className="w-3.5 h-3.5" />
             Article topic or primary keyword
           </label>
@@ -120,8 +118,6 @@ export function ArticleForm({ onSubmit, isLoading }: Props) {
               className="w-full bg-canvas-cream/50 border border-ink-black/10 rounded-mc-button pl-11 pr-4 py-3.5 text-[14px] text-ink-black placeholder:text-dust-taupe focus:outline-none focus:border-ink-black transition-colors"
             />
           </div>
-
-          {/* Suggestions */}
           <div className="mt-3 flex flex-wrap gap-2">
             {SUGGESTIONS.map((s) => (
               <button
@@ -129,19 +125,19 @@ export function ArticleForm({ onSubmit, isLoading }: Props) {
                 type="button"
                 onClick={() => setTopic(s)}
                 disabled={isLoading}
-                className="text-[11px] px-2.5 py-1 rounded-full bg-canvas-cream border border-ink-black/10 text-slate-gray hover:text-ink-black hover:border-ink-black/30 transition-colors">
+                className="text-[11px] px-2.5 py-1 rounded-full bg-canvas-cream border border-ink-black/10 text-slate-gray hover:text-ink-black hover:border-ink-black/30 transition-colors"
+              >
                 {s}
               </button>
             ))}
           </div>
         </div>
-
-        {/* Language + Word count */}
         <div className="grid grid-cols-1 md:grid-cols-2 gap-5 mt-6">
           <div>
             <label
               htmlFor="language"
-              className="flex items-center gap-2 text-[12px] font-bold text-ink-black tracking-mc-wide mb-2 ml-1">
+              className="flex items-center gap-2 text-[12px] font-bold text-ink-black tracking-mc-wide mb-2 ml-1"
+            >
               <Globe className="w-3.5 h-3.5" /> Language
             </label>
             <select
@@ -149,7 +145,8 @@ export function ArticleForm({ onSubmit, isLoading }: Props) {
               value={language}
               onChange={(e) => setLanguage(e.target.value)}
               disabled={isLoading}
-              className="w-full bg-canvas-cream/50 border border-ink-black/10 rounded-mc-button px-4 py-3 text-[14px] text-ink-black focus:outline-none focus:border-ink-black transition-colors">
+              className="w-full bg-canvas-cream/50 border border-ink-black/10 rounded-mc-button px-4 py-3 text-[14px] text-ink-black focus:outline-none focus:border-ink-black transition-colors"
+            >
               {LANGUAGES.map((l) => (
                 <option key={l.code} value={l.code}>
                   {l.name}
@@ -175,12 +172,14 @@ export function ArticleForm({ onSubmit, isLoading }: Props) {
                       active
                         ? "bg-ink-black text-canvas-cream border-ink-black"
                         : "bg-canvas-cream/50 text-ink-black border-ink-black/10 hover:border-ink-black/30"
-                    }`}>
+                    }`}
+                  >
                     <span className="block text-[12px] font-bold tracking-mc-wide uppercase">
                       {opt.label}
                     </span>
                     <span
-                      className={`block text-[10px] mt-0.5 ${active ? "text-canvas-cream/70" : "text-slate-gray"}`}>
+                      className={`block text-[10px] mt-0.5 ${active ? "text-canvas-cream/70" : "text-slate-gray"}`}
+                    >
                       {opt.desc}
                     </span>
                   </button>
@@ -189,8 +188,6 @@ export function ArticleForm({ onSubmit, isLoading }: Props) {
             </div>
           </div>
         </div>
-
-        {/* Submit */}
         <div className="mt-7">
           <Button
             type="submit"
@@ -198,18 +195,18 @@ export function ArticleForm({ onSubmit, isLoading }: Props) {
             size="lg"
             isLoading={isLoading}
             disabled={isLoading || !topic.trim()}
-            className="w-full">
+            className="w-full"
+          >
             {!isLoading && <Sparkles className="w-4 h-4" />}
             {isLoading ? "Generating your article..." : "Generate article"}
           </Button>
         </div>
-
-        {/* Features */}
         <div className="mt-6 flex items-center justify-center gap-x-5 gap-y-2 flex-wrap">
           {FEATURES.map((f) => (
             <span
               key={f}
-              className="inline-flex items-center gap-1.5 text-[11px] text-slate-gray">
+              className="inline-flex items-center gap-1.5 text-[11px] text-slate-gray"
+            >
               <CheckCircle2 className="w-3.5 h-3.5 text-emerald-500" />
               {f}
             </span>

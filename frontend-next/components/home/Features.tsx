@@ -141,11 +141,6 @@ function TiltCard({
         <p className="text-slate-gray text-[15px] leading-relaxed">
           {feature.description}
         </p>
-
-        <div className="mt-8 flex items-center gap-2 text-[12px] text-signal-orange font-medium uppercase tracking-wider opacity-0 group-hover:opacity-100 translate-y-2 group-hover:translate-y-0 transition-all duration-500">
-          Learn more
-          <span className="w-6 h-px bg-signal-orange" />
-        </div>
       </div>
     </motion.div>
   );

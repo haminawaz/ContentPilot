@@ -24,10 +24,7 @@ export function ArticleLoading() {
   const [step, setStep] = useState(0);
 
   useEffect(() => {
-    const id = setInterval(
-      () => setStep((s) => (s + 1) % STEPS.length),
-      2500,
-    );
+    const id = setInterval(() => setStep((s) => (s + 1) % STEPS.length), 2500);
     return () => clearInterval(id);
   }, []);
 
@@ -39,7 +36,8 @@ export function ArticleLoading() {
       <motion.div
         initial={{ opacity: 0, y: 16 }}
         animate={{ opacity: 1, y: 0 }}
-        className="relative overflow-hidden bg-lifted-cream border border-ink-black/5 rounded-3xl shadow-mc-soft p-10 text-center">
+        className="relative overflow-hidden bg-lifted-cream border border-ink-black/5 rounded-3xl shadow-mc-soft p-10 text-center"
+      >
         <div
           className="absolute inset-0 opacity-[0.04] pointer-events-none"
           style={{
@@ -49,8 +47,6 @@ export function ArticleLoading() {
           }}
           aria-hidden
         />
-
-        {/* Rotating rings behind icon */}
         <div className="relative mx-auto w-28 h-28 mb-6">
           <motion.div
             animate={{ rotate: 360 }}
@@ -70,7 +66,8 @@ export function ArticleLoading() {
                 animate={{ scale: 1, opacity: 1, rotate: 0 }}
                 exit={{ scale: 0.7, opacity: 0, rotate: 20 }}
                 transition={{ duration: 0.35 }}
-                className="w-16 h-16 rounded-2xl bg-signal-orange/10 border border-signal-orange/20 grid place-items-center">
+                className="w-16 h-16 rounded-2xl bg-signal-orange/10 border border-signal-orange/20 grid place-items-center"
+              >
                 <Icon className="w-7 h-7 text-signal-orange" />
               </motion.div>
             </AnimatePresence>
@@ -83,7 +80,8 @@ export function ArticleLoading() {
             initial={{ opacity: 0, y: 6 }}
             animate={{ opacity: 1, y: 0 }}
             exit={{ opacity: 0, y: -6 }}
-            transition={{ duration: 0.25 }}>
+            transition={{ duration: 0.25 }}
+          >
             <h2 className="text-[22px] font-semibold text-ink-black tracking-mc-tight">
               {current.text}
             </h2>
@@ -92,8 +90,6 @@ export function ArticleLoading() {
             </p>
           </motion.div>
         </AnimatePresence>
-
-        {/* Progress dots */}
         <div className="mt-7 flex items-center justify-center gap-2">
           {STEPS.map((_, i) => (
             <span
@@ -109,13 +105,12 @@ export function ArticleLoading() {
           ))}
         </div>
       </motion.div>
-
-      {/* Skeleton preview */}
       <motion.div
         initial={{ opacity: 0, y: 16 }}
         animate={{ opacity: 0.85, y: 0 }}
         transition={{ delay: 0.2, duration: 0.5 }}
-        className="mt-6 bg-lifted-cream border border-ink-black/5 rounded-3xl shadow-mc-soft p-6 md:p-8">
+        className="mt-6 bg-lifted-cream border border-ink-black/5 rounded-3xl shadow-mc-soft p-6 md:p-8"
+      >
         <div className="flex gap-2 mb-6">
           {[1, 2, 3, 4].map((i) => (
             <div

@@ -38,22 +38,22 @@ export const Toast = ({
       exit={{ opacity: 0, scale: 0.9, transition: { duration: 0.2 } }}
       className={cn(
         "fixed bottom-8 right-8 z-100 flex items-center gap-3 px-6 py-4 bg-white rounded-mc-button shadow-mc-heavy border border-ink-black/5 min-w-[320px]",
-      )}>
+      )}
+    >
       <div className="shrink-0">{icons[type]}</div>
       <p className="grow text-[14px] font-medium text-ink-black tracking-mc-tight">
         {message}
       </p>
       <button
         onClick={onClose}
-        className="shrink-0 p-1 hover:bg-ink-black/5 rounded-full transition-colors">
+        className="shrink-0 p-1 hover:bg-ink-black/5 rounded-full transition-colors"
+      >
         <X className="w-4 h-4 text-slate-gray" />
       </button>
     </motion.div>
   );
 };
 
-// Simple global toast state manager for demo purposes
-// In a full app, use a Context or a library like sonner
 export const useToast = () => {
   const [toasts, setToasts] = useState<
     { id: number; message: string; type: ToastType }[]

@@ -53,12 +53,12 @@ export function GenerateArticleClient() {
 
   return (
     <div className="relative">
-      {/* Sub-header with reset action when showing result */}
       {view === "result" && (
         <motion.div
           initial={{ opacity: 0, y: -6 }}
           animate={{ opacity: 1, y: 0 }}
-          className="max-w-5xl mx-auto mb-5 flex items-center justify-between gap-3">
+          className="max-w-5xl mx-auto mb-5 flex items-center justify-between gap-3"
+        >
           <div>
             <p className="text-[11px] uppercase tracking-mc-wide font-bold text-slate-gray">
               Generated draft
@@ -69,7 +69,8 @@ export function GenerateArticleClient() {
           </div>
           <button
             onClick={handleReset}
-            className="inline-flex items-center gap-1.5 text-[13px] font-semibold px-4 py-2 rounded-mc-button bg-lifted-cream border border-ink-black/10 text-ink-black hover:bg-white transition-colors">
+            className="inline-flex items-center gap-1.5 text-[13px] font-semibold px-4 py-2 rounded-mc-button bg-lifted-cream border border-ink-black/10 text-ink-black hover:bg-white transition-colors"
+          >
             <ArrowLeft className="w-4 h-4" />
             New article
           </button>
@@ -83,7 +84,8 @@ export function GenerateArticleClient() {
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
-            transition={{ duration: 0.2 }}>
+            transition={{ duration: 0.2 }}
+          >
             <ArticleForm onSubmit={handleGenerate} isLoading={false} />
           </motion.div>
         )}
@@ -93,7 +95,8 @@ export function GenerateArticleClient() {
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
-            transition={{ duration: 0.2 }}>
+            transition={{ duration: 0.2 }}
+          >
             <ArticleLoading />
           </motion.div>
         )}
@@ -103,13 +106,13 @@ export function GenerateArticleClient() {
             initial={{ opacity: 0, y: 8 }}
             animate={{ opacity: 1, y: 0 }}
             exit={{ opacity: 0 }}
-            transition={{ duration: 0.25 }}>
+            transition={{ duration: 0.25 }}
+          >
             <ArticleResult data={data} />
           </motion.div>
         )}
       </AnimatePresence>
 
-      {/* Toasts */}
       <AnimatePresence>
         {toast && (
           <Toast
@@ -121,13 +124,13 @@ export function GenerateArticleClient() {
         )}
       </AnimatePresence>
 
-      {/* Offline/demo hint when no backend */}
       {view === "form" && (
         <motion.div
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           transition={{ delay: 0.4 }}
-          className="max-w-3xl mx-auto mt-6 flex items-start gap-3 text-[12px] text-slate-gray bg-lifted-cream border border-ink-black/5 rounded-2xl px-4 py-3">
+          className="max-w-3xl mx-auto mt-6 flex items-start gap-3 text-[12px] text-slate-gray bg-lifted-cream border border-ink-black/5 rounded-2xl px-4 py-3"
+        >
           <AlertCircle className="w-4 h-4 text-slate-gray shrink-0 mt-0.5" />
           <p>
             Generation calls{" "}

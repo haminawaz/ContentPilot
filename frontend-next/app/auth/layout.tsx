@@ -52,7 +52,8 @@ export default function AuthLayout({
 
           <Link
             href="/"
-            className="hidden md:inline-flex items-center gap-1.5 text-[12px] font-medium tracking-mc-tight text-slate-gray hover:text-ink-black transition-colors group">
+            className="hidden md:inline-flex items-center gap-1.5 text-[12px] font-medium tracking-mc-tight text-slate-gray hover:text-ink-black transition-colors group"
+          >
             Back to site
             <ArrowUpRight
               size={14}
@@ -66,9 +67,9 @@ export default function AuthLayout({
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.7, ease: [0.16, 1, 0.3, 1] }}
-            className="w-full max-w-105">
+            className="w-full max-w-105"
+          >
             <div className="relative">
-              {/* soft card glow */}
               <div
                 aria-hidden
                 className="absolute -inset-6 rounded-4xl bg-linaer-to-br from-signal-orange/5 via-transparent to-canvas-cream/40 blur-2xl pointer-events-none"
@@ -84,10 +85,7 @@ export default function AuthLayout({
           </motion.div>
         </div>
       </div>
-
-      {/* RIGHT: 3D scene */}
       <div className="hidden lg:flex w-1/2 bg-ink-black relative overflow-hidden flex-col items-center justify-center p-16">
-        {/* rotating rings */}
         <motion.div
           aria-hidden
           animate={{ rotate: 360 }}
@@ -125,8 +123,8 @@ export default function AuthLayout({
           animate={{ opacity: 1, scale: 1 }}
           transition={{ duration: 1, delay: 0.2, ease: [0.16, 1, 0.3, 1] }}
           style={{ perspective: 1400 }}
-          className="relative z-10 max-w-md w-full">
-          {/* floating KPI card (top-right) */}
+          className="relative z-10 max-w-md w-full"
+        >
           <motion.div
             aria-hidden
             initial={{ opacity: 0, y: 10 }}
@@ -140,7 +138,8 @@ export default function AuthLayout({
                 repeat: Infinity,
               },
             }}
-            className="absolute -top-10 -right-6 z-20 bg-white/10 backdrop-blur-md border border-white/15 rounded-2xl px-4 py-3 shadow-2xl">
+            className="absolute -top-10 -right-6 z-20 bg-white/10 backdrop-blur-md border border-white/15 rounded-2xl px-4 py-3 shadow-2xl"
+          >
             <div className="flex items-center gap-3">
               <div className="w-8 h-8 rounded-full bg-signal-orange/20 flex items-center justify-center">
                 <TrendingUp className="w-4 h-4 text-signal-orange" />
@@ -155,8 +154,6 @@ export default function AuthLayout({
               </div>
             </div>
           </motion.div>
-
-          {/* floating KPI card (bottom-left) */}
           <motion.div
             aria-hidden
             initial={{ opacity: 0, y: 10 }}
@@ -170,7 +167,8 @@ export default function AuthLayout({
                 repeat: Infinity,
               },
             }}
-            className="absolute -bottom-8 -left-4 z-20 bg-white/10 backdrop-blur-md border border-white/15 rounded-2xl px-4 py-3 shadow-2xl">
+            className="absolute -bottom-8 -left-4 z-20 bg-white/10 backdrop-blur-md border border-white/15 rounded-2xl px-4 py-3 shadow-2xl"
+          >
             <div className="flex items-center gap-3">
               <div className="w-8 h-8 rounded-full bg-white/10 flex items-center justify-center">
                 <Target className="w-4 h-4 text-white" />
@@ -189,7 +187,8 @@ export default function AuthLayout({
           <motion.div
             animate={{ y: [0, -6, 0] }}
             transition={{ duration: 7, ease: "easeInOut", repeat: Infinity }}
-            className="relative bg-white/6 backdrop-blur-md border border-white/10 rounded-mc-stadium p-7 shadow-[0_30px_60px_-20px_rgba(0,0,0,0.6)]">
+            className="relative bg-white/6 backdrop-blur-md border border-white/10 rounded-mc-stadium p-7 shadow-[0_30px_60px_-20px_rgba(0,0,0,0.6)]"
+          >
             <div className="flex items-center justify-between mb-6">
               <div className="flex items-center gap-2">
                 <Sparkles className="w-3.5 h-3.5 text-signal-orange" />
@@ -206,20 +205,20 @@ export default function AuthLayout({
                 </span>
               </div>
             </div>
-
-            {/* animated chart */}
             <div className="relative h-32 mb-2">
               <svg
                 viewBox="0 0 280 120"
                 className="absolute inset-0 w-full h-full"
-                preserveAspectRatio="none">
+                preserveAspectRatio="none"
+              >
                 <defs>
                   <linearGradient
                     id="authChartFill"
                     x1="0"
                     y1="0"
                     x2="0"
-                    y2="1">
+                    y2="1"
+                  >
                     <stop offset="0%" stopColor="#f37338" stopOpacity="0.35" />
                     <stop offset="100%" stopColor="#f37338" stopOpacity="0" />
                   </linearGradient>
@@ -228,7 +227,8 @@ export default function AuthLayout({
                     x1="0"
                     y1="0"
                     x2="1"
-                    y2="0">
+                    y2="0"
+                  >
                     <stop offset="0%" stopColor="#f37338" />
                     <stop offset="100%" stopColor="#ffb88a" />
                   </linearGradient>
@@ -259,12 +259,15 @@ export default function AuthLayout({
                   }}
                 />
               </svg>
-              {/* pulsing endpoint */}
               <motion.span
                 aria-hidden
                 className="absolute top-[9%] right-0 block w-2.5 h-2.5 rounded-full bg-signal-orange"
                 animate={{ scale: [1, 1.8, 1], opacity: [1, 0.5, 1] }}
-                transition={{ duration: 2, ease: "easeInOut", repeat: Infinity }}
+                transition={{
+                  duration: 2,
+                  ease: "easeInOut",
+                  repeat: Infinity,
+                }}
               />
             </div>
 
@@ -274,7 +277,6 @@ export default function AuthLayout({
               ))}
             </div>
 
-            {/* stats */}
             <div className="grid grid-cols-3 gap-4 mt-6 pt-6 border-t border-white/10">
               <div>
                 <p className="text-[22px] font-semibold text-white tracking-mc-tight leading-none">
@@ -297,12 +299,12 @@ export default function AuthLayout({
             </div>
           </motion.div>
 
-          {/* tagline */}
           <motion.div
             initial={{ opacity: 0, y: 16 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 0.6, duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
-            className="relative z-10 text-center mt-14">
+            className="relative z-10 text-center mt-14"
+          >
             <h2 className="text-[28px] font-medium text-white tracking-mc-tight leading-tight mb-3 text-balance">
               Structural SEO,{" "}
               <span className="text-signal-orange">autopilot mode</span>
