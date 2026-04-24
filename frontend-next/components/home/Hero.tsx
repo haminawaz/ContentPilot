@@ -140,9 +140,10 @@ export default function Hero() {
             transition={{ duration: 0.8, delay: 0.9 }}
             className="text-slate-gray text-[17px] md:text-[20px] mb-10 md:mb-12 max-w-xl leading-relaxed font-normal"
           >
-            An AI-powered engine designed to help you scale organic reach with
-            surgical precision and structural integrity. Built for those who
-            demand performance, not just volume.
+            Turn a single topic into a publish-ready SEO content package. A
+            long-form Markdown article, optimized title and meta description,
+            target keywords, linking ideas, and an intent-driven FAQ — all
+            shaped by real SERP signals.
           </motion.p>
 
           <motion.div

@@ -6,34 +6,34 @@ import { useRef } from "react";
 
 const features = [
   {
-    icon: Sparkles,
-    title: "AI-Powered Content Creation",
+    icon: BarChart3,
+    title: "SERP-First Analysis",
     description:
-      "Leverages cutting-edge OpenAI models to generate high-quality, SEO-optimized articles that mimic human writing styles.",
+      "Before writing a single word, ContentPilot scans real top-ranking results to decode intent, structure, and the SEO signals that already win for your keyword.",
     accent: "bg-signal-orange",
     number: "01",
   },
   {
-    icon: BarChart3,
-    title: "SERP & Competitor Analysis",
+    icon: Sparkles,
+    title: "AI-Powered Article Generation",
     description:
-      "Integrates directly with SerpAPI to analyze competitive search results and identify content gaps before generation.",
+      "Advanced OpenAI models turn those SERP insights into a cohesive long-form article, written in clean Markdown and engineered around search intent.",
     accent: "bg-ink-black",
     number: "02",
   },
   {
     icon: Settings,
-    title: "Fully Customizable Output",
+    title: "Topic, Language & Length Controls",
     description:
-      "Fine-tune every aspect of your content, from specific topics and target languages to precise word counts and formatting.",
+      "Set the brief exactly how you need it. Choose your topic or keyword, target language, and word count, and every run adapts to your inputs.",
     accent: "bg-link-blue",
     number: "03",
   },
   {
     icon: FileCode,
-    title: "Native Markdown Support",
+    title: "Complete SEO Content Package",
     description:
-      "Every piece of content is generated in clean markdown format, ready to be dropped into your CMS or static site generator.",
+      "Every draft ships with an SEO title, meta description, target keyword suggestions, internal and external link ideas, and an intent-driven FAQ.",
     accent: "bg-light-signal-orange",
     number: "04",
   },
@@ -194,8 +194,8 @@ export default function Features() {
               </h2>
             </div>
             <p className="text-slate-gray text-[17px] md:text-[19px] max-w-sm mb-4 leading-relaxed">
-              A comprehensive suite of tools designed for creators who demand
-              performance and precision.
+              A complete SEO content workflow — from SERP analysis to a
+              publish-ready article, metadata, links, and FAQ.
             </p>
           </div>
 

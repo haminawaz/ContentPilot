@@ -4,7 +4,7 @@ import HomeClient from "../components/home/HomeClient";
 export const metadata: Metadata = {
   title: "ContentPilot | AI SEO & Structural Content Strategy",
   description:
-    "The structural integrity of SEO. Scale your organic reach with ContentPilot's AI-powered engine. Built for performance and precision. Explore our Search Labs and Structural Pilot.",
+    "ContentPilot is an AI-assisted SEO content platform. Turn a single topic into a publish-ready package — long-form Markdown article, SEO title and meta, target keywords, internal and external link ideas, and an intent-driven FAQ, all shaped by live SERP analysis.",
 };
 
 export default function Home() {

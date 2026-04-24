@@ -28,16 +28,16 @@ type Step = {
 const steps: Step[] = [
   {
     icon: Search,
-    title: "Intent Discovery",
-    copy: "Input your target keyword. Our system instantly decodes what users are actively searching for and the shape of the demand.",
-    stat: "2.4s",
-    statLabel: "avg. scan time",
+    title: "Brief Your Flight",
+    copy: "Submit a topic or keyword, target language, and desired word count. ContentPilot uses your exact inputs to decode the search demand it will write for.",
+    stat: "3 inputs",
+    statLabel: "topic · language · length",
     tag: "Phase 01",
   },
   {
     icon: TrendingUp,
     title: "SERP Analysis",
-    copy: "We scan the top 5 Google search results, mapping their structure, semantic keywords, and content density in real time.",
+    copy: "We scan the top Google search results in real time, mapping their structure, semantic keywords, and content density before any draft is produced.",
     stat: "Top 5",
     statLabel: "results analysed",
     tag: "Phase 02",
@@ -45,17 +45,17 @@ const steps: Step[] = [
   {
     icon: Brain,
     title: "Structural Insights",
-    copy: "Our AI extracts the ranking factors that matter, surfacing the gaps and opportunities hidden inside the SERP landscape.",
+    copy: "Our AI extracts the ranking factors that actually matter — headings, entities, depth, and content gaps — and turns them into a structural blueprint.",
     stat: "18+",
     statLabel: "signals extracted",
     tag: "Phase 03",
   },
   {
     icon: FileText,
-    title: "Content Generation",
-    copy: "We generate a cohesive, optimised blog post that weaves those insights into a narrative engineered to outrank competitors.",
-    stat: "1 draft",
-    statLabel: "publish-ready",
+    title: "Complete Content Package",
+    copy: "You get a long-form Markdown article plus SEO title and meta description, target keywords, internal & external link ideas, and an intent-driven FAQ.",
+    stat: "4 tabs",
+    statLabel: "article · seo · links · faq",
     tag: "Phase 04",
   },
 ];
@@ -64,17 +64,17 @@ const pillars = [
   {
     icon: Target,
     title: "Precision first",
-    copy: "Every brief is scoped to the exact query, never generic output.",
+    copy: "Every brief is scoped to the exact topic, language, and length you choose — never generic filler.",
   },
   {
     icon: Layers,
     title: "Structurally aware",
-    copy: "Headings, entities and depth modeled from what already ranks.",
+    copy: "Headings, entities, keywords and depth are modeled from the pages that already rank for your query.",
   },
   {
     icon: Sparkles,
-    title: "Velocity built in",
-    copy: "From keyword to published draft in minutes, not days.",
+    title: "A full content package",
+    copy: "From a single keyword to an article, SEO metadata, linking ideas, and an FAQ — in a single run.",
   },
 ];
 
@@ -295,9 +295,10 @@ export default function CapabilitiesPage() {
             transition={{ delay: 0.6, duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
             className="text-slate-gray text-[18px] md:text-[22px] max-w-2xl leading-relaxed font-normal opacity-90 mb-16"
           >
-            ContentPilot bridges the gap between raw data and compelling
-            narrative. We don&apos;t just write — we engineer content around
-            what search engines already reward.
+            ContentPilot is an AI-assisted SEO content platform. We analyze
+            real search results first, then produce a complete content package
+            — article, SEO data, linking ideas, and FAQ — shaped by structural
+            SEO signals.
           </motion.p>
 
           <motion.div
@@ -363,13 +364,13 @@ export default function CapabilitiesPage() {
               THE FLIGHT PATH
             </div>
             <h2 className="text-[36px] md:text-[56px] font-medium tracking-mc-tight text-ink-black leading-[1.05] max-w-2xl text-balance">
-              Four phases, one publish-ready draft.
+              Four phases, one complete content package.
             </h2>
           </div>
           <p className="text-slate-gray text-[15px] md:text-[17px] leading-relaxed max-w-md">
             Every flight runs through the same four-phase flight deck. Each
-            phase passes its output forward so the final draft is coherent,
-            contextual, and ranked for intent.
+            phase passes its output forward, so you land with an article, SEO
+            metadata, linking ideas, and an FAQ all in one place.
           </p>
         </motion.div>
 

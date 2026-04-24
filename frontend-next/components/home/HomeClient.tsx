@@ -77,8 +77,9 @@ export default function HomeClient() {
               </h2>
 
               <p className="text-canvas-cream/70 text-[17px] md:text-[20px] mb-14 max-w-2xl mx-auto leading-relaxed pt-8 border-t border-canvas-cream/10">
-                Join high-performing SEO teams using ContentPilot to scale with
-                integrity and surgical precision.
+                Sign up, submit a topic, and get back a complete SEO content
+                package — article, metadata, linking ideas, and FAQ — in a
+                single flight.
               </p>
 
               <div className="flex flex-col sm:flex-row gap-5 justify-center">

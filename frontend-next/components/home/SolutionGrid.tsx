@@ -7,7 +7,7 @@ const solutions = [
   {
     title: "SEO Specialists",
     description:
-      "Deep-dive SERP analysis for data-backed generation. Identify high-value keywords and content gaps with surgical precision.",
+      "Get SERP-informed drafts paired with target keyword suggestions and linking ideas, so every article is built around real ranking signals.",
     icon: Zap,
     accentBg: "bg-signal-orange",
     accentText: "text-white",
@@ -15,7 +15,7 @@ const solutions = [
   {
     title: "Content Teams",
     description:
-      "Scale high-quality production without sacrificing your brand's unique editorial voice. Collaborative tools for high-volume pipelines.",
+      "Move from a topic idea to a long-form Markdown article plus SEO metadata and FAQ in a single run — ready to edit, not start from scratch.",
     icon: Layout,
     accentBg: "bg-ink-black",
     accentText: "text-canvas-cream",
@@ -23,7 +23,7 @@ const solutions = [
   {
     title: "E-commerce",
     description:
-      "Automated, SEO-optimized product descriptions that actually drive traffic and convert visitors into loyal customers.",
+      "Generate intent-driven blog articles around product and category keywords, complete with meta titles, descriptions, and supporting FAQs.",
     icon: Globe,
     accentBg: "bg-link-blue",
     accentText: "text-white",
@@ -31,7 +31,7 @@ const solutions = [
   {
     title: "Agencies",
     description:
-      "White-label reports and multi-client management built for the most demanding SEO and content marketing agency workflows.",
+      "Package SEO deliverables for clients faster — article, SEO data, internal and external links, and FAQ all produced in one structured flow.",
     icon: MousePointer2,
     accentBg: "bg-charcoal",
     accentText: "text-canvas-cream",
@@ -80,7 +80,8 @@ export default function SolutionGrid() {
           </h2>
           <p className="text-slate-gray text-[17px] md:text-[19px] max-w-2xl mx-auto leading-relaxed">
             From independent creators to global SEO agencies, ContentPilot
-            provides the structural integrity your content deserves.
+            delivers the same complete content package — article, SEO data,
+            links, and FAQ — shaped around your brief.
           </p>
         </div>
 

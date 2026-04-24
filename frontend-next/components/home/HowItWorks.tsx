@@ -6,25 +6,25 @@ import Image from "next/image";
 
 const steps = [
   {
-    title: "Market Analysis",
+    title: "Set Your Brief",
     description:
-      "Our system performs a deep scan of SERPs and competitor clusters to identify the exact search intent and performance gaps.",
+      "Start from the dashboard and submit a topic or keyword, target language, and desired word count. Every flight begins with your exact inputs.",
     icon: Search,
     image: "/how-work/img-1.png",
     side: "left",
   },
   {
-    title: "Structural Pilot",
+    title: "SERP-Informed Generation",
     description:
-      "Content is generated using advanced OpenAI models, fine-tuned to maintain your brand's unique trajectory and SEO integrity.",
+      "ContentPilot scans real top-ranking results, maps search intent and structure, then generates a long-form Markdown article shaped by those signals.",
     icon: PenTool,
     image: "/how-work/img-2.png",
     side: "right",
   },
   {
-    title: "Final Launch",
+    title: "Review Your Package",
     description:
-      "Refine your masterpiece, export in native markdown, and deploy your content to steer your organic growth.",
+      "Open the result in four tabs: the Article, SEO title and meta, internal & external Link ideas, and an FAQ built from real search intent.",
     icon: Rocket,
     image: "/how-work/img-3.png",
     side: "left",
@@ -50,8 +50,8 @@ export default function HowItWorks() {
             </span>
           </h2>
           <p className="text-slate-gray text-[17px] md:text-[19px] max-w-2xl mx-auto leading-relaxed">
-            A precise, step-by-step workflow designed to integrate with your
-            existing systems.
+            A precise, step-by-step workflow that takes you from a single
+            keyword to a complete, publish-ready SEO content package.
           </p>
         </div>
 
