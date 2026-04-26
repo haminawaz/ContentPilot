@@ -6,11 +6,24 @@ import {
   ResetPassword,
 } from "../../interface/user/auth";
 
+// const getAllUsers = async () => {
+//   const users = await prisma.users.findMany({
+//     select: {
+//       email: true
+//     }
+//   });
+//   console.log("users", users);
+// };
+
+// getAllUsers();
+
 const getUserByEmail = async (email: string) => {
   return prisma.users.findUnique({
     where: { email },
     select: {
       id: true,
+      first_name: true,
+      last_name: true,
       email_verified: true,
       email_verification_expires_at: true,
       status: true,
@@ -53,9 +66,7 @@ const updateLastLogin = async (userId: number) => {
   });
 };
 
-const createOrUpdateUserTransaction = async (
-  userData: RegisterUser,
-) => {
+const createOrUpdateUserTransaction = async (userData: RegisterUser) => {
   return prisma.$transaction(async (tx) => {
     return tx.users.upsert({
       where: { email: userData.email },
@@ -77,6 +88,20 @@ const createOrUpdateUserTransaction = async (
         email_verification_expires_at: userData.email_verification_otp_expiry,
       },
     });
+  });
+};
+
+const updateUserOtp = async (userData: {
+  email: string;
+  otp: string;
+  otpExpiry: Date;
+}) => {
+  return prisma.users.update({
+    where: { email: userData.email },
+    data: {
+      email_verification_otp: userData.otp,
+      email_verification_expires_at: userData.otpExpiry,
+    },
   });
 };
 
@@ -172,6 +197,7 @@ export default {
   getUserWithPassword,
   updateLastLogin,
   createOrUpdateUserTransaction,
+  updateUserOtp,
   verifyUserEmail,
   updateProfile,
   getUserPassword,

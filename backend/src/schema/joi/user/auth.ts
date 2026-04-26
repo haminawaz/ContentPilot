@@ -45,6 +45,19 @@ const registerSchema = Joi.object({
   }),
 });
 
+const resendOTP = Joi.object({
+  email: Joi.string()
+    .trim()
+    .lowercase()
+    .email({ minDomainSegments: 2 })
+    .required()
+    .messages({
+      "string.email": "Enter a valid email address",
+      "any.required": "Email is required",
+      "string.empty": "Email is not allowed to be empty",
+    }),
+});
+
 const loginSchema = Joi.object({
   email: Joi.string()
     .trim()
@@ -155,6 +168,7 @@ const resetPassword = Joi.object({
 export const userSchemas = {
   register: registerSchema,
   login: loginSchema,
+  resendOTP,
   authToken,
   profileUpdate,
   passwordUpdate,

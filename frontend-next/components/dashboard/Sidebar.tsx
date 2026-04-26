@@ -1,11 +1,14 @@
 "use client";
 
 import Link from "next/link";
+import { useRouter } from "next/navigation";
 import { usePathname } from "next/navigation";
 import Image from "next/image";
 import { motion } from "framer-motion";
 import { LayoutDashboard, Sparkles, User, LogOut } from "lucide-react";
 import { cn } from "@/lib/utils";
+import { Button } from "../ui/Button";
+import { clearAuthCookie } from "@/lib/auth-client";
 
 const NAV = [
   {
@@ -27,7 +30,14 @@ const NAV = [
 ];
 
 export function Sidebar() {
+  const router = useRouter();
   const pathname = usePathname();
+
+  const handleLogout = () => {
+    clearAuthCookie();
+    router.push("/auth/login");
+    router.refresh();
+  };
 
   return (
     <aside className="hidden lg:flex flex-col w-72 shrink-0 bg-lifted-cream border-r border-ink-black/5 h-screen sticky top-0">
@@ -65,8 +75,7 @@ export function Sidebar() {
                 active
                   ? "text-ink-black"
                   : "text-slate-gray hover:text-ink-black hover:bg-ink-black/5",
-              )}
-            >
+              )}>
               {active && (
                 <motion.div
                   layoutId="sidebar-active"
@@ -86,13 +95,13 @@ export function Sidebar() {
         })}
       </nav>
       <div className="px-4 py-4 border-t border-ink-black/5">
-        <Link
-          href="/auth/login"
-          className="flex items-center gap-3 px-3 py-2 rounded-xl text-[13px] text-slate-gray hover:text-ink-black hover:bg-ink-black/5 transition-colors"
-        >
+        <Button
+          variant="ghost"
+          onClick={handleLogout}
+          className="flex items-center gap-3 px-3 py-2 rounded-xl text-[13px] text-slate-gray hover:text-ink-black hover:bg-ink-black/5 transition-colors cursor-pointer">
           <LogOut className="w-4 h-4" />
           Sign out
-        </Link>
+        </Button>
       </div>
     </aside>
   );

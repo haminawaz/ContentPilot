@@ -1,15 +1,14 @@
 import type { ContentResponse } from "@/types/content-response";
 import {
   LoginPayload,
-  ForgotPasswordPayload,
+  EmailPayload,
   GenerateArticlePayload,
   ResetPasswordPayload,
   SignupPayload,
+  VerifyUserPayload,
 } from "@/types/content-request";
 
-const DEFAULT_API_URL = "http://localhost:3001/api/v1";
-
-export const API_URL = process.env.NEXT_PUBLIC_API_URL || DEFAULT_API_URL;
+export const API_URL = process.env.NEXT_PUBLIC_API_URL;
 
 export async function apiRequest<T>(
   endpoint: string,
@@ -63,11 +62,11 @@ function splitFullName(name: string) {
 export const api = {
   auth: {
     login: <TResponse>(payload: LoginPayload) =>
-      apiRequest<TResponse>("/auth/login", "POST", payload),
+      apiRequest<TResponse>("/user/auth/login", "POST", payload),
     signup: <TResponse>(payload: SignupPayload) => {
       const { firstName, lastName } = splitFullName(payload.name);
 
-      return apiRequest<TResponse>("/auth/register", "POST", {
+      return apiRequest<TResponse>("/user/auth/register", "POST", {
         first_name: firstName,
         last_name: lastName,
         email: payload.email,
@@ -77,11 +76,17 @@ export const api = {
         terms: true,
       });
     },
-    forgotPassword: <TResponse>(payload: ForgotPasswordPayload) =>
-      apiRequest<TResponse>("/auth/forgot-password", "POST", payload),
+    verifyUser: <TResponse>(payload: VerifyUserPayload) =>
+      apiRequest<TResponse>(
+        `/user/auth/verify-user?email=${encodeURIComponent(payload.email)}&otp=${encodeURIComponent(payload.otp)}`,
+      ),
+    resendOTP: <TResponse>(payload: EmailPayload) =>
+      apiRequest<TResponse>("/user/auth/resend-otp", "POST", payload),
+    forgotPassword: <TResponse>(payload: EmailPayload) =>
+      apiRequest<TResponse>("/user/auth/forgot-password", "POST", payload),
     resetPassword: <TResponse>(payload: ResetPasswordPayload) =>
       apiRequest<TResponse>(
-        `/auth/reset-password?email=${encodeURIComponent(payload.email)}&otp=${encodeURIComponent(payload.otp)}`,
+        `/user/auth/reset-password?email=${encodeURIComponent(payload.email)}&otp=${encodeURIComponent(payload.otp)}`,
         "POST",
         {
           password: payload.password,
@@ -89,13 +94,18 @@ export const api = {
         },
       ),
     me: <TResponse>(token?: string) =>
-      apiRequest<TResponse>("/auth/me", "GET", undefined, token),
+      apiRequest<TResponse>("/user/auth/me", "GET", undefined, token),
   },
   dashboard: {
     overview: <TResponse>(token?: string) =>
-      apiRequest<TResponse>("/dashboard/overview", "GET", undefined, token),
+      apiRequest<TResponse>(
+        "/user/dashboard/overview",
+        "GET",
+        undefined,
+        token,
+      ),
     profile: <TResponse>(token?: string) =>
-      apiRequest<TResponse>("/dashboard/profile", "GET", undefined, token),
+      apiRequest<TResponse>("/user/dashboard/profile", "GET", undefined, token),
   },
   content: {
     generateArticle: (payload: GenerateArticlePayload) =>

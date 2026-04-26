@@ -11,7 +11,7 @@ export interface SignupPayload {
   password: string;
 }
 
-export interface ForgotPasswordPayload {
+export interface EmailPayload {
   email: string;
 }
 
@@ -20,6 +20,11 @@ export interface ResetPasswordPayload {
   otp: string;
   password: string;
   confirmPassword: string;
+}
+
+export interface VerifyUserPayload {
+  email: string;
+  otp: string;
 }
 
 export interface GenerateArticlePayload {

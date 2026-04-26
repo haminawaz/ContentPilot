@@ -7,9 +7,15 @@ const router = Router();
 router.post("/register", bodyValidator("register"), authController.register);
 
 router.post(
-  "/verify",
+  "/resend-otp",
+  bodyValidator("resendOTP"),
+  authController.resendOTP,
+);
+
+router.get(
+  "/verify-user",
   queryValidator("authToken"),
-  authController.verifyUserEmail
+  authController.verifyUserEmail,
 );
 
 router.post("/login", bodyValidator("login"), authController.login);
@@ -18,27 +24,27 @@ router.put(
   "/profile",
   verifyUserToken,
   bodyValidator("profileUpdate"),
-  authController.updateProfile
+  authController.updateProfile,
 );
 
 router.put(
   "/password",
   verifyUserToken,
   bodyValidator("passwordUpdate"),
-  authController.updatePassword
+  authController.updatePassword,
 );
 
 router.post(
   "/forgot-password",
   bodyValidator("forgotPassword"),
-  authController.forgotPassword
+  authController.forgotPassword,
 );
 
 router.post(
   "/reset-password",
   queryValidator("authToken"),
   bodyValidator("resetPassword"),
-  authController.resetPassword
+  authController.resetPassword,
 );
 
 export default router;

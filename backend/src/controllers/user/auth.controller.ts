@@ -9,13 +9,7 @@ import emailTemplates from "../../lib/email-templates";
 import configs from "../../config/env";
 
 export const register = asyncHandler(async (req: Request, res: Response) => {
-  const {
-    first_name,
-    last_name,
-    email,
-    password,
-    phone,
-  } = req.body;
+  const { first_name, last_name, email, password, phone } = req.body;
 
   const existingUser = await userQueries.getUserByEmail(email);
   if (existingUser) {
@@ -66,6 +60,70 @@ export const register = asyncHandler(async (req: Request, res: Response) => {
 
   return res.status(201).json({
     message: "User created successfully",
+    response: null,
+    error: null,
+  });
+});
+
+export const resendOTP = asyncHandler(async (req: Request, res: Response) => {
+  const { email } = req.body;
+  if (!email) {
+    return res.status(400).json({
+      message: "Email is required",
+      response: null,
+      error: "Email is required",
+    });
+  }
+
+  const existingUser = await userQueries.getUserByEmail(email);
+  if (!existingUser) {
+    return res.status(404).json({
+      message: "User not found",
+      response: null,
+      error: "User not found",
+    });
+  }
+
+  if (existingUser.email_verified) {
+    return res.status(400).json({
+      message: "Email is already verified",
+      response: null,
+      error: "Email is already verified",
+    });
+  }
+
+  if (
+    existingUser.email_verification_expires_at &&
+    existingUser.email_verification_expires_at > new Date()
+  ) {
+    return res.status(403).json({
+      message: "Verification email has already been sent",
+      response: null,
+      error: "Verification email has already been sent",
+    });
+  }
+
+  const otp = crypto.randomInt(100000, 999999).toString();
+  const otpExpiry = new Date(Date.now() + 5 * 60 * 1000);
+
+  await userQueries.updateUserOtp({
+    email,
+    otp,
+    otpExpiry,
+  });
+
+  const fullName = `${existingUser.first_name} ${existingUser.last_name}`;
+  const dynamicData = {
+    subject: "Verify Your Email",
+    to_email: email,
+  };
+  await emailService.sendMail(
+    emailTemplates.getRegistrationEmailBody(fullName, Number(otp)),
+    dynamicData,
+  );
+
+  return res.status(200).json({
+    message: "OTP sent successfully",
     response: null,
     error: null,
   });
