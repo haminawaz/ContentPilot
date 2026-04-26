@@ -2,6 +2,7 @@
 
 import { useState } from "react";
 import Link from "next/link";
+import { useRouter } from "next/navigation";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { ArrowLeft } from "lucide-react";
@@ -16,9 +17,8 @@ import {
 } from "@/lib/validations/auth";
 
 export default function ForgotPasswordPage() {
-  const [isSubmitted, setIsSubmitted] = useState(false);
+  const router = useRouter();
   const [isLoading, setIsLoading] = useState(false);
-  const [submittedEmail, setSubmittedEmail] = useState("");
   const { showToast, ToastContainer } = useToast();
 
   const {
@@ -34,8 +34,9 @@ export default function ForgotPasswordPage() {
     setIsLoading(true);
     try {
       await api.auth.forgotPassword<{ message: string }>(data);
-      setSubmittedEmail(data.email);
-      setIsSubmitted(true);
+      router.push(
+        `/auth/reset-password?email=${encodeURIComponent(data.email)}`,
+      );
     } catch (error) {
       showToast(
         error instanceof Error
@@ -62,48 +63,23 @@ export default function ForgotPasswordPage() {
         </span>
       </Link>
 
-      {!isSubmitted ? (
-        <Form
-          eyebrow="RECOVERY"
-          title="Reset request"
-          onSubmit={handleSubmit(onSubmit)}
-          className="space-y-6">
-          <Input
-            label="Email Address"
-            type="email"
-            placeholder="pilot@contentpilot.ai"
-            error={errors.email?.message}
-            {...register("email")}
-          />
+      <Form
+        eyebrow="RECOVERY"
+        title="Reset request"
+        onSubmit={handleSubmit(onSubmit)}
+        className="space-y-6">
+        <Input
+          label="Email Address"
+          type="email"
+          placeholder="pilot@contentpilot.ai"
+          error={errors.email?.message}
+          {...register("email")}
+        />
 
-          <Button type="submit" className="w-full mt-2" isLoading={isLoading}>
-            Send Recovery Link
-          </Button>
-        </Form>
-      ) : (
-        <div className="text-center py-6">
-          <div className="w-16 h-16 bg-canvas-cream rounded-full flex items-center justify-center mx-auto mb-6">
-            <div className="w-8 h-8 border-2 border-signal-orange rounded-full flex items-center justify-center">
-              <div className="w-3 h-3 bg-signal-orange rounded-full" />
-            </div>
-          </div>
-          <h2 className="text-[24px] font-medium text-ink-black mb-3 tracking-mc-tight">
-            Check your inbox
-          </h2>
-          <p className="text-slate-gray mb-8 max-w-70 mx-auto text-[14px]">
-            We&apos;ve sent recovery instructions to{" "}
-            <span className="text-ink-black font-medium">{submittedEmail}</span>
-          </p>
-          <p className="text-slate-gray text-[14px]">
-            Didn&apos;t receive it?{" "}
-            <button
-              onClick={() => setIsSubmitted(false)}
-              className="text-signal-orange cursor-pointer font-semibold hover:underline underline-offset-4">
-              Try again
-            </button>
-          </p>
-        </div>
-      )}
+        <Button type="submit" className="w-full mt-2" isLoading={isLoading}>
+          Send Recovery Link
+        </Button>
+      </Form>
 
       <ToastContainer />
     </>

@@ -383,13 +383,9 @@ Content-Type: application/json
 
 #### Verify Email
 ```http
-POST /user/auth/verify-email
+GET /user/auth/verify-user?email=john@example.com&otp=123456
 Content-Type: application/json
 
-{
-  "email": "john@example.com",
-  "otp": "123456"
-}
 ```
 
 #### Request Password Reset

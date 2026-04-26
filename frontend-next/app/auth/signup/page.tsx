@@ -52,7 +52,7 @@ export default function SignupPage() {
         "success",
       );
 
-      router.push(`/auth/verify-email?email=${encodeURIComponent(data.email)}`);
+      router.push(`/auth/verify-user?email=${encodeURIComponent(data.email)}`);
     } catch (error) {
       showToast(
         error instanceof Error ? error.message : "Unable to create account.",

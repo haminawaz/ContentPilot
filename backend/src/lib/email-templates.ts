@@ -1,4 +1,6 @@
 const generateEmailLayout = (content: string): string => {
+  const LOGO_URL = `${process.env.FRONTEND_BASE_URL}/logo.png`;
+  
   return `
     <!DOCTYPE html>
     <html lang="en">
@@ -6,47 +8,108 @@ const generateEmailLayout = (content: string): string => {
       <meta charset="UTF-8" />
       <meta name="viewport" content="width=device-width, initial-scale=1.0" />
       <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-      <title>ShipFlex</title>
+      <title>ContentPilot</title>
+      <style>
+        @import url('https://fonts.googleapis.com/css2?family=Sofia+Sans:wght@400;500;700&display=swap');
+        
+        body {
+          margin: 0;
+          padding: 0;
+          font-family: 'Sofia Sans', 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+          background-color: #F3F0EE;
+          -webkit-font-smoothing: antialiased;
+        }
+        
+        table {
+          border-spacing: 0;
+        }
+        
+        img {
+          border: 0;
+        }
+        
+        .container {
+          width: 100%;
+          max-width: 600px;
+          margin: 0 auto;
+          background-color: #ffffff;
+          border-radius: 40px;
+          overflow: hidden;
+          box-shadow: 0 24px 48px rgba(0, 0, 0, 0.08);
+        }
+        
+        .header {
+          padding: 60px 40px 30px 40px;
+          text-align: center;
+        }
+        
+        .content {
+          padding: 0 60px 60px 60px;
+          color: #141413;
+          line-height: 1.6;
+        }
+        
+        .footer {
+          background-color: #141413;
+          padding: 60px 40px;
+          text-align: center;
+          color: #FFFFFF;
+        }
+        
+        .button {
+          display: inline-block;
+          padding: 12px 32px;
+          background-color: #141413;
+          color: #F3F0EE;
+          text-decoration: none;
+          border-radius: 20px;
+          font-weight: 500;
+          font-size: 16px;
+        }
+        
+        .otp-box {
+          display: inline-block;
+          padding: 20px 40px;
+          background-color: #CF4500;
+          color: #FFFFFF;
+          border-radius: 24px;
+          font-size: 32px;
+          font-weight: 700;
+          letter-spacing: 8px;
+          margin: 24px 0;
+          font-family: monospace;
+        }
+      </style>
     </head>
-    <body style="margin: 0; padding: 0; font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif; background-color: #f4f4f4; line-height: 1.6;">
-      <table role="presentation" cellspacing="0" cellpadding="0" border="0" width="100%" style="background-color: #f4f4f4; padding: 20px 0;">
+    <body>
+      <table role="presentation" cellspacing="0" cellpadding="0" border="0" width="100%" style="background-color: #F3F0EE; padding: 40px 0;">
         <tr>
           <td align="center">
-            <table role="presentation" cellspacing="0" cellpadding="0" border="0" width="600" style="max-width: 600px; background-color: #ffffff; border-radius: 8px; overflow: hidden; box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);">
-              <tr>
-                <td style="background-color: #ffffff; padding: 40px 40px 30px 40px; text-align: center; border-bottom: 3px solid #735ae5;">
-                  <!-- Replace 'YOUR_LOGO_URL_HERE' with your actual hosted logo URL -->
-                  <!-- <img 
-                    src="YOUR_LOGO_URL_HERE" 
-                    alt="ShipFlex" 
-                    width="280" 
-                    height="63"
-                    style="display: block; margin: 0 auto; max-width: 100%; height: auto;" 
-                  /> -->
-                  <!-- Temporary text-based logo until you have a hosted image -->
-                  <h1 style="margin: 0; font-size: 32px; font-weight: 700; color: #735ae5; font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;">ShipFlex</h1>
-                </td>
-              </tr>
-              <tr>
-                <td style="padding: 40px 40px; background-color: #ffffff;">
-                  ${content}
-                </td>
-              </tr>
-              <tr>
-                <td style="background-color: #f8f9fa; padding: 30px 40px; text-align: center; border-top: 1px solid #e0e0e0;">
-                  <p style="margin: 0 0 8px 0; color: #6b7280; font-size: 13px; line-height: 1.6;">
-                    &copy; 2026 ShipFlex. All rights reserved.
-                  </p>
-                  <p style="margin: 0; color: #9ca3af; font-size: 12px; line-height: 1.6;">
-                    123 Shipping Lane, Logistics City, LC 12345
-                  </p>
-                  <p style="margin: 15px 0 0 0; color: #9ca3af; font-size: 12px;">
-                    This email was sent to you by ShipFlex. 
-                    <a href="#" style="color: #735ae5; text-decoration: none;">Unsubscribe</a>
-                  </p>
-                </td>
-              </tr>
-            </table>
+            <div class="container">
+              <div class="header">
+                <img 
+                  src="${LOGO_URL}" 
+                  alt="ContentPilot" 
+                  width="200"
+                  style="display: block; margin: 0 auto; max-width: 100%; height: auto;" 
+                />
+              </div>
+              <div class="content">
+                ${content}
+              </div>
+              <div class="footer">
+                <p style="margin: 0 0 16px 0; font-size: 14px; opacity: 0.8; font-weight: 400;">
+                  &copy; 2026 ContentPilot. All rights reserved.
+                </p>
+                <p style="margin: 0; font-size: 12px; opacity: 0.6; line-height: 1.6;">
+                  Empowering your content journey with AI-driven precision.
+                </p>
+                <div style="margin-top: 32px; border-top: 1px solid rgba(255,255,255,0.1); padding-top: 32px;">
+                  <a href="#" style="color: #FFFFFF; text-decoration: none; font-size: 12px; opacity: 0.6; margin: 0 12px;">Privacy Policy</a>
+                  <a href="#" style="color: #FFFFFF; text-decoration: none; font-size: 12px; opacity: 0.6; margin: 0 12px;">Terms of Service</a>
+                </div>
+              </div>
+            </div>
           </td>
         </tr>
       </table>
@@ -57,27 +120,21 @@ const generateEmailLayout = (content: string): string => {
 
 export const getRegistrationEmailBody = (name: string, otp: number): string => {
   const content = `
-    <h1 style="margin: 0 0 24px 0; font-size: 28px; font-weight: 700; color: #1f2937; line-height: 1.3;">
-      Welcome to ShipFlex, ${name}!
-    </h1>
-    <p style="margin: 0 0 16px 0; font-size: 16px; line-height: 1.6; color: #4b5563;">
-      We are thrilled to have you on board. Your account has been successfully created.
-    </p>
-    <p style="margin: 0 0 24px 0; font-size: 16px; line-height: 1.6; color: #4b5563;">
-      Get started by exploring our platform and setting up your preferences.
+    <h2 style="margin: 0 0 24px 0; font-size: 24px; font-weight: 600; color: #141413; text-align: center;">
+      Welcome to the future of content, ${name}!
+    </h2>
+    <p style="margin: 0 0 32px 0; font-size: 16px; color: #141413; text-align: center; opacity: 0.8;">
+      We're excited to have you join ContentPilot. To get started, please verify your email address using the code below.
     </p>
     
-    <div style="background: linear-gradient(135deg, #f3f4f6 0%, #e5e7eb 100%); border-left: 4px solid #667eea; padding: 24px; border-radius: 8px; margin: 24px 0;">
-      <p style="margin: 0 0 8px 0; font-size: 14px; font-weight: 600; color: #6b7280; text-transform: uppercase; letter-spacing: 0.5px;">
-        Your Verification Code
-      </p>
-      <p style="margin: 0; font-size: 36px; font-weight: 700; color: #667eea; letter-spacing: 4px; font-family: 'Courier New', monospace;">
+    <div style="text-align: center;">
+      <div class="otp-box">
         ${otp}
-      </p>
+      </div>
     </div>
     
-    <p style="margin: 24px 0 0 0; font-size: 14px; line-height: 1.6; color: #9ca3af;">
-      Please use this code to verify your email address. This code will expire in 5 minutes.
+    <p style="margin: 32px 0 0 0; font-size: 14px; color: #696969; text-align: center;">
+      This verification code will expire in 5 minutes.
     </p>
   `;
   return generateEmailLayout(content);
@@ -85,27 +142,21 @@ export const getRegistrationEmailBody = (name: string, otp: number): string => {
 
 export const getForgotPasswordEmailBody = (otp: number): string => {
   const content = `
-    <h1 style="margin: 0 0 24px 0; font-size: 28px; font-weight: 700; color: #1f2937; line-height: 1.3;">
+    <h2 style="margin: 0 0 24px 0; font-size: 24px; font-weight: 600; color: #141413; text-align: center;">
       Password Reset Request
-    </h1>
-    <p style="margin: 0 0 16px 0; font-size: 16px; line-height: 1.6; color: #4b5563;">
-      We received a request to reset your password. If you didn't make this request, you can safely ignore this email.
-    </p>
-    <p style="margin: 0 0 28px 0; font-size: 16px; line-height: 1.6; color: #4b5563;">
-      To reset your password, use the verification code below:
+    </h2>
+    <p style="margin: 0 0 32px 0; font-size: 16px; color: #141413; text-align: center; opacity: 0.8;">
+      We received a request to reset your password. Use the verification code below to proceed with the reset.
     </p>
     
-    <div style="background: linear-gradient(135deg, #f3f4f6 0%, #e5e7eb 100%); border-left: 4px solid #667eea; padding: 24px; border-radius: 8px; margin: 24px 0;">
-      <p style="margin: 0 0 8px 0; font-size: 14px; font-weight: 600; color: #6b7280; text-transform: uppercase; letter-spacing: 0.5px;">
-        Your Password Reset Code
-      </p>
-      <p style="margin: 0; font-size: 36px; font-weight: 700; color: #667eea; letter-spacing: 4px; font-family: 'Courier New', monospace;">
+    <div style="text-align: center;">
+      <div class="otp-box">
         ${otp}
-      </p>
+      </div>
     </div>
     
-    <p style="margin: 24px 0 0 0; font-size: 14px; line-height: 1.6; color: #ef4444; font-weight: 500;">
-      ⚠️ This code will expire in 5 minutes for security reasons.
+    <p style="margin: 32px 0 0 0; font-size: 14px; color: #696969; text-align: center;">
+      If you didn't request this, you can safely ignore this email. This code expires in 5 minutes.
     </p>
   `;
   return generateEmailLayout(content);
@@ -113,29 +164,29 @@ export const getForgotPasswordEmailBody = (otp: number): string => {
 
 export const getResetPasswordEmailBody = (): string => {
   const content = `
-    <div style="text-align: center; margin-bottom: 32px;">
-      <div style="width: 80px; height: 80px; background: linear-gradient(135deg, #10b981 0%, #059669 100%); border-radius: 50%; margin: 0 auto 20px; line-height: 80px; text-align: center;">
-        <span style="font-size: 48px; color: white;">✓</span>
+    <div style="text-align: center; margin-bottom: 40px;">
+      <div style="width: 80px; height: 80px; background-color: #F3F0EE; border: 2px solid #141413; border-radius: 50%; margin: 0 auto; line-height: 80px; text-align: center;">
+        <span style="font-size: 32px; color: #141413;">✓</span>
       </div>
     </div>
     
-    <h1 style="margin: 0 0 24px 0; font-size: 28px; font-weight: 700; color: #1f2937; line-height: 1.3; text-align: center;">
-      Password Changed Successfully
-    </h1>
-    <p style="margin: 0 0 16px 0; font-size: 16px; line-height: 1.6; color: #4b5563; text-align: center;">
-      Your password has been successfully updated. You can now log in with your new password.
+    <h2 style="margin: 0 0 24px 0; font-size: 24px; font-weight: 600; color: #141413; text-align: center;">
+      Password Updated
+    </h2>
+    <p style="margin: 0 0 40px 0; font-size: 16px; color: #141413; text-align: center; opacity: 0.8;">
+      Your password has been successfully updated. Your account is now secure and ready to use.
     </p>
     
-    <div style="background: #fef3c7; border-left: 4px solid #f59e0b; padding: 16px; border-radius: 8px; margin: 24px 0;">
-      <p style="margin: 0; font-size: 14px; line-height: 1.6; color: #92400e;">
-        <strong>⚠️ Security Alert:</strong> If you did not perform this action, please contact our support team immediately.
-      </p>
+    <div style="text-align: center;">
+      <a href="${process.env.FRONTEND_BASE_URL}/login" class="button">
+        Go to Login
+      </a>
     </div>
     
-    <div style="text-align: center; margin: 32px 0;">
-      <a href="${process.env.FRONTEND_BASE_URL}/login" style="display: inline-block; padding: 16px 40px; background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); color: #ffffff; text-decoration: none; border-radius: 8px; font-size: 16px; font-weight: 600; box-shadow: 0 4px 14px rgba(102, 126, 234, 0.4);">
-        Login Now
-      </a>
+    <div style="margin-top: 48px; padding: 24px; background-color: #FCFBFA; border-radius: 20px; text-align: center;">
+      <p style="margin: 0; font-size: 13px; color: #696969;">
+        <strong>Security Note:</strong> If you did not perform this action, please contact our support team immediately.
+      </p>
     </div>
   `;
   return generateEmailLayout(content);

@@ -49,6 +49,11 @@ export type ForgotPasswordFormData = z.infer<typeof forgotPasswordSchema>;
 
 export const resetPasswordSchema = z
   .object({
+    otp: z
+      .string()
+      .min(1, "OTP is required")
+      .length(6, "OTP must be 6 digits")
+      .regex(/^[0-9]{6}$/, "OTP must contain only digits"),
     password: z
       .string()
       .min(8, "Password must be at least 8 characters")
