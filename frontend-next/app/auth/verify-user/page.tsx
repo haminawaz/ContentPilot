@@ -149,7 +149,7 @@ export default function VerifyUserPage() {
               onClick={() => resendOtp()}
               className="text-[13px] text-slate-gray hover:text-signal-orange transition-colors group">
               Didn't receive the code?{" "}
-              <span className="font-semibold underline underline-offset-2 group-hover:text-signal-orange transition-colors">
+              <span className="cursor-pointer font-semibold underline underline-offset-2 group-hover:text-signal-orange transition-colors">
                 Resend OTP
               </span>
             </button>

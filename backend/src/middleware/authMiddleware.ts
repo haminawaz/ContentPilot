@@ -7,6 +7,8 @@ const verifyUserJwt =
   () => async (req: Request, res: Response, next: NextFunction) => {
     try {
       let token = req.headers.authorization;
+      console.log("req.header", req.headers.authorization);
+      console.log("req.body", req.body);
       if (token) {
         if (token.startsWith("Bearer ")) {
           token = token.slice(7, token.length);

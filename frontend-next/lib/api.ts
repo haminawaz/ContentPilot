@@ -7,6 +7,7 @@ import {
   SignupPayload,
   VerifyUserPayload,
 } from "@/types/content-request";
+import { getTokenFromCookie } from "./auth-client";
 
 export const API_URL = process.env.NEXT_PUBLIC_API_URL;
 
@@ -14,11 +15,15 @@ export async function apiRequest<T>(
   endpoint: string,
   method: RequestInit["method"] = "GET",
   body?: unknown,
-  token?: string,
+  requireAuth: boolean = false,
 ): Promise<T> {
   const headers: HeadersInit = {};
 
-  if (token) {
+  if (requireAuth) {
+    const token = getTokenFromCookie();
+    if (!token) {
+      throw new Error("Unauthorized");
+    }
     headers.Authorization = `Bearer ${token}`;
   }
 
@@ -93,27 +98,27 @@ export const api = {
           confirm_password: payload.confirmPassword,
         },
       ),
-    me: <TResponse>(token?: string) =>
-      apiRequest<TResponse>("/user/auth/me", "GET", undefined, token),
+    me: <TResponse>() =>
+      apiRequest<TResponse>("/user/auth/me", "GET", undefined, true),
   },
   dashboard: {
-    overview: <TResponse>(token?: string) =>
-      apiRequest<TResponse>(
-        "/user/dashboard/overview",
-        "GET",
-        undefined,
-        token,
-      ),
-    profile: <TResponse>(token?: string) =>
-      apiRequest<TResponse>("/user/dashboard/profile", "GET", undefined, token),
+    overview: <TResponse>() =>
+      apiRequest<TResponse>("/user/dashboard/overview", "GET", undefined, true),
+    profile: <TResponse>() =>
+      apiRequest<TResponse>("/user/dashboard/profile", "GET", undefined, true),
   },
   content: {
     generateArticle: (payload: GenerateArticlePayload) =>
-      apiRequest<ContentResponse>("/user/ai-search", "POST", {
-        topic: payload.topic,
-        language: payload.language,
-        word_count: payload.wordCount,
-      }),
+      apiRequest<ContentResponse>(
+        "/user/ai-search",
+        "POST",
+        {
+          topic: payload.topic,
+          language: payload.language,
+          word_count: payload.wordCount,
+        },
+        true,
+      ),
   },
 };
 

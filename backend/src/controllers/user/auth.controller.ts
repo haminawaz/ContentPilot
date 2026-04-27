@@ -8,6 +8,21 @@ import emailService from "../../services/email.service";
 import emailTemplates from "../../lib/email-templates";
 import configs from "../../config/env";
 
+const getFrontendAuthUrl = (
+  path: "verify-user" | "reset-password",
+  email: string,
+  otp: string,
+) => {
+  const baseUrl = configs.frontendBaseUrl.replace(/\/+$/, "");
+  const params = new URLSearchParams({
+    email,
+    otp,
+  });
+  console.log("baseUrl", `${baseUrl}/auth/${path}?${params.toString()}`)
+
+  return `${baseUrl}/auth/${path}?${params.toString()}`;
+};
+
 export const register = asyncHandler(async (req: Request, res: Response) => {
   const { first_name, last_name, email, password, phone } = req.body;
 
@@ -49,12 +64,17 @@ export const register = asyncHandler(async (req: Request, res: Response) => {
   });
 
   const fullName = `${first_name} ${last_name}`;
+  const verificationUrl = getFrontendAuthUrl("verify-user", email, otp);
   const dynamicData = {
     subject: "Verify Your Email",
     to_email: email,
   };
   await emailService.sendMail(
-    emailTemplates.getRegistrationEmailBody(fullName, Number(otp)),
+    emailTemplates.getRegistrationEmailBody(
+      fullName,
+      Number(otp),
+      verificationUrl,
+    ),
     dynamicData,
   );
 
@@ -92,16 +112,16 @@ export const resendOTP = asyncHandler(async (req: Request, res: Response) => {
     });
   }
 
-  if (
-    existingUser.email_verification_expires_at &&
-    existingUser.email_verification_expires_at > new Date()
-  ) {
-    return res.status(403).json({
-      message: "Verification email has already been sent",
-      response: null,
-      error: "Verification email has already been sent",
-    });
-  }
+  // if (
+  //   existingUser.email_verification_expires_at &&
+  //   existingUser.email_verification_expires_at > new Date()
+  // ) {
+  //   return res.status(403).json({
+  //     message: "Verification email has already been sent",
+  //     response: null,
+  //     error: "Verification email has already been sent",
+  //   });
+  // }
 
   const otp = crypto.randomInt(100000, 999999).toString();
   const otpExpiry = new Date(Date.now() + 5 * 60 * 1000);
@@ -113,12 +133,17 @@ export const resendOTP = asyncHandler(async (req: Request, res: Response) => {
   });
 
   const fullName = `${existingUser.first_name} ${existingUser.last_name}`;
+  const verificationUrl = getFrontendAuthUrl("verify-user", email, otp);
   const dynamicData = {
     subject: "Verify Your Email",
     to_email: email,
   };
   await emailService.sendMail(
-    emailTemplates.getRegistrationEmailBody(fullName, Number(otp)),
+    emailTemplates.getRegistrationEmailBody(
+      fullName,
+      Number(otp),
+      verificationUrl,
+    ),
     dynamicData,
   );
 
@@ -354,12 +379,16 @@ export const forgotPassword = async (req: Request, res: Response) => {
       reset_password_otp_expiry: otpExpiry,
     });
 
+    const resetPasswordUrl = getFrontendAuthUrl("reset-password", email, otp);
     const dynamicData = {
       subject: "Reset your password",
       to_email: email,
     };
     await emailService.sendMail(
-      emailTemplates.getForgotPasswordEmailBody(Number(otp)),
+      emailTemplates.getForgotPasswordEmailBody(
+        Number(otp),
+        resetPasswordUrl,
+      ),
       dynamicData,
     );
 

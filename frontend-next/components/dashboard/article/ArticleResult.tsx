@@ -15,7 +15,7 @@ import {
   Tag,
   TrendingUp,
 } from "lucide-react";
-import type { ContentResponse } from "@/types/content";
+import type { ContentResponse } from "@/types/content-response";
 import { cn } from "@/lib/utils";
 
 interface Props {

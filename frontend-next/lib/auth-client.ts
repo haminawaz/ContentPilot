@@ -12,6 +12,14 @@ export function setAuthCookie(token = "dummy-pilot-token") {
   )}; path=/; max-age=${ONE_WEEK}; SameSite=Lax${secure}`;
 }
 
+export function getTokenFromCookie() {
+  if (typeof document === "undefined") return null;
+  const value = `; ${document.cookie}`;
+  const parts = value.split(`; ${AUTH_COOKIE}=`);
+  if (parts.length === 2) return parts.pop()?.split(";").shift() || null;
+  return null;
+}
+
 export function clearAuthCookie() {
   if (typeof document === "undefined") return;
   document.cookie = `${AUTH_COOKIE}=; path=/; max-age=0; SameSite=Lax`;
