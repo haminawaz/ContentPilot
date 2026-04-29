@@ -5,7 +5,7 @@ import { useRouter } from "next/navigation";
 import { usePathname } from "next/navigation";
 import Image from "next/image";
 import { motion } from "framer-motion";
-import { LayoutDashboard, Sparkles, User, LogOut } from "lucide-react";
+import { LayoutDashboard, Sparkles, User, LogOut, FileText } from "lucide-react";
 import { cn } from "@/lib/utils";
 import { Button } from "../ui/Button";
 import { clearAuthCookie } from "@/lib/auth-client";
@@ -21,6 +21,11 @@ const NAV = [
     href: "/dashboard/generate-article",
     label: "Generate Article",
     icon: Sparkles,
+  },
+  {
+    href: "/dashboard/article-listing",
+    label: "Article Listing",
+    icon: FileText,
   },
   {
     href: "/dashboard/profile",

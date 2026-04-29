@@ -12,6 +12,7 @@ interface Config {
   frontendBaseUrl: string;
   serpApiKey: string,
   openaiApiKey: string;
+  geminiApiKey: string;
   rateLimitWindowMs: number;
   rateLimitMaxRequests: number;
   gmailUser: string;
@@ -28,6 +29,7 @@ const config: Config = {
   frontendBaseUrl: process.env.FRONTEND_BASE_URL as string,
   serpApiKey: process.env.SERP_API_KEY as string,
   openaiApiKey: process.env.OPENAI_API_KEY as string,
+  geminiApiKey: process.env.GEMINI_API_KEY as string,
   gmailUser: process.env.GMAIL_USER as string,
   gmailPassword: process.env.GMAIL_PASSWORD as string,
   rateLimitWindowMs: parseInt(process.env.RATE_LIMIT_WINDOW_MS as string, 10),

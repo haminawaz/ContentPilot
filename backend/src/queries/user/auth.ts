@@ -6,17 +6,6 @@ import {
   ResetPassword,
 } from "../../interface/user/auth";
 
-// const getAllUsers = async () => {
-//   const users = await prisma.users.findMany({
-//     select: {
-//       email: true
-//     }
-//   });
-//   console.log("users", users);
-// };
-
-// getAllUsers();
-
 const getUserByEmail = async (email: string) => {
   return prisma.users.findUnique({
     where: { email },

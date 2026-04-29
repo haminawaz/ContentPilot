@@ -2,8 +2,10 @@ import { Request, Response } from "express";
 import { asyncHandler } from "../../middleware/errorHandler";
 import * as ContentGenerator from "../../services/content-generator.service";
 import logger from "../../services/logger.service";
+import searchQueries from "../../queries/user/search";
 
 export const search = asyncHandler(async (req: Request, res: Response) => {
+  const userId = (req as any).decoded?.userId;
   const { topic, language, word_count } = req.body;
 
   try {
@@ -24,6 +26,17 @@ export const search = asyncHandler(async (req: Request, res: Response) => {
         },
       });
     }
+
+    await searchQueries.articleGeneration({
+      userId,
+      topic,
+      content: result.content.markdown,
+      language,
+      wordCount: result.content.wordCount,
+      metadata: result.metadata,
+      linkingStrategy: result.linkingStrategy,
+      faq: result.faq,
+    });
 
     return res.status(200).json({
       message: "Your SEO-optimized article has been generated successfully!",
@@ -69,3 +82,76 @@ export const search = asyncHandler(async (req: Request, res: Response) => {
     });
   }
 });
+
+export const getGeneratedArticles = async (req: Request, res: Response) => {
+  const userId = (req as any).decoded?.userId;
+  const { page = 1, pageSize = 5 } = req.query;
+  try {
+    const { articles, totalCount } = await searchQueries.getGeneratedArticles(
+      userId,
+      parseInt(page as string),
+      parseInt(pageSize as string),
+    );
+
+    const totalPages = Math.ceil(totalCount / parseInt(pageSize as string));
+
+    return res.status(200).json({
+      message: "Generated articles fetched successfully!",
+      response: {
+        articles,
+        pagination: {
+          totalCount,
+          totalPages,
+          currentPage: parseInt(page as string),
+          pageSize: parseInt(pageSize as string),
+        },
+      },
+      error: null,
+    });
+  } catch (error: any) {
+    logger.error("Failed to fetch generated articles", error);
+    return res.status(500).json({
+      message: "Failed to fetch generated articles",
+      response: null,
+      error: {
+        code: "FETCH_FAILED",
+        details: error.message || "An unexpected error occurred",
+      },
+    });
+  }
+};
+
+export const getSingleGeneratedArticle = async (req: Request, res: Response) => {
+  const userId = (req as any).decoded?.userId;
+  const { id } = req.params;
+
+  try {
+    const article = await searchQueries.getSingleGeneratedArticle(
+      userId,
+      parseInt(id),
+    );
+    if (!article) {
+      return res.status(404).json({
+        message: "Generated article not found!",
+        response: null,
+        error: "Generated article not found",
+      });
+    }
+
+    return res.status(200).json({
+      message: "Generated article fetched successfully!",
+      response: article,
+      error: null,
+    });
+  } catch (error: any) {
+    logger.error("Failed to fetch generated article", error);
+    return res.status(500).json({
+      message: "Failed to fetch generated article",
+      response: null,
+      error: {
+        code: "FETCH_FAILED",
+        details: error.message || "An unexpected error occurred",
+      },
+    });
+  }
+}

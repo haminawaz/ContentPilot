@@ -8,11 +8,11 @@ datasource db {
 }
 
 model Admin {
-  id                            Int       @id @default(autoincrement())
-  email                         String    @unique @db.VarChar(50)
-  password                      String    @db.Text
-  createdAt                     DateTime  @default(now())
-  updatedAt                     DateTime  @updatedAt
+  id        Int      @id @default(autoincrement())
+  email     String   @unique @db.VarChar(50)
+  password  String   @db.Text
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
 
   @@index([email])
   @@map("admin")
@@ -35,7 +35,30 @@ model Users {
   createdAt                     DateTime  @default(now())
   updatedAt                     DateTime  @updatedAt
 
+  articles ArticleGeneration[]
+
   @@index([email])
   @@index([status])
   @@map("users")
+}
+
+model ArticleGeneration {
+  id               Int      @id @default(autoincrement())
+  user_id          Int
+  topic            String   @db.VarChar(255)
+  title            String?  @db.VarChar(255)
+  content          String   @db.Text
+  word_count       Int
+  language         String   @db.VarChar(20)
+  metadata         Json?
+  linking_strategy Json?
+  faq              Json?
+  status           String   @default("active") @db.VarChar(20)
+  createdAt        DateTime @default(now())
+  updatedAt        DateTime @updatedAt
+
+  user Users @relation(fields: [user_id], references: [id])
+
+  @@index([user_id])
+  @@map("article_generations")
 }

@@ -1,4 +1,5 @@
 import type { ContentResponse } from "@/types/content-response";
+import type { PaginatedArticles, ArticleDetail } from "@/types/article";
 import {
   LoginPayload,
   EmailPayload,
@@ -119,6 +120,18 @@ export const api = {
         },
         true,
       ),
+    getArticles: (page = 1, pageSize = 10) =>
+      apiRequest<{
+        message: string;
+        response: PaginatedArticles;
+        error: null;
+      }>(`/user/ai-search?page=${page}&pageSize=${pageSize}`, "GET", undefined, true),
+    getArticle: (id: number) =>
+      apiRequest<{
+        message: string;
+        response: ArticleDetail;
+        error: null;
+      }>(`/user/ai-search/${id}`, "GET", undefined, true),
   },
 };
 

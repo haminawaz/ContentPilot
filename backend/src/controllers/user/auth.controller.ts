@@ -18,7 +18,6 @@ const getFrontendAuthUrl = (
     email,
     otp,
   });
-  console.log("baseUrl", `${baseUrl}/auth/${path}?${params.toString()}`)
 
   return `${baseUrl}/auth/${path}?${params.toString()}`;
 };

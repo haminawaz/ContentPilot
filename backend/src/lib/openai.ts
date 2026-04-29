@@ -1,5 +1,6 @@
-import OpenAI from "openai";
+// import OpenAI from "openai";
 import config from "../config/env";
+import { GoogleGenerativeAI } from "@google/generative-ai";
 import logger from "../services/logger.service";
 import {
   LinkSuggestion,
@@ -7,13 +8,19 @@ import {
   SEOKeyword,
 } from "../types/seo-content.types";
 
-if (!config.openaiApiKey) {
-  throw new Error("OPENAI_API_KEY is not defined in environment variables");
+// if (!config.openaiApiKey) {
+//   throw new Error("OPENAI_API_KEY is not defined in environment variables");
+// }
+
+if (!config.geminiApiKey) {
+  throw new Error("GEMINI_API_KEY is not defined in environment variables");
 }
 
-const openai = new OpenAI({
-  apiKey: config.openaiApiKey,
-});
+// const openai = new OpenAI({
+//   apiKey: config.openaiApiKey,
+// });
+
+const genAI = new GoogleGenerativeAI(config.geminiApiKey);
 
 const parseJSON = (text: string) => {
   try {
@@ -92,19 +99,27 @@ export const generateContentStrategy = async (
     }
   `;
 
-  const completion = await openai.chat.completions.create({
-    messages: [
-      {
-        role: "system",
-        content: "You are an SEO expert. Output valid JSON only.",
-      },
-      { role: "user", content: prompt },
-    ],
-    model: "gpt-4-turbo-preview",
-    response_format: { type: "json_object" },
-  });
+  // const completion = await openai.chat.completions.create({
+  //   messages: [
+  //     {
+  //       role: "system",
+  //       content: "You are an SEO expert. Output valid JSON only.",
+  //     },
+  //     { role: "user", content: prompt },
+  //   ],
+  //   model: "gpt-4-turbo-preview",
+  //   response_format: { type: "json_object" },
+  // });
 
-  return parseJSON(completion.choices[0].message.content || "{}");
+  // return parseJSON(completion.choices[0].message.content || "{}");
+
+  const model = genAI.getGenerativeModel({
+    model: "gemini-3-flash-preview",
+    systemInstruction: "You are an SEO expert. Output valid JSON only.",
+    generationConfig: { responseMimeType: "application/json" },
+  });
+  const result = await model.generateContent(prompt);
+  return parseJSON(result.response.text());
 };
 
 export const generateFullArticle = async (
@@ -133,13 +148,20 @@ export const generateFullArticle = async (
     Return ONLY the Markdown content.
   `;
 
-  const completion = await openai.chat.completions.create({
-    messages: [
-      { role: "system", content: "You are a professional writer." },
-      { role: "user", content: prompt },
-    ],
-    model: "gpt-4-turbo-preview",
-  });
+  // const completion = await openai.chat.completions.create({
+  //   messages: [
+  //     { role: "system", content: "You are a professional writer." },
+  //     { role: "user", content: prompt },
+  //   ],
+  //   model: "gpt-4-turbo-preview",
+  // });
 
-  return completion.choices[0].message.content || "";
+  // return completion.choices[0].message.content || "";
+
+  const model = genAI.getGenerativeModel({
+    model: "gemini-3-flash-preview",
+    systemInstruction: "You are a professional writer.",
+  });
+  const result = await model.generateContent(prompt);
+  return result.response.text();
 };
