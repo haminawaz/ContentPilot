@@ -26,10 +26,12 @@ const registerSchema = Joi.object({
   phone: Joi.string()
     .trim()
     .required()
-    .length(10)
+    .min(9)
+    .max(15)
     .pattern(/^[0-9]+$/)
     .messages({
-      "string.length": "Phone number must be exactly 10 digits",
+      "string.min": "Phone number must be at least 9 digits",
+      "string.max": "Phone number must be at most 15 digits",
       "string.pattern.base": "Phone number must contain only digits",
       "any.required": "Phone number is required",
       "string.empty": "Phone number is not allowed to be empty",
@@ -117,10 +119,12 @@ const profileUpdate = Joi.object({
   phone: Joi.string()
     .trim()
     .required()
-    .length(10)
+    .min(9)
+    .max(15)
     .pattern(/^[0-9]+$/)
     .messages({
-      "string.length": "Phone number must be exactly 10 digits",
+      "string.min": "Phone number must be at least 9 digits",
+      "string.max": "Phone number must be at most 15 digits",
       "string.pattern.base": "Phone number must contain only digits",
       "any.required": "Phone number is required",
       "string.empty": "Phone number is not allowed to be empty",
