@@ -1,7 +1,7 @@
 {
-  "name": "content-pilot-backend",
+  "name": "structa-backend",
   "version": "1.0.0",
-  "description": "Professional Express.js backend for ContentPilot",
+  "description": "Professional Express.js backend for Structa",
   "main": "dist/server.js",
   "scripts": {
     "build": "tsc",

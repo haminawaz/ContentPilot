@@ -29,7 +29,7 @@ const steps: Step[] = [
   {
     icon: Search,
     title: "Brief Your Flight",
-    copy: "Submit a topic or keyword, target language, and desired word count. ContentPilot uses your exact inputs to decode the search demand it will write for.",
+    copy: "Submit a topic or keyword, target language, and desired word count. Structa uses your exact inputs to decode the search demand it will write for.",
     stat: "3 inputs",
     statLabel: "topic · language · length",
     tag: "Phase 01",
@@ -295,7 +295,7 @@ export default function CapabilitiesPage() {
             transition={{ delay: 0.6, duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
             className="text-slate-gray text-[18px] md:text-[22px] max-w-2xl leading-relaxed font-normal opacity-90 mb-16"
           >
-            ContentPilot is an AI-assisted SEO content platform. We analyze
+            Structa is an AI-assisted SEO content platform. We analyze
             real search results first, then produce a complete content package
             — article, SEO data, linking ideas, and FAQ — shaped by structural
             SEO signals.

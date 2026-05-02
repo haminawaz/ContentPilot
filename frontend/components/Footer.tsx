@@ -68,7 +68,7 @@ export default function Footer() {
 
         <div className="pt-8 border-t border-canvas-cream/10 flex flex-col md:flex-row justify-between items-center gap-6">
           <div className="flex flex-wrap gap-8 text-[12px] text-slate-gray font-medium tracking-mc-wide">
-            <span>© 2026 CONTENTPILOT</span>
+            <span>© 2026 STRUCTA</span>
           </div>
         </div>
       </div>

@@ -86,7 +86,7 @@ export function ProfileClient() {
                 Account details
               </h2>
               <p className="text-[13px] text-slate-gray mt-1">
-                Update how your identity appears across ContentPilot.
+                Update how your identity appears across Structa.
               </p>
             </div>
           </div>

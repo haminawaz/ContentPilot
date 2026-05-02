@@ -57,7 +57,7 @@ if (!isVercel) {
 const logger = winston.createLogger({
   level: process.env.LOG_LEVEL || "info",
   defaultMeta: {
-    service: "contentpilot-backend",
+    service: "structa-backend",
   },
   exitOnError: false,
   transports,

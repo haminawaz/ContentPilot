@@ -77,7 +77,7 @@ function LoginForm() {
         <Input
           label="Email Address"
           type="email"
-          placeholder="pilot@contentpilot.ai"
+          placeholder="hello@structa.ai"
           error={errors.email?.message}
           {...register("email")}
         />
@@ -104,7 +104,7 @@ function LoginForm() {
 
       <div className="mt-8 pt-6 border-t border-ink-black/5 text-center">
         <p className="text-slate-gray text-[14px]">
-          New to ContentPilot?{" "}
+          New to Structa?{" "}
           <Link
             href="/auth/signup"
             className="text-signal-orange font-semibold hover:underline underline-offset-4">

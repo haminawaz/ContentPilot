@@ -71,7 +71,7 @@ export default function ForgotPasswordPage() {
         <Input
           label="Email Address"
           type="email"
-          placeholder="pilot@contentpilot.ai"
+          placeholder="hello@structa.ai"
           error={errors.email?.message}
           {...register("email")}
         />

@@ -14,36 +14,36 @@ const geistMono = Geist_Mono({
 
 export const metadata: Metadata = {
   title: {
-    default: "ContentPilot | AI-Powered Structural SEO & Content Strategy",
-    template: "%s | ContentPilot"
+    default: "Structa | AI-Powered Structural SEO & Content Strategy",
+    template: "%s | Structa"
   },
-  description: "Scale your organic reach with surgical precision. ContentPilot is an AI-powered structural integrity engine for high-performing SEO teams.",
+  description: "Scale your organic reach with surgical precision. Structa is an AI-powered structural integrity engine for high-performing SEO teams.",
   keywords: ["AI SEO", "Structural Content", "Content Strategy", "Search Visibility", "E-E-A-T", "SEO Automation", "Content Trajectory"],
-  authors: [{ name: "ContentPilot Team" }],
-  creator: "ContentPilot",
-  publisher: "ContentPilot",
+  authors: [{ name: "Structa Team" }],
+  creator: "Structa",
+  publisher: "Structa",
   formatDetection: {
     email: false,
     address: false,
     telephone: false,
   },
-  metadataBase: new URL("https://contentpilot.ai"),
+  metadataBase: new URL("https://structa.ai"),
   alternates: {
     canonical: "/",
   },
   openGraph: {
-    title: "ContentPilot | AI-Powered Structural SEO & Content Strategy",
+    title: "Structa | AI-Powered Structural SEO & Content Strategy",
     description: "Scale your organic reach with surgical precision. Built for those who demand performance, not just volume.",
-    url: "https://contentpilot.ai",
-    siteName: "ContentPilot",
+    url: "https://structa.ai",
+    siteName: "Structa",
     locale: "en_US",
     type: "website",
   },
   twitter: {
     card: "summary_large_image",
-    title: "ContentPilot | AI-Powered Structural SEO",
+    title: "Structa | AI-Powered Structural SEO",
     description: "Scale your organic reach with surgical precision. Structural integrity for the future of content.",
-    creator: "@contentpilot",
+    creator: "@structa",
   },
   verification: {
     google: "-mxWn10065ZQF-Al_HXrkNAoxafbLlgdDm6h6J3ufW8",

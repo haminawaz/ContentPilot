@@ -86,7 +86,7 @@ export function ArticleLoading() {
               {current.text}
             </h2>
             <p className="mt-1 text-[13px] text-slate-gray">
-              ContentPilot is working on your article...
+              Structa is working on your article...
             </p>
           </motion.div>
         </AnimatePresence>

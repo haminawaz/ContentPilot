@@ -79,7 +79,7 @@ export default function SolutionGrid() {
             of ambition.
           </h2>
           <p className="text-slate-gray text-[17px] md:text-[19px] max-w-2xl mx-auto leading-relaxed">
-            From independent creators to global SEO agencies, ContentPilot
+            From independent creators to global SEO agencies, Structa
             delivers the same complete content package — article, SEO data,
             links, and FAQ — shaped around your brief.
           </p>

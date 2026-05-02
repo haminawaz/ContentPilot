@@ -49,7 +49,7 @@ export function Sidebar() {
       <div className="flex items-center gap-3 px-7 py-6 border-b border-ink-black/5">
         <Image
           src="/logo.png"
-          alt="ContentPilot Logo"
+          alt="Structa Logo"
           width={40}
           height={40}
           className={`w-auto object-contain transition-all duration-500`}
@@ -57,7 +57,7 @@ export function Sidebar() {
         />
         <div className="leading-tight cursor-default">
           <p className="text-[15px] font-bold text-[#d12329] tracking-mc-tight">
-            Content<span className=" text-[#ef9b1a]">Pilot</span>
+            Struct<span className=" text-[#ef9b1a]">a</span>
           </p>
         </div>
       </div>

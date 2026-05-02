@@ -30,7 +30,7 @@ const sections: Section[] = [
     title: "Introduction",
     body: (
       <p>
-        At ContentPilot, we take your privacy seriously. This Privacy Policy
+        At Structa, we take your privacy seriously. This Privacy Policy
         explains how we collect, use, disclose, and safeguard your information
         when you visit our website and use our AI-assisted SEO content
         platform.
@@ -51,7 +51,7 @@ const sections: Section[] = [
             <strong className="text-ink-black">Personal Data:</strong>{" "}
             personally identifiable information such as your name and email
             address that you voluntarily give to us when registering for a
-            ContentPilot account or contacting support.
+            Structa account or contacting support.
           </li>
           <li>
             <strong className="text-ink-black">Usage Data:</strong> information
@@ -76,7 +76,7 @@ const sections: Section[] = [
     title: "How We Use Your Information",
     body: (
       <ul className="space-y-3">
-        <li>To create and manage your ContentPilot account.</li>
+        <li>To create and manage your Structa account.</li>
         <li>
           To operate the core service: analyzing the top search results for
           your submitted keyword and generating a long-form Markdown article,
@@ -146,10 +146,10 @@ const sections: Section[] = [
         If you have questions or comments about this Privacy Policy, please
         contact us at{" "}
         <a
-          href="mailto:privacy@contentpilot.ai"
+          href="mailto:privacy@structa.ai"
           className="text-link-blue hover:underline underline-offset-4"
         >
-          privacy@contentpilot.ai
+          privacy@structa.ai
         </a>
         .
       </p>
@@ -263,7 +263,7 @@ export default function PrivacyClient() {
             transition={{ delay: 0.3, duration: 0.8 }}
             className="text-slate-gray text-[17px] md:text-[20px] max-w-2xl leading-relaxed mb-8"
           >
-            How ContentPilot collects, uses, and protects the information you
+            How Structa collects, uses, and protects the information you
             share when you generate SEO content with us.
           </motion.p>
 

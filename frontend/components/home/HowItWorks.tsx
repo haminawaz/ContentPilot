@@ -16,7 +16,7 @@ const steps = [
   {
     title: "SERP-Informed Generation",
     description:
-      "ContentPilot scans real top-ranking results, maps search intent and structure, then generates a long-form Markdown article shaped by those signals.",
+      "Structa scans real top-ranking results, maps search intent and structure, then generates a long-form Markdown article shaped by those signals.",
     icon: PenTool,
     image: "/how-work/img-2.png",
     side: "right",

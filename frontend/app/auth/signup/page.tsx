@@ -66,7 +66,7 @@ export default function SignupPage() {
   return (
     <>
       <Form
-        eyebrow="JOIN CONTENTPILOT"
+        eyebrow="JOIN STRUCTA"
         title="Begin your flight"
         onSubmit={handleSubmit(onSubmit)}
         className="space-y-4">
@@ -80,7 +80,7 @@ export default function SignupPage() {
         <Input
           label="Email Address"
           type="email"
-          placeholder="pilot@contentpilot.ai"
+          placeholder="hello@structa.ai"
           error={errors.email?.message}
           {...register("email")}
         />

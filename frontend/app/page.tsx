@@ -2,20 +2,20 @@ import { Metadata } from "next";
 import HomeClient from "../components/home/HomeClient";
 
 export const metadata: Metadata = {
-  title: "ContentPilot | AI SEO & Structural Content Strategy",
+  title: "Structa | AI SEO & Structural Content Strategy",
   description:
-    "ContentPilot is an AI-assisted SEO content platform. Turn a single topic into a publish-ready package — long-form Markdown article, SEO title and meta, target keywords, internal and external link ideas, and an intent-driven FAQ, all shaped by live SERP analysis.",
+    "Structa is an AI-assisted SEO content platform. Turn a single topic into a publish-ready package — long-form Markdown article, SEO title and meta, target keywords, internal and external link ideas, and an intent-driven FAQ, all shaped by live SERP analysis.",
 };
 
 export default function Home() {
   const jsonLd = {
     "@context": "https://schema.org",
     "@type": "WebSite",
-    name: "ContentPilot",
-    url: "https://contentpilot.ai",
+    name: "Structa",
+    url: "https://structa.ai",
     potentialAction: {
       "@type": "SearchAction",
-      target: "https://contentpilot.ai/search?q={search_term_string}",
+      target: "https://structa.ai/search?q={search_term_string}",
       "query-input": "required name=search_term_string",
     },
   };
@@ -23,9 +23,9 @@ export default function Home() {
   const orgJsonLd = {
     "@context": "https://schema.org",
     "@type": "Organization",
-    name: "ContentPilot",
-    url: "https://contentpilot.ai",
-    logo: "https://contentpilot.ai/logo.png",
+    name: "Structa",
+    url: "https://structa.ai",
+    logo: "https://structa.ai/logo.png",
     contactPoint: {
       "@type": "ContactPoint",
       telephone: "",

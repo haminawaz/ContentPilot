@@ -82,7 +82,7 @@ export function ArticleForm({ onSubmit, isLoading }: Props) {
           article
         </h1>
         <p className="mt-3 text-[15px] text-slate-gray max-w-xl mx-auto">
-          Enter your topic and let ContentPilot handle the research, writing,
+          Enter your topic and let Structa handle the research, writing,
           and optimization.
         </p>
       </div>

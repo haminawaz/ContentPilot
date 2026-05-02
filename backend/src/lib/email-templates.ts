@@ -9,7 +9,7 @@ const generateEmailLayout = (content: string): string => {
       <meta charset="UTF-8" />
       <meta name="viewport" content="width=device-width, initial-scale=1.0" />
       <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-      <title>ContentPilot</title>
+      <title>Structa</title>
       <style>
         @import url('https://fonts.googleapis.com/css2?family=Sofia+Sans:wght@400;500;700&display=swap');
         
@@ -207,22 +207,22 @@ const generateEmailLayout = (content: string): string => {
         <div class="email-card">
           <div class="email-header">
             <div class="logo-area">
-              <img src="${LOGO_URL}" alt="ContentPilot" class="logo-img" />
+              <img src="${LOGO_URL}" alt="Structa" class="logo-img" />
             </div>
-            <p>ContentPilot</p>
+            <p>Structa</p>
           </div>
           <div class="email-body">
             ${content}
           </div>
           <div class="email-footer">
-            <div class="footer-brand">ContentPilot</div>
+            <div class="footer-brand">Structa</div>
             <p class="footer-tagline">Empowering your content journey with AI-driven precision.</p>
             <div class="footer-links">
               <a href="#" class="footer-link">Privacy Policy</a>
               <a href="#" class="footer-link">Terms of Service</a>
               <a href="#" class="footer-link">Unsubscribe</a>
             </div>
-            <div class="footer-copy">© 2026 ContentPilot. All rights reserved.</div>
+            <div class="footer-copy">© 2026 Structa. All rights reserved.</div>
           </div>
         </div>
       </div>

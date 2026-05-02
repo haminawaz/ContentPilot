@@ -42,7 +42,7 @@ export default function AuthLayout({
           <Link href="/" className="inline-block">
             <Image
               src="/logo.png"
-              alt="ContentPilot Logo"
+              alt="Structa Logo"
               width={350}
               height={350}
               className="h-16 md:h-20 w-auto object-contain"
@@ -80,7 +80,7 @@ export default function AuthLayout({
             </div>
 
             <p className="text-center mt-8 text-[11px] tracking-mc-wide uppercase text-slate-gray/70">
-              Secured by ContentPilot &middot; v1.0
+              Secured by Structa &middot; v1.0
             </p>
           </motion.div>
         </div>

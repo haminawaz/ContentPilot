@@ -9,7 +9,7 @@ const features = [
     icon: BarChart3,
     title: "SERP-First Analysis",
     description:
-      "Before writing a single word, ContentPilot scans real top-ranking results to decode intent, structure, and the SEO signals that already win for your keyword.",
+      "Before writing a single word, Structa scans real top-ranking results to decode intent, structure, and the SEO signals that already win for your keyword.",
     accent: "bg-signal-orange",
     number: "01",
   },

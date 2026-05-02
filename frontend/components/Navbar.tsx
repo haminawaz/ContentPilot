@@ -32,7 +32,7 @@ export default function Navbar() {
         <Link href="/" className="flex items-center shrink-0">
           <Image
             src="/logo.png"
-            alt="ContentPilot Logo"
+            alt="Structa Logo"
             width={350}
             height={350}
             className={`w-auto object-contain transition-all duration-500 ${

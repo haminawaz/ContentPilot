@@ -6,7 +6,7 @@ import { MobileNav } from "@/components/dashboard/MobileNav";
 export const metadata: Metadata = {
   title: "Dashboard",
   description:
-    "Your ContentPilot command center: generate SEO articles, review insights, and manage your profile.",
+    "Your Structa command center: generate SEO articles, review insights, and manage your profile.",
 };
 
 export default function DashboardLayout({

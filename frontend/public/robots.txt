@@ -4,4 +4,4 @@ Allow: /
 Disallow: /dashboard/
 Disallow: /auth/
 
-Sitemap: https://content-pilot-ai.vercel.app/sitemap.xml
+Sitemap: https://structa-ai.vercel.app/sitemap.xml

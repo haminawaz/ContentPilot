@@ -177,7 +177,7 @@ export function ArticleListingClient() {
             </h1>
             <p className="mt-3 text-[14px] text-canvas-cream/70 max-w-xl">
               Browse and revisit every article you&apos;ve generated with
-              ContentPilot.
+              Structa.
             </p>
           </div>
           <Link
