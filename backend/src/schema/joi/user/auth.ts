@@ -23,12 +23,17 @@ const registerSchema = Joi.object({
       "any.required": "Email is required",
       "string.empty": "Email is not allowed to be empty",
     }),
-  phone: Joi.string().trim().required().min(10).max(15).messages({
-    "string.min": "Phone number must be at least 10 characters long",
-    "string.max": "Phone number must be at most 15 characters long",
-    "any.required": "Phone number is required",
-    "string.empty": "Phone number is not allowed to be empty",
-  }),
+  phone: Joi.string()
+    .trim()
+    .required()
+    .length(10)
+    .pattern(/^[0-9]+$/)
+    .messages({
+      "string.length": "Phone number must be exactly 10 digits",
+      "string.pattern.base": "Phone number must contain only digits",
+      "any.required": "Phone number is required",
+      "string.empty": "Phone number is not allowed to be empty",
+    }),
   password: Joi.string().trim().required().min(6).max(30).messages({
     "string.min": "Password must be at least 6 characters long",
     "string.max": "Password must be at most 30 characters long",
@@ -109,12 +114,17 @@ const profileUpdate = Joi.object({
     "any.required": "Last name is required",
     "string.empty": "Last name is not allowed to be empty",
   }),
-  phone: Joi.string().trim().required().min(10).max(15).messages({
-    "string.min": "Phone number must be at least 10 characters long",
-    "string.max": "Phone number must be at most 15 characters long",
-    "any.required": "Phone number is required",
-    "string.empty": "Phone number is not allowed to be empty",
-  }),
+  phone: Joi.string()
+    .trim()
+    .required()
+    .length(10)
+    .pattern(/^[0-9]+$/)
+    .messages({
+      "string.length": "Phone number must be exactly 10 digits",
+      "string.pattern.base": "Phone number must contain only digits",
+      "any.required": "Phone number is required",
+      "string.empty": "Phone number is not allowed to be empty",
+    }),
 });
 
 const passwordUpdate = Joi.object({

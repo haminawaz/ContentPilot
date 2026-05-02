@@ -1,37 +1,73 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { motion } from "framer-motion";
-import {
-  // Globe2,
-  // CreditCard,
-  // KeyRound,
-  Save,
-  Check,
-} from "lucide-react";
+import { Save, Check } from "lucide-react";
 import { Input } from "@/components/ui/Input";
 import { Button } from "@/components/ui/Button";
+import { useToast } from "@/components/ui/Toast";
+import { api } from "@/lib/api";
+import { getUser, saveUser } from "@/lib/user-storage";
 
-// const PLAN_USAGE = [
-//   { label: "Articles this month", value: 28, max: 50 },
-//   { label: "Keywords researched", value: 1284, max: 2000 },
-//   { label: "Internal links mapped", value: 412, max: 1000 },
-// ];
+interface UpdateProfileResponse {
+  message: string;
+  response: {
+    data: {
+      first_name: string;
+      last_name: string;
+      phone: string;
+    };
+  };
+  error: null;
+}
 
 export function ProfileClient() {
-  const [fullName, setFullName] = useState("Alex Morgan");
-  const [email, setEmail] = useState("alex@contentpilot.ai");
-  const [company, setCompany] = useState("ContentPilot");
-  const [phone, setPhone] = useState("+1234567890");
-  const [bio, setBio] = useState(
-    "Head of SEO. I build content systems that compound.",
-  );
+  const [fullName, setFullName] = useState("");
+  const [email, setEmail] = useState("");
+  const [phone, setPhone] = useState("");
+  const [company, setCompany] = useState("");
+  const [bio, setBio] = useState("");
   const [saved, setSaved] = useState(false);
+  const [isLoading, setIsLoading] = useState(false);
+  const { showToast, ToastContainer } = useToast();
 
-  const handleSave = (e: React.FormEvent) => {
+  useEffect(() => {
+    const user = getUser();
+    if (user) {
+      setFullName(`${user.first_name} ${user.last_name}`.trim());
+      setEmail(user.email);
+      setPhone(user.phone ?? "");
+      setCompany(user.company ?? "");
+      setBio(user.bio ?? "");
+    }
+  }, []);
+
+  const handleSave = async (e: React.FormEvent) => {
     e.preventDefault();
-    setSaved(true);
-    setTimeout(() => setSaved(false), 2200);
+    setIsLoading(true);
+    try {
+      const parts = fullName.trim().split(/\s+/).filter(Boolean);
+      const first_name = parts[0] || "";
+      const last_name = parts.slice(1).join(" ") || parts[0] || "";
+
+      await api.auth.updateProfile<UpdateProfileResponse>({
+        first_name,
+        last_name,
+        phone,
+      });
+
+      saveUser({ email, first_name, last_name, phone, company, bio });
+
+      setSaved(true);
+      setTimeout(() => setSaved(false), 2200);
+    } catch (error) {
+      showToast(
+        error instanceof Error ? error.message : "Failed to update profile.",
+        "error",
+      );
+    } finally {
+      setIsLoading(false);
+    }
   };
 
   return (
@@ -96,7 +132,7 @@ export function ProfileClient() {
             <Button type="button" variant="ghost" size="md">
               Cancel
             </Button>
-            <Button type="submit" variant="primary" size="md">
+            <Button type="submit" variant="primary" size="md" isLoading={isLoading}>
               {saved ? (
                 <>
                   <Check className="w-4 h-4" /> Saved
@@ -109,78 +145,9 @@ export function ProfileClient() {
             </Button>
           </div>
         </motion.form>
-        {/* <motion.aside
-          initial={{ opacity: 0, y: 16 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.5, delay: 0.2 }}
-          className="flex flex-col gap-6">
-          <div className="bg-ink-black text-canvas-cream rounded-2xl p-6 relative overflow-hidden">
-            <div className="absolute -top-10 -right-10 w-40 h-40 rounded-full bg-signal-orange/30 blur-3xl" />
-            <div className="relative">
-              <p className="eyebrow text-canvas-cream/70 mb-3">
-                <span className="eyebrow-dot" />
-                Current plan
-              </p>
-              <p className="text-[22px] font-semibold tracking-mc-tight">
-                Pro · Monthly
-              </p>
-              <p className="text-[12px] text-canvas-cream/70 mt-1">
-                Renews March 21, 2026
-              </p>
-
-              <div className="mt-5 flex flex-col gap-3">
-                {PLAN_USAGE.map((u) => {
-                  const pct = Math.round((u.value / u.max) * 100);
-                  return (
-                    <div key={u.label}>
-                      <div className="flex items-center justify-between text-[11px] text-canvas-cream/70 mb-1.5">
-                        <span>{u.label}</span>
-                        <span className="font-mono text-canvas-cream">
-                          {u.value.toLocaleString()} /{" "}
-                          {u.max.toLocaleString()}
-                        </span>
-                      </div>
-                      <div className="h-1.5 rounded-full bg-canvas-cream/10 overflow-hidden">
-                        <motion.div
-                          initial={{ width: 0 }}
-                          animate={{ width: `${pct}%` }}
-                          transition={{ duration: 0.8, ease: "easeOut" }}
-                          className="h-full bg-signal-orange rounded-full"
-                        />
-                      </div>
-                    </div>
-                  );
-                })}
-              </div>
-
-              <button className="mt-6 w-full inline-flex items-center justify-center gap-2 text-[13px] font-semibold bg-canvas-cream text-ink-black rounded-mc-button py-2.5 hover:bg-white transition-colors">
-                <CreditCard className="w-4 h-4" />
-                Manage billing
-              </button>
-            </div>
-          </div>
-
-          <div className="bg-lifted-cream border border-ink-black/5 rounded-2xl p-6">
-            <h3 className="text-[14px] font-semibold text-ink-black tracking-mc-tight mb-4">
-              Quick actions
-            </h3>
-            <div className="flex flex-col gap-2">
-              <button className="flex items-center gap-3 text-[13px] text-ink-black px-3 py-2.5 rounded-xl hover:bg-canvas-cream transition-colors">
-                <KeyRound className="w-4 h-4 text-slate-gray" />
-                Change password
-              </button>
-              <button className="flex items-center gap-3 text-[13px] text-ink-black px-3 py-2.5 rounded-xl hover:bg-canvas-cream transition-colors">
-                <Globe2 className="w-4 h-4 text-slate-gray" />
-                Language &amp; region
-              </button>
-              <button className="flex items-center gap-3 text-[13px] text-ink-black px-3 py-2.5 rounded-xl hover:bg-canvas-cream transition-colors">
-                <Shield className="w-4 h-4 text-slate-gray" />
-                Two-factor authentication
-              </button>
-            </div>
-          </div>
-        </motion.aside> */}
       </div>
+
+      <ToastContainer />
     </div>
   );
 }

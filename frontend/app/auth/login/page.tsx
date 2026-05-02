@@ -12,11 +12,17 @@ import { useToast } from "@/components/ui/Toast";
 import { api } from "@/lib/api";
 import { loginSchema, type LoginFormData } from "@/lib/validations/auth";
 import { setAuthCookie } from "@/lib/auth-client";
+import { saveUser } from "@/lib/user-storage";
 
 interface LoginResponse {
   message: string;
   response: {
     token: string;
+    data: {
+      email: string;
+      first_name: string;
+      last_name: string;
+    };
   };
 }
 
@@ -40,6 +46,11 @@ function LoginForm() {
     try {
       const result = await api.auth.login<LoginResponse>(data);
       setAuthCookie(result.response?.token);
+
+      if (result.response?.data) {
+        const { email, first_name, last_name } = result.response.data;
+        saveUser({ email, first_name, last_name, phone: "", company: "", bio: "" });
+      }
 
       const redirect = searchParams.get("redirect");
       const target =

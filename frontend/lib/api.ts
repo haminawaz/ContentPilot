@@ -101,6 +101,12 @@ export const api = {
       ),
     me: <TResponse>() =>
       apiRequest<TResponse>("/user/auth/me", "GET", undefined, true),
+    updateProfile: <TResponse>(payload: {
+      first_name: string;
+      last_name: string;
+      phone: string;
+    }) =>
+      apiRequest<TResponse>("/user/auth/profile", "PUT", payload, true),
   },
   dashboard: {
     overview: <TResponse>() =>
