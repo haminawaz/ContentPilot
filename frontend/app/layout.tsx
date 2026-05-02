@@ -45,6 +45,9 @@ export const metadata: Metadata = {
     description: "Scale your organic reach with surgical precision. Structural integrity for the future of content.",
     creator: "@contentpilot",
   },
+  verification: {
+    google: "-mxWn10065ZQF-Al_HXrkNAoxafbLlgdDm6h6J3ufW8",
+  },
   robots: {
     index: true,
     follow: true,

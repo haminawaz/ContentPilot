@@ -9,6 +9,18 @@
   "routes": [
     {
       "src": "/(.*)",
+      "methods": ["OPTIONS"],
+      "headers": {
+        "Access-Control-Allow-Origin": "https://content-pilot-ai.vercel.app",
+        "Access-Control-Allow-Methods": "GET,POST,PUT,DELETE,OPTIONS",
+        "Access-Control-Allow-Headers": "Content-Type, Authorization",
+        "Access-Control-Allow-Credentials": "true"
+      },
+      "continue": true,
+      "dest": "src/server.ts"
+    },
+    {
+      "src": "/(.*)",
       "dest": "src/server.ts"
     }
   ]
