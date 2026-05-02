@@ -26,21 +26,8 @@ const getAllUsers = async (
         id: true,
         first_name: true,
         last_name: true,
-        balance: true,
         status: true,
         createdAt: true,
-        _count: {
-          select: { shipments: true },
-        },
-        shipments: {
-          take: 1,
-          orderBy: { createdAt: "desc" },
-          select: {
-            id: true,
-            createdAt: true,
-            status: true,
-          },
-        },
       },
       orderBy: {
         createdAt: "desc",
@@ -51,10 +38,6 @@ const getAllUsers = async (
 
   const formattedusers = users.map((users) => ({
     ...users,
-    shipment_count: users._count.shipments,
-    last_shipment: users.shipments[0] || null,
-    _count: undefined,
-    shipments: undefined,
   }));
 
   return {
@@ -84,13 +67,9 @@ const getUserDetails = async (id: number) => {
       last_name: true,
       email: true,
       status: true,
-      balance: true,
       last_login_at: true,
       createdAt: true,
       updatedAt: true,
-      _count: {
-        select: { shipments: true },
-      },
     },
   });
 };
