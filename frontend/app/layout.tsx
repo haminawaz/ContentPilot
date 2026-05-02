@@ -46,7 +46,7 @@ export const metadata: Metadata = {
     creator: "@structa",
   },
   verification: {
-    google: "cCfqdvQzGP61Si5bycRJQztgSttUTqIRqdZkGBSx5AM",
+    google: "-mxWn10065ZQF-Al_HXrkNAoxafbLlgdDm6h6J3ufW8",
   },
   robots: {
     index: true,
