@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { Suspense, useEffect, useState } from "react";
 import { useSearchParams, useRouter } from "next/navigation";
 import { Controller, useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
@@ -14,7 +14,7 @@ import {
   type VerifyUserFormData,
 } from "@/lib/validations/auth";
 
-export default function VerifyUserPage() {
+function VerifyUserForm() {
   const [isSuccess, setIsSuccess] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
   const searchParams = useSearchParams();
@@ -183,5 +183,13 @@ export default function VerifyUserPage() {
 
       <ToastContainer />
     </>
+  );
+}
+
+export default function VerifyUserPage() {
+  return (
+    <Suspense fallback={<div>Loading...</div>}>
+      <VerifyUserForm />
+    </Suspense>
   );
 }

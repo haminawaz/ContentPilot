@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { Suspense, useEffect, useState } from "react";
 import { useSearchParams, useRouter } from "next/navigation";
 import { Controller, useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
@@ -15,7 +15,7 @@ import {
   type ResetPasswordFormData,
 } from "@/lib/validations/auth";
 
-export default function ResetPasswordPage() {
+function ResetPasswordForm() {
   const [isSuccess, setIsSuccess] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
   const searchParams = useSearchParams();
@@ -64,7 +64,7 @@ export default function ResetPasswordPage() {
       });
       setIsSuccess(true);
       showToast("Password reset successfully!", "success");
-      
+
       setTimeout(() => {
         router.push("/auth/login");
       }, 3000);
@@ -167,7 +167,8 @@ export default function ResetPasswordPage() {
             Password Reset
           </h2>
           <p className="text-slate-gray mb-10 max-w-[300px] mx-auto text-[15px] leading-relaxed">
-            Your security has been updated successfully. Redirecting to sign in...
+            Your security has been updated successfully. Redirecting to sign
+            in...
           </p>
           <div className="w-8 h-8 border-2 border-signal-orange border-t-transparent rounded-full animate-spin mx-auto" />
         </div>
@@ -175,5 +176,13 @@ export default function ResetPasswordPage() {
 
       <ToastContainer />
     </>
+  );
+}
+
+export default function ResetPasswordPage() {
+  return (
+    <Suspense fallback={<div>Loading...</div>}>
+      <ResetPasswordForm />
+    </Suspense>
   );
 }
