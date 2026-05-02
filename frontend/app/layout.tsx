@@ -27,14 +27,14 @@ export const metadata: Metadata = {
     address: false,
     telephone: false,
   },
-  metadataBase: new URL("https://structa.ai"),
+  metadataBase: new URL("https://structa-ai.vercel.app"),
   alternates: {
     canonical: "/",
   },
   openGraph: {
     title: "Structa | AI-Powered Structural SEO & Content Strategy",
     description: "Scale your organic reach with surgical precision. Built for those who demand performance, not just volume.",
-    url: "https://structa.ai",
+    url: "https://structa-ai.vercel.app",
     siteName: "Structa",
     locale: "en_US",
     type: "website",

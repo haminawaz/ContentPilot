@@ -12,10 +12,10 @@ export default function Home() {
     "@context": "https://schema.org",
     "@type": "WebSite",
     name: "Structa",
-    url: "https://structa.ai",
+    url: "https://structa-ai.vercel.app",
     potentialAction: {
       "@type": "SearchAction",
-      target: "https://structa.ai/search?q={search_term_string}",
+      target: "https://structa-ai.vercel.app/search?q={search_term_string}",
       "query-input": "required name=search_term_string",
     },
   };
@@ -24,8 +24,8 @@ export default function Home() {
     "@context": "https://schema.org",
     "@type": "Organization",
     name: "Structa",
-    url: "https://structa.ai",
-    logo: "https://structa.ai/logo.png",
+    url: "https://structa-ai.vercel.app",
+    logo: "https://structa-ai.vercel.app/logo.png",
     contactPoint: {
       "@type": "ContactPoint",
       telephone: "",
