@@ -17,6 +17,11 @@ export const metadata: Metadata = {
     default: "Structa | AI-Powered Structural SEO & Content Strategy",
     template: "%s | Structa"
   },
+  icons: {
+    icon: "/favicon.ico",
+    apple: "/logo.png",
+    shortcut: "/logo.png",
+  },
   description: "Scale your organic reach with surgical precision. Structa is an AI-powered structural integrity engine for high-performing SEO teams.",
   keywords: ["AI SEO", "Structural Content", "Content Strategy", "Search Visibility", "E-E-A-T", "SEO Automation", "Content Trajectory"],
   authors: [{ name: "Structa Team" }],
@@ -27,17 +32,25 @@ export const metadata: Metadata = {
     address: false,
     telephone: false,
   },
-  metadataBase: new URL("https://structa-ai.vercel.app"),
+  metadataBase: new URL("https://structa-seo-ai.vercel.app"),
   alternates: {
     canonical: "/",
   },
   openGraph: {
     title: "Structa | AI-Powered Structural SEO & Content Strategy",
     description: "Scale your organic reach with surgical precision. Built for those who demand performance, not just volume.",
-    url: "https://structa-ai.vercel.app",
+    url: "https://structa-seo-ai.vercel.app",
     siteName: "Structa",
     locale: "en_US",
     type: "website",
+    images: [
+      {
+        url: "/logo.png",
+        width: 1200,
+        height: 630,
+        alt: "Structa — AI SEO & Structural Content Strategy",
+      },
+    ],
   },
   twitter: {
     card: "summary_large_image",
