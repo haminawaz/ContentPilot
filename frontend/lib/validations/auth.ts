@@ -75,3 +75,36 @@ export const verifyUserSchema = z.object({
 });
 
 export type VerifyUserFormData = z.infer<typeof verifyUserSchema>;
+
+export const updateProfileSchema = z.object({
+  fullName: z
+    .string()
+    .min(5, "Full name must be at least 5 characters")
+    .max(100, "Full name must not exceed 100 characters")
+    .refine(
+      (val) => {
+        const parts = val.trim().split(/\s+/).filter(Boolean);
+        return parts.length >= 2;
+      },
+      { message: "Please provide both first and last name" },
+    ),
+  phone: z
+    .string()
+    .min(9, "Phone number must be at least 9 digits")
+    .max(15, "Phone number must be at most 15 digits")
+    .regex(/^[0-9]+$/, "Phone number must contain only digits"),
+  company: z
+    .string()
+    .min(2, "Company name must be at least 2 characters")
+    .max(50, "Company name must not exceed 50 characters")
+    .optional()
+    .or(z.literal("")),
+  bio: z
+    .string()
+    .min(2, "Bio must be at least 2 characters")
+    .max(50, "Bio must not exceed 50 characters")
+    .optional()
+    .or(z.literal("")),
+});
+
+export type UpdateProfileFormData = z.infer<typeof updateProfileSchema>;

@@ -42,11 +42,7 @@ export async function apiRequest<T>(
   const data = await response.json();
 
   if (!response.ok) {
-    throw new Error(
-      data?.error?.details ||
-        data?.message ||
-        `Request failed with ${response.status}`,
-    );
+    throw new Error(data?.message || `Request failed with ${response.status}`);
   }
 
   return data as T;
@@ -105,8 +101,9 @@ export const api = {
       first_name: string;
       last_name: string;
       phone: string;
-    }) =>
-      apiRequest<TResponse>("/user/auth/profile", "PUT", payload, true),
+      company: string;
+      bio: string;
+    }) => apiRequest<TResponse>("/user/auth/profile", "PUT", payload, true),
   },
   dashboard: {
     overview: <TResponse>() =>
@@ -131,7 +128,12 @@ export const api = {
         message: string;
         response: PaginatedArticles;
         error: null;
-      }>(`/user/ai-search?page=${page}&pageSize=${pageSize}`, "GET", undefined, true),
+      }>(
+        `/user/ai-search?page=${page}&pageSize=${pageSize}`,
+        "GET",
+        undefined,
+        true,
+      ),
     getArticle: (id: number) =>
       apiRequest<{
         message: string;

@@ -24,6 +24,8 @@ model Users {
   last_name                     String    @db.VarChar(50)
   email                         String    @unique @db.VarChar(50)
   phone                         String    @db.VarChar(50)
+  company                       String?   @db.VarChar(50)
+  bio                           String?   @db.Text
   password                      String    @db.Text
   email_verified                Boolean   @default(false)
   email_verification_otp        String?   @db.VarChar(6)

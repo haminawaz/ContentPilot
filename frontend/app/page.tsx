@@ -4,7 +4,7 @@ import HomeClient from "../components/home/HomeClient";
 export const metadata: Metadata = {
   title: "Structa | AI SEO & Structural Content Strategy",
   description:
-    "Structa is an AI-assisted SEO content platform. Turn a single topic into a publish-ready package — long-form Markdown article, SEO title and meta, target keywords, internal and external link ideas, and an intent-driven FAQ, all shaped by live SERP analysis.",
+    "Skip the guesswork. Structa turns a single topic into a complete SEO content package, article, meta, keywords, links & FAQ.",
 };
 
 export default function Home() {
@@ -12,10 +12,10 @@ export default function Home() {
     "@context": "https://schema.org",
     "@type": "WebSite",
     name: "Structa",
-    url: "https://structa-ai.vercel.app",
+    url: "https://structa-seo-ai.vercel.app",
     potentialAction: {
       "@type": "SearchAction",
-      target: "https://structa-ai.vercel.app/search?q={search_term_string}",
+      target: "https://structa-seo-ai.vercel.app/search?q={search_term_string}",
       "query-input": "required name=search_term_string",
     },
   };
@@ -24,8 +24,8 @@ export default function Home() {
     "@context": "https://schema.org",
     "@type": "Organization",
     name: "Structa",
-    url: "https://structa-ai.vercel.app",
-    logo: "https://structa-ai.vercel.app/logo.png",
+    url: "https://structa-seo-ai.vercel.app",
+    logo: "https://structa-seo-ai.vercel.app/logo.png",
     contactPoint: {
       "@type": "ContactPoint",
       telephone: "",

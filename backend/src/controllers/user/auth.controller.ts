@@ -229,6 +229,9 @@ export const login = asyncHandler(async (req: Request, res: Response) => {
     email: user.email,
     first_name: user.first_name,
     last_name: user.last_name,
+    phone: user.phone,
+    company: user.company,
+    bio: user.bio,
   };
 
   const data = {
@@ -246,13 +249,15 @@ export const login = asyncHandler(async (req: Request, res: Response) => {
 export const updateProfile = async (req: Request, res: Response) => {
   try {
     const userId = parseInt(req.decoded.userId as string);
-    const { first_name, last_name, phone } = req.body;
+    const { first_name, last_name, phone, company, bio } = req.body;
 
     const updateProfile = await userQueries.updateProfile({
       user_id: userId,
       first_name,
       last_name,
       phone,
+      company,
+      bio,
     });
     if (!updateProfile) {
       return res.status(400).json({
@@ -269,6 +274,8 @@ export const updateProfile = async (req: Request, res: Response) => {
           first_name: updateProfile.first_name,
           last_name: updateProfile.last_name,
           phone: updateProfile.phone,
+          company: updateProfile.company,
+          bio: updateProfile.bio,
         },
       },
       error: null,
@@ -384,10 +391,7 @@ export const forgotPassword = async (req: Request, res: Response) => {
       to_email: email,
     };
     await emailService.sendMail(
-      emailTemplates.getForgotPasswordEmailBody(
-        Number(otp),
-        resetPasswordUrl,
-      ),
+      emailTemplates.getForgotPasswordEmailBody(Number(otp), resetPasswordUrl),
       dynamicData,
     );
 

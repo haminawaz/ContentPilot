@@ -1,5 +1,6 @@
 "use client";
 
+import { useEffect, useState } from "react";
 import Link from "next/link";
 import { motion } from "framer-motion";
 import {
@@ -10,71 +11,79 @@ import {
   ArrowUpRight,
   Zap,
   Clock,
+  RefreshCw,
 } from "lucide-react";
+import { getUser } from "@/lib/user-storage";
+import { api } from "@/lib/api";
+import type { ArticleListItem } from "@/types/article";
 
-const STATS = [
-  {
-    label: "Articles generated",
-    value: "142",
-    delta: "+18%",
-    icon: FileText,
-    accent: "bg-signal-orange/10 text-signal-orange",
-  },
-  {
-    label: "Avg. SEO score",
-    value: "92.4",
-    delta: "+4.2",
-    icon: TrendingUp,
-    accent: "bg-link-blue/10 text-link-blue",
-  },
-  {
-    label: "Ranked keywords",
-    value: "1,284",
-    delta: "+212",
-    icon: Target,
-    accent: "bg-emerald-500/10 text-emerald-600",
-  },
-  {
-    label: "Words written",
-    value: "198k",
-    delta: "+12k",
-    icon: Zap,
-    accent: "bg-ink-black/5 text-ink-black",
-  },
-];
+const LANGUAGE_NAMES: Record<string, string> = {
+  en: "English",
+  es: "Spanish",
+  fr: "French",
+  de: "German",
+  it: "Italian",
+  pt: "Portuguese",
+};
 
-const RECENT = [
-  {
-    title: "Best practices for remote team management",
-    keywords: 14,
-    words: 1820,
-    status: "Published",
-    time: "2h ago",
-  },
-  {
-    title: "AI-driven keyword clustering for content teams",
-    keywords: 22,
-    words: 2140,
-    status: "Draft",
-    time: "Yesterday",
-  },
-  {
-    title: "Structural SEO: a 2025 playbook for growth marketers",
-    keywords: 18,
-    words: 1960,
-    status: "Published",
-    time: "2 days ago",
-  },
-  {
-    title: "E-E-A-T signals every SaaS blog needs to earn",
-    keywords: 11,
-    words: 1510,
-    status: "Published",
-    time: "5 days ago",
-  },
-];
+function timeAgo(dateStr: string) {
+  const diff = Date.now() - new Date(dateStr).getTime();
+  const mins = Math.floor(diff / 60000);
+  if (mins < 60) return `${mins}m ago`;
+  const hrs = Math.floor(mins / 60);
+  if (hrs < 24) return `${hrs}h ago`;
+  const days = Math.floor(hrs / 24);
+  if (days < 30) return `${days}d ago`;
+  return new Date(dateStr).toLocaleDateString();
+}
 
 export function DashboardClient() {
+  const [articles, setArticles] = useState<ArticleListItem[]>([]);
+  const [stats, setStats] = useState<any>(null);
+  const [loading, setLoading] = useState(true);
+
+  useEffect(() => {
+    async function fetchData() {
+      try {
+        const [recentRes, overviewRes] = await Promise.all([
+          api.content.getArticles(1, 4),
+          api.dashboard.overview<any>(),
+        ]);
+        setArticles(recentRes.response?.articles ?? []);
+        setStats(overviewRes.response);
+      } catch (err) {
+        // Ignore error
+      } finally {
+        setLoading(false);
+      }
+    }
+    fetchData();
+  }, []);
+
+  const displayStats = [
+    {
+      label: "Articles generated",
+      value: stats?.articles_generated ?? "0",
+      icon: FileText,
+      accent: "bg-signal-orange/10 text-signal-orange",
+    },
+    {
+      label: "Ranked keywords",
+      value: stats?.ranked_keywords?.toLocaleString() ?? "0",
+      icon: Target,
+      accent: "bg-emerald-500/10 text-emerald-600",
+    },
+    {
+      label: "Words written",
+      value:
+        stats?.words_written > 1000
+          ? `${(stats.words_written / 1000).toFixed(1)}k`
+          : (stats?.words_written ?? "0"),
+      icon: Zap,
+      accent: "bg-ink-black/5 text-ink-black",
+    },
+  ];
+
   return (
     <div className="max-w-7xl mx-auto flex flex-col gap-8">
       <motion.section
@@ -96,19 +105,11 @@ export function DashboardClient() {
 
         <div className="relative flex flex-col md:flex-row items-start md:items-end justify-between gap-6">
           <div>
-            <p className="eyebrow text-canvas-cream/70 mb-3">
-              <span className="eyebrow-dot" />
-              Welcome back
-            </p>
             <h1 className="text-[32px] md:text-[40px] leading-[1.05] font-semibold tracking-mc-tight text-balance">
-              Good morning, Alex.
+              Welcome back, {getUser()?.first_name ?? ""}
               <br />
               Let&apos;s build something that ranks.
             </h1>
-            <p className="mt-3 text-[14px] text-canvas-cream/70 max-w-xl">
-              Your last article climbed 6 positions this week. Time to keep the
-              momentum going.
-            </p>
           </div>
           <Link
             href="/dashboard/generate-article"
@@ -121,8 +122,8 @@ export function DashboardClient() {
         </div>
       </motion.section>
 
-      <section className="grid grid-cols-2 lg:grid-cols-4 gap-4">
-        {STATS.map((s, i) => {
+      <section className="grid grid-cols-2 lg:grid-cols-3 gap-4">
+        {displayStats.map((s, i) => {
           const Icon = s.icon;
           return (
             <motion.div
@@ -138,13 +139,14 @@ export function DashboardClient() {
                 <Icon className="w-4 h-4" />
               </div>
               <p className="mt-4 text-[28px] font-semibold text-ink-black tracking-mc-tight leading-none">
-                {s.value}
+                {loading ? (
+                  <RefreshCw className="w-5 h-5 text-slate-gray animate-spin mt-1" />
+                ) : (
+                  s.value
+                )}
               </p>
               <div className="mt-2 flex items-center justify-between">
                 <p className="text-[12px] text-slate-gray">{s.label}</p>
-                <span className="text-[11px] font-semibold text-emerald-600">
-                  {s.delta}
-                </span>
               </div>
             </motion.div>
           );
@@ -168,46 +170,69 @@ export function DashboardClient() {
               </p>
             </div>
             <Link
-              href="/dashboard/generate-article"
+              href="/dashboard/article-listing"
               className="text-[12px] font-semibold text-ink-black hover:text-signal-orange transition-colors flex items-center gap-1"
             >
               View all
               <ArrowUpRight className="w-3.5 h-3.5" />
             </Link>
           </div>
-          <ul className="divide-y divide-ink-black/5">
-            {RECENT.map((r, i) => (
-              <li
-                key={i}
-                className="px-6 py-4 flex items-center gap-4 hover:bg-canvas-cream transition-colors"
-              >
-                <div className="w-10 h-10 rounded-xl bg-ink-black/5 grid place-items-center shrink-0">
-                  <FileText className="w-4 h-4 text-ink-black" />
-                </div>
-                <div className="min-w-0 flex-1">
-                  <p className="text-[14px] font-medium text-ink-black truncate">
-                    {r.title}
-                  </p>
-                  <p className="text-[12px] text-slate-gray mt-0.5">
-                    {r.words.toLocaleString()} words · {r.keywords} keywords
-                  </p>
-                </div>
-                <span
-                  className={`hidden sm:inline-flex text-[11px] font-semibold px-2.5 py-1 rounded-full ${
-                    r.status === "Published"
-                      ? "bg-emerald-100 text-emerald-700"
-                      : "bg-ink-black/5 text-slate-gray"
-                  }`}
+          {loading ? (
+            <div className="py-12 flex justify-center items-center">
+              <RefreshCw className="w-5 h-5 text-slate-gray animate-spin" />
+            </div>
+          ) : articles.length > 0 ? (
+            <ul className="divide-y divide-ink-black/5">
+              {articles.map((r) => (
+                <li
+                  key={r.id}
+                  className="px-6 py-4 flex items-center gap-4 hover:bg-canvas-cream transition-colors"
                 >
-                  {r.status}
-                </span>
-                <span className="text-[11px] text-slate-gray flex items-center gap-1 shrink-0">
-                  <Clock className="w-3 h-3" />
-                  {r.time}
-                </span>
-              </li>
-            ))}
-          </ul>
+                  <div className="w-10 h-10 rounded-xl bg-ink-black/5 grid place-items-center shrink-0">
+                    <FileText className="w-4 h-4 text-ink-black" />
+                  </div>
+                  <div className="min-w-0 flex-1">
+                    <Link
+                      href={`/dashboard/article-detail/${r.id}`}
+                      className="block group w-fit max-w-full"
+                    >
+                      <p className="text-[14px] font-medium text-ink-black truncate group-hover:text-signal-orange transition-colors">
+                        {r.title || "Untitled article"}
+                      </p>
+                    </Link>
+                    <p className="text-[12px] text-slate-gray mt-0.5">
+                      {r.word_count.toLocaleString()} words ·{" "}
+                      {LANGUAGE_NAMES[r.language] ?? r.language}
+                    </p>
+                  </div>
+                  <span className="text-[11px] text-slate-gray flex items-center gap-1 shrink-0">
+                    <Clock className="w-3 h-3" />
+                    {timeAgo(r.createdAt)}
+                  </span>
+                </li>
+              ))}
+            </ul>
+          ) : (
+            <div className="flex flex-col items-center justify-center py-12 px-6 text-center">
+              <div className="w-12 h-12 rounded-2xl bg-signal-orange/10 grid place-items-center mb-4">
+                <FileText className="w-6 h-6 text-signal-orange" />
+              </div>
+              <h2 className="text-[16px] font-semibold tracking-mc-tight text-ink-black">
+                No articles yet
+              </h2>
+              <p className="mt-1.5 text-[13px] text-slate-gray max-w-[240px]">
+                You haven&apos;t generated any articles.
+              </p>
+              <Link
+                href="/dashboard/generate-article"
+                className="mt-5 inline-flex items-center gap-2 bg-signal-orange text-white px-4 py-2.5 rounded-mc-button font-medium text-[13px] hover:bg-light-signal-orange transition-colors"
+              >
+                <Sparkles className="w-3.5 h-3.5" />
+                Generate
+                <ArrowUpRight className="w-3.5 h-3.5" />
+              </Link>
+            </div>
+          )}
         </motion.div>
       </section>
     </div>

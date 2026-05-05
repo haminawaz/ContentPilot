@@ -39,6 +39,9 @@ const getUserWithPassword = async (email: string) => {
       email: true,
       first_name: true,
       last_name: true,
+      phone: true,
+      company: true,
+      bio: true,
       password: true,
       email_verified: true,
       status: true,
@@ -123,6 +126,8 @@ const updateProfile = async (userData: UpdateUser) => {
       first_name: userData.first_name,
       last_name: userData.last_name,
       phone: userData.phone,
+      company: userData.company,
+      bio: userData.bio,
     },
   });
 };

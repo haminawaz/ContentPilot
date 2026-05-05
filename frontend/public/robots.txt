@@ -4,4 +4,4 @@ Allow: /
 Disallow: /dashboard/
 Disallow: /auth/
 
-Sitemap: https://structa-ai.vercel.app/sitemap.xml
+Sitemap: https://structa-seo-ai.vercel.app/sitemap.xml

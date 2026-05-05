@@ -5,7 +5,13 @@ import { useRouter } from "next/navigation";
 import { usePathname } from "next/navigation";
 import Image from "next/image";
 import { motion } from "framer-motion";
-import { LayoutDashboard, Sparkles, User, LogOut, FileText } from "lucide-react";
+import {
+  LayoutDashboard,
+  Sparkles,
+  User,
+  LogOut,
+  FileText,
+} from "lucide-react";
 import { cn } from "@/lib/utils";
 import { Button } from "../ui/Button";
 import { clearAuthCookie } from "@/lib/auth-client";
@@ -57,7 +63,7 @@ export function Sidebar() {
         />
         <div className="leading-tight cursor-default">
           <p className="text-[15px] font-bold text-[#d12329] tracking-mc-tight">
-            Struct<span className=" text-[#ef9b1a]">a</span>
+            Structa
           </p>
         </div>
       </div>
@@ -80,7 +86,8 @@ export function Sidebar() {
                 active
                   ? "text-ink-black"
                   : "text-slate-gray hover:text-ink-black hover:bg-ink-black/5",
-              )}>
+              )}
+            >
               {active && (
                 <motion.div
                   layoutId="sidebar-active"
@@ -103,7 +110,8 @@ export function Sidebar() {
         <Button
           variant="ghost"
           onClick={handleLogout}
-          className="flex items-center gap-3 px-3 py-2 rounded-xl text-[13px] text-slate-gray hover:text-ink-black hover:bg-ink-black/5 transition-colors cursor-pointer">
+          className="flex items-center gap-3 px-3 py-2 rounded-xl text-[13px] text-slate-gray hover:text-ink-black hover:bg-ink-black/5 transition-colors cursor-pointer"
+        >
           <LogOut className="w-4 h-4" />
           Sign out
         </Button>

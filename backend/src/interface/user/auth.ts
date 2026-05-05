@@ -13,6 +13,8 @@ export interface UpdateUser {
   first_name: string;
   last_name: string;
   phone: string;
+  company: string;
+  bio: string;
 }
 
 export interface ForgotPassword {

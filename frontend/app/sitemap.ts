@@ -1,6 +1,6 @@
 import type { MetadataRoute } from "next";
 
-const BASE_URL = "https://structa-ai.vercel.app";
+const BASE_URL = "https://structa-seo-ai.vercel.app";
 
 export default function sitemap(): MetadataRoute.Sitemap {
   return [

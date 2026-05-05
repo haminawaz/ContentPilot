@@ -22,6 +22,9 @@ interface LoginResponse {
       email: string;
       first_name: string;
       last_name: string;
+      phone: string;
+      company: string;
+      bio: string;
     };
   };
 }
@@ -48,8 +51,9 @@ function LoginForm() {
       setAuthCookie(result.response?.token);
 
       if (result.response?.data) {
-        const { email, first_name, last_name } = result.response.data;
-        saveUser({ email, first_name, last_name, phone: "", company: "", bio: "" });
+        const { email, first_name, last_name, phone, company, bio } =
+          result.response.data;
+        saveUser({ email, first_name, last_name, phone, company, bio });
       }
 
       const redirect = searchParams.get("redirect");
@@ -73,7 +77,8 @@ function LoginForm() {
       <Form
         eyebrow="AUTHENTICATION"
         title="Welcome back"
-        onSubmit={handleSubmit(onSubmit)}>
+        onSubmit={handleSubmit(onSubmit)}
+      >
         <Input
           label="Email Address"
           type="email"
@@ -90,7 +95,8 @@ function LoginForm() {
           rightElement={
             <Link
               href="/auth/forgot-password"
-              className="text-[12px] text-signal-orange hover:underline font-medium underline-offset-2">
+              className="text-[12px] text-signal-orange hover:underline font-medium underline-offset-2"
+            >
               Forgot?
             </Link>
           }
@@ -107,7 +113,8 @@ function LoginForm() {
           New to Structa?{" "}
           <Link
             href="/auth/signup"
-            className="text-signal-orange font-semibold hover:underline underline-offset-4">
+            className="text-signal-orange font-semibold hover:underline underline-offset-4"
+          >
             Create account
           </Link>
         </p>

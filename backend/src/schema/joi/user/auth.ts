@@ -129,6 +129,14 @@ const profileUpdate = Joi.object({
       "any.required": "Phone number is required",
       "string.empty": "Phone number is not allowed to be empty",
     }),
+  company: Joi.string().trim().optional().allow("").min(2).max(50).messages({
+    "string.min": "Company name must be at least 2 characters long",
+    "string.max": "Company name must be at most 50 characters long",
+  }),
+  bio: Joi.string().trim().optional().allow("").min(2).max(50).messages({
+    "string.min": "Bio must be at least 2 characters long",
+    "string.max": "Bio must be at most 50 characters long",
+  }),
 });
 
 const passwordUpdate = Joi.object({
