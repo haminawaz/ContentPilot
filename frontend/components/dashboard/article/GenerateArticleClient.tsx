@@ -123,28 +123,6 @@ export function GenerateArticleClient() {
           />
         )}
       </AnimatePresence>
-
-      {view === "form" && (
-        <motion.div
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          transition={{ delay: 0.4 }}
-          className="max-w-3xl mx-auto mt-6 flex items-start gap-3 text-[12px] text-slate-gray bg-lifted-cream border border-ink-black/5 rounded-2xl px-4 py-3"
-        >
-          <AlertCircle className="w-4 h-4 text-slate-gray shrink-0 mt-0.5" />
-          <p>
-            Generation calls{" "}
-            <code className="font-mono text-ink-black bg-ink-black/5 px-1.5 py-0.5 rounded">
-              {getApiUrl("/user/ai-search")}
-            </code>
-            . Set{" "}
-            <code className="font-mono text-ink-black bg-ink-black/5 px-1.5 py-0.5 rounded">
-              NEXT_PUBLIC_API_URL
-            </code>{" "}
-            to point at your backend.
-          </p>
-        </motion.div>
-      )}
     </div>
   );
 }
