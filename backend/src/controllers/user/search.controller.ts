@@ -3,12 +3,29 @@ import { asyncHandler } from "../../middleware/errorHandler";
 import * as ContentGenerator from "../../services/content-generator.service";
 import logger from "../../services/logger.service";
 import searchQueries from "../../queries/user/search";
+import subscriptionQueries from "../../queries/user/subscription";
 
 export const search = asyncHandler(async (req: Request, res: Response) => {
   const userId = (req as any).decoded?.userId;
   const { topic, language, word_count } = req.body;
 
   try {
+    const userSubscription =
+      await subscriptionQueries.getUserSubscription(userId);
+    if (
+      !userSubscription ||
+      userSubscription.credits_remaining < userSubscription.plan.credit_limit
+    ) {
+      return res.status(400).json({
+        message: "You don't have enough credits to generate this content",
+        response: null,
+        error: {
+          code: "INSUFFICIENT_CREDITS",
+          details: "You don't have enough credits to generate this content",
+        },
+      });
+    }
+
     const result = await ContentGenerator.generateSEOContent(
       topic,
       language,
@@ -121,7 +138,10 @@ export const getGeneratedArticles = async (req: Request, res: Response) => {
   }
 };
 
-export const getSingleGeneratedArticle = async (req: Request, res: Response) => {
+export const getSingleGeneratedArticle = async (
+  req: Request,
+  res: Response,
+) => {
   const userId = (req as any).decoded?.userId;
   const { id } = req.params;
 
@@ -154,4 +174,4 @@ export const getSingleGeneratedArticle = async (req: Request, res: Response) => 
       },
     });
   }
-}
+};

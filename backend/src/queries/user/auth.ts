@@ -60,7 +60,7 @@ const updateLastLogin = async (userId: number) => {
 
 const createOrUpdateUserTransaction = async (userData: RegisterUser) => {
   return prisma.$transaction(async (tx) => {
-    return tx.users.upsert({
+    const user = await tx.users.upsert({
       where: { email: userData.email },
       update: {
         first_name: userData.first_name,
@@ -80,6 +80,32 @@ const createOrUpdateUserTransaction = async (userData: RegisterUser) => {
         email_verification_expires_at: userData.email_verification_otp_expiry,
       },
     });
+
+    const freePlan = await tx.plans.findFirst({
+      where: {
+        plan_name: "Free",
+        active: true,
+      },
+      select: {
+        id: true,
+        credit_limit: true,
+      },
+    });
+
+    if (!freePlan) {
+      throw new Error("Free plan not found");
+    }
+
+    await tx.userSubscriptions.create({
+      data: {
+        user_id: user.id,
+        plan_id: freePlan.id,
+        status: "active",
+        credits_remaining: freePlan.credit_limit,
+      },
+    });
+
+    return user;
   });
 };
 

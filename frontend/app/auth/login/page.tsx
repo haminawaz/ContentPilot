@@ -12,7 +12,7 @@ import { useToast } from "@/components/ui/Toast";
 import { api } from "@/lib/api";
 import { loginSchema, type LoginFormData } from "@/lib/validations/auth";
 import { setAuthCookie } from "@/lib/auth-client";
-import { saveUser } from "@/lib/user-storage";
+import { saveUser, saveCredits } from "@/lib/user-storage";
 
 interface LoginResponse {
   message: string;
@@ -25,6 +25,13 @@ interface LoginResponse {
       phone: string;
       company: string;
       bio: string;
+    };
+    subscription: {
+      plan_name: string;
+      credits_remaining: number;
+      credit_limit: number;
+      current_period_start: string;
+      current_period_end: string;
     };
   };
 }
@@ -54,6 +61,17 @@ function LoginForm() {
         const { email, first_name, last_name, phone, company, bio } =
           result.response.data;
         saveUser({ email, first_name, last_name, phone, company, bio });
+      }
+
+      if (result.response?.subscription) {
+        const sub = result.response.subscription;
+        saveCredits({
+          plan: sub.plan_name,
+          total: sub.credit_limit,
+          used: sub.credit_limit - sub.credits_remaining,
+          purchasedAt: sub.current_period_start,
+          expiresAt: sub.current_period_end,
+        });
       }
 
       const redirect = searchParams.get("redirect");

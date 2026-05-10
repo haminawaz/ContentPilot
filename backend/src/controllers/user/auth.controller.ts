@@ -4,6 +4,7 @@ import bcrypt from "bcrypt";
 import jwt from "jsonwebtoken";
 import { asyncHandler } from "../../middleware/errorHandler";
 import userQueries from "../../queries/user/auth";
+import subscriptionQueries from "../../queries/user/subscription";
 import emailService from "../../services/email.service";
 import emailTemplates from "../../lib/email-templates";
 import configs from "../../config/env";
@@ -225,6 +226,17 @@ export const login = asyncHandler(async (req: Request, res: Response) => {
 
   await userQueries.updateLastLogin(user.id);
 
+  const userSubscription = await subscriptionQueries.getUserSubscription(
+    user.id,
+  );
+  const subscriptionData = {
+    plan_name: userSubscription?.plan.plan_name,
+    credits_remaining: userSubscription?.credits_remaining,
+    credit_limit: userSubscription?.plan.credit_limit,
+    current_period_start: userSubscription?.current_period_start,
+    current_period_end: userSubscription?.current_period_end,
+  };
+
   const userData = {
     email: user.email,
     first_name: user.first_name,
@@ -237,6 +249,7 @@ export const login = asyncHandler(async (req: Request, res: Response) => {
   const data = {
     data: userData,
     token,
+    subscription: subscriptionData,
   };
 
   return res.status(200).json({

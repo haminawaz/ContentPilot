@@ -11,10 +11,13 @@ import {
   User,
   LogOut,
   FileText,
+  Zap,
 } from "lucide-react";
 import { cn } from "@/lib/utils";
 import { Button } from "../ui/Button";
 import { clearAuthCookie } from "@/lib/auth-client";
+import { getCredits, type StoredCredits } from "@/lib/user-storage";
+import { useState, useEffect } from "react";
 
 const NAV = [
   {
@@ -43,12 +46,37 @@ const NAV = [
 export function Sidebar() {
   const router = useRouter();
   const pathname = usePathname();
+  const [credits, setCredits] = useState<StoredCredits>({
+    total: 2,
+    used: 0,
+    plan: "free",
+  });
+
+  useEffect(() => {
+    setCredits(getCredits());
+    const onStorage = () => setCredits(getCredits());
+    window.addEventListener("storage", onStorage);
+    const id = setInterval(() => setCredits(getCredits()), 2000);
+    return () => {
+      window.removeEventListener("storage", onStorage);
+      clearInterval(id);
+    };
+  }, []);
 
   const handleLogout = () => {
     clearAuthCookie();
     router.push("/auth/login");
     router.refresh();
   };
+
+  const remaining = Math.max(0, credits.total - credits.used);
+  const pct = credits.total > 0 ? (credits.used / credits.total) * 100 : 0;
+  const barColor =
+    pct < 50
+      ? "bg-emerald-500"
+      : pct < 80
+        ? "bg-amber-400"
+        : "bg-signal-orange";
 
   return (
     <aside className="hidden lg:flex flex-col w-72 shrink-0 bg-lifted-cream border-r border-ink-black/5 h-screen sticky top-0">
@@ -106,6 +134,48 @@ export function Sidebar() {
           );
         })}
       </nav>
+
+      <div className="px-4 pb-2">
+        <Link
+          href="/dashboard/profile?tab=subscription"
+          className="block rounded-2xl border border-ink-black/8 bg-canvas-cream p-4 hover:bg-white transition-colors group"
+        >
+          <div className="flex items-center justify-between mb-2">
+            <div className="flex items-center gap-1.5">
+              <Zap className="w-3.5 h-3.5 text-signal-orange" />
+              <span className="text-[12px] font-semibold text-ink-black">
+                Credits
+              </span>
+            </div>
+            <span className="text-[11px] font-medium capitalize text-slate-gray bg-ink-black/5 px-2 py-0.5 rounded-full">
+              {credits.plan}
+            </span>
+          </div>
+
+          <div className="h-1.5 rounded-full bg-ink-black/8 overflow-hidden mb-2">
+            <motion.div
+              className={`h-full rounded-full ${barColor} transition-colors`}
+              initial={{ width: 0 }}
+              animate={{ width: `${pct}%` }}
+              transition={{ duration: 0.6, ease: "easeOut" }}
+            />
+          </div>
+
+          <div className="flex items-center justify-between">
+            <span className="text-[11px] text-slate-gray">
+              {credits.used} used of {credits.total}
+            </span>
+            <span className="text-[11px] font-semibold text-ink-black">
+              {remaining} left
+            </span>
+          </div>
+
+          <p className="mt-2 text-[11px] text-slate-gray/70 group-hover:text-slate-gray transition-colors">
+            Upgrade for more →
+          </p>
+        </Link>
+      </div>
+
       <div className="px-4 py-4 border-t border-ink-black/5">
         <Button
           variant="ghost"

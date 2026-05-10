@@ -5,6 +5,7 @@ import Hero from "./Hero";
 import Features from "./Features";
 import SolutionGrid from "./SolutionGrid";
 import HowItWorks from "./HowItWorks";
+import Pricing from "./Pricing";
 import Footer from "../Footer";
 import { motion } from "framer-motion";
 import Link from "next/link";
@@ -20,6 +21,7 @@ export default function HomeClient() {
         <Features />
         <SolutionGrid />
         <HowItWorks />
+        <Pricing />
 
         <section className="pb-20 px-6 text-center" id="contact">
           <motion.div
