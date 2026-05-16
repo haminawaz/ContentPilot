@@ -8,7 +8,11 @@ const getUserSubscription = async (userId: number | string) => {
       credits_remaining: true,
       plan: {
         select: {
+          id: true,
           plan_name: true,
+          price: true,
+          description: true,
+          features: true,
           credit_limit: true,
         },
       },
@@ -18,6 +22,23 @@ const getUserSubscription = async (userId: number | string) => {
   });
 };
 
+const getAllPlans = async () => {
+  return prisma.plans.findMany({
+    where: { active: true },
+    select: {
+      id: true,
+      plan_name: true,
+      price: true,
+      interval: true,
+      description: true,
+      features: true,
+      currency: true,
+      credit_limit: true,
+    },
+  });
+};
+
 export default {
   getUserSubscription,
+  getAllPlans,
 };

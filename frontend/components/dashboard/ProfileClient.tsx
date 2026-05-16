@@ -43,6 +43,39 @@ interface UpdateProfileResponse {
   error: null;
 }
 
+interface Plan {
+  id: number;
+  plan_name: string;
+  price: number;
+  interval: string;
+  description: string;
+  features: any;
+  currency: string;
+  credit_limit: number;
+}
+
+interface SubscriptionDetailsResponse {
+  message: string;
+  response: {
+    current_subscription: {
+      id: number;
+      credits_remaining: number;
+      plan: {
+        id: number;
+        plan_name: string;
+        price: number;
+        description: string;
+        features: any;
+        credit_limit: number;
+      };
+      current_period_start: string;
+      current_period_end: string;
+    } | null;
+    available_plans: Plan[];
+  };
+  error: null;
+}
+
 function CancelModal({
   isOpen,
   onClose,
@@ -261,39 +294,48 @@ function PersonalTab() {
   );
 }
 
-// ─── Subscription tab ─────────────────────────────────────────────────────────
 function SubscriptionTab() {
-  const [credits, setCredits] = useState<any>(null);
-  const [selecting, setSelecting] = useState<SubscriptionPlan | null>(null);
+  const [subscription, setSubscription] = useState<any>(null);
+  const [plans, setPlans] = useState<Plan[]>([]);
+  const [isLoadingDetails, setIsLoadingDetails] = useState(true);
+  const [selecting, setSelecting] = useState<number | string | null>(null);
   const [isCancelModalOpen, setIsCancelModalOpen] = useState(false);
   const [isCancelling, setIsCancelling] = useState(false);
   const { showToast, ToastContainer } = useToast();
 
   useEffect(() => {
-    setCredits(getCredits());
+    fetchSubscriptionDetails();
   }, []);
 
-  const handleSelect = async (plan: SubscriptionPlan) => {
-    if (plan === credits?.plan) return;
-    setSelecting(plan);
+  const fetchSubscriptionDetails = async () => {
+    try {
+      setIsLoadingDetails(true);
+      const data =
+        await api.subscription.getDetails<SubscriptionDetailsResponse>();
+      setSubscription(data.response.current_subscription);
+      setPlans(data.response.available_plans);
+    } catch (error) {
+      console.error("Failed to fetch subscription details:", error);
+      showToast("Failed to load subscription details.", "error");
+    } finally {
+      setIsLoadingDetails(false);
+    }
+  };
+
+  const handleSelect = async (planId: number | string) => {
+    if (planId === subscription?.plan?.id) return;
+    setSelecting(planId);
     await new Promise((r) => setTimeout(r, 800));
-    setPlan(plan);
-    setCredits(getCredits());
+    showToast("Checkout logic will be implemented with Stripe.", "info");
     setSelecting(null);
-    showToast(
-      `Welcome to the ${plan.charAt(0).toUpperCase() + plan.slice(1)} plan!`,
-      "success",
-    );
   };
 
   const handleCancel = async () => {
     setIsCancelling(true);
-    await new Promise((r) => setTimeout(r, 1200)); // Simulate API
-    setPlan("free");
-    setCredits(getCredits());
+    await new Promise((r) => setTimeout(r, 1200));
     setIsCancelling(false);
     setIsCancelModalOpen(false);
-    showToast("Subscription cancelled. Reverted to Free tier.", "info");
+    showToast("Subscription cancellation is not implemented yet.", "info");
   };
 
   const formatDate = (iso?: string) => {
@@ -305,7 +347,15 @@ function SubscriptionTab() {
     });
   };
 
-  const isPaid = credits?.plan && credits.plan !== "free";
+  const isPaid = subscription && subscription.plan;
+
+  if (isLoadingDetails) {
+    return (
+      <div className="flex items-center justify-center min-h-[400px]">
+        <div className="w-8 h-8 border-4 border-signal-orange border-t-transparent rounded-full animate-spin" />
+      </div>
+    );
+  }
 
   return (
     <>
@@ -331,7 +381,7 @@ function SubscriptionTab() {
                     Active Plan
                   </p>
                   <p className="text-[24px] font-bold text-ink-black capitalize">
-                    {credits?.plan}
+                    {subscription.plan.plan_name}
                   </p>
                 </div>
               </div>
@@ -344,7 +394,7 @@ function SubscriptionTab() {
                       Purchased
                     </p>
                     <p className="text-[14px] font-semibold text-ink-black whitespace-nowrap">
-                      {formatDate(credits?.purchasedAt)}
+                      {formatDate(subscription.current_period_start)}
                     </p>
                   </div>
                 </div>
@@ -356,7 +406,7 @@ function SubscriptionTab() {
                       Renews On
                     </p>
                     <p className="text-[14px] font-semibold text-ink-black whitespace-nowrap">
-                      {formatDate(credits?.expiresAt)}
+                      {formatDate(subscription.current_period_end)}
                     </p>
                   </div>
                 </div>
@@ -367,7 +417,9 @@ function SubscriptionTab() {
                       Credit Usage
                     </span>
                     <span className="text-[13px] font-bold text-ink-black">
-                      {credits?.used}/{credits?.total}
+                      {subscription.plan.credit_limit -
+                        subscription.credits_remaining}
+                      /{subscription.plan.credit_limit}
                     </span>
                   </div>
                   <div className="h-2 rounded-full bg-canvas-cream overflow-hidden">
@@ -375,7 +427,7 @@ function SubscriptionTab() {
                       className="h-full bg-signal-orange"
                       initial={{ width: 0 }}
                       animate={{
-                        width: `${(credits?.used / credits?.total) * 100}%`,
+                        width: `${((subscription.plan.credit_limit - subscription.credits_remaining) / subscription.plan.credit_limit) * 100}%`,
                       }}
                       transition={{ duration: 1, ease: "easeOut" }}
                     />
@@ -383,38 +435,47 @@ function SubscriptionTab() {
                 </div>
               </div>
 
-              <div className="flex items-center gap-3">
-                <div className="hidden xl:block px-6 py-3 bg-ink-black rounded-2xl text-white">
-                  <div className="flex items-center gap-2">
-                    <Sparkles className="w-4 h-4 text-signal-orange" />
-                    <span className="text-[13px] font-semibold whitespace-nowrap">
-                      Pro Power Active
-                    </span>
+              {subscription.plan.plan_name !== "Free" && (
+                <div className="flex items-center gap-3">
+                  <div className="hidden xl:block px-6 py-3 bg-ink-black rounded-2xl text-white">
+                    <div className="flex items-center gap-2">
+                      <Sparkles className="w-4 h-4 text-signal-orange" />
+                      <span className="text-[13px] font-semibold whitespace-nowrap">
+                        Pro Power Active
+                      </span>
+                    </div>
                   </div>
-                </div>
 
-                <button
-                  onClick={() => setIsCancelModalOpen(true)}
-                  className="p-3 rounded-full bg-canvas-cream border border-ink-black/5 text-slate-gray hover:text-signal-orange hover:bg-signal-orange/5 transition-all group"
-                  title="Cancel subscription"
-                >
-                  <X className="w-5 h-5 group-hover:rotate-90 transition-transform duration-300" />
-                </button>
-              </div>
+                  <button
+                    onClick={() => setIsCancelModalOpen(true)}
+                    className="p-3 rounded-full bg-canvas-cream border border-ink-black/5 text-slate-gray hover:text-signal-orange hover:bg-signal-orange/5 transition-all group"
+                    title="Cancel subscription"
+                  >
+                    <X className="w-5 h-5 group-hover:rotate-90 transition-transform duration-300" />
+                  </button>
+                </div>
+              )}
             </div>
           </motion.div>
         )}
 
-        {/* Plan Cards */}
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-          {PLANS.map((plan, i) => (
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-12">
+          {plans.map((plan, i) => (
             <PlanCard
               key={plan.id}
-              plan={plan}
+              plan={{
+                id: plan.id,
+                name: plan.plan_name,
+                credits: plan.credit_limit,
+                price: `$${plan.price}`,
+                description: plan.description,
+                features: Array.isArray(plan.features) ? plan.features : [],
+                highlight: plan.plan_name.toLowerCase() === "pro",
+              }}
               index={i}
-              isActive={plan.id === credits?.plan}
+              isActive={plan.id === subscription?.plan?.id}
               isLoading={selecting === plan.id}
-              onSelect={handleSelect}
+              onSelect={() => handleSelect(plan.id)}
             />
           ))}
         </div>
@@ -457,7 +518,6 @@ export function ProfileClient() {
 
   return (
     <div className="max-w-7xl mx-auto flex flex-col gap-8 pb-20">
-      {/* Header Section */}
       <div className="flex flex-col md:flex-row md:items-end justify-between gap-6">
         <div>
           <div className="eyebrow mb-4">
@@ -471,7 +531,6 @@ export function ProfileClient() {
           </h1>
         </div>
 
-        {/* Tab Switcher */}
         <div className="flex items-center gap-1 bg-white border border-ink-black/5 rounded-2xl p-1 shadow-mc-soft h-fit">
           {tabs.map((t) => {
             const Icon = t.icon;
@@ -503,7 +562,6 @@ export function ProfileClient() {
         </div>
       </div>
 
-      {/* Content Section */}
       <AnimatePresence mode="wait">
         <motion.div
           key={activeTab}

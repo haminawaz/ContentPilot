@@ -67,3 +67,37 @@ const verifyUserJwt =
   };
 
 export const verifyUserToken = verifyUserJwt();
+
+export const optionalUserToken = async (
+  req: Request,
+  res: Response,
+  next: NextFunction,
+) => {
+  try {
+    let token = req.headers.authorization;
+    if (token) {
+      if (token.startsWith("Bearer ")) {
+        token = token.slice(7, token.length);
+      }
+
+      let decoded = jwt.verify(token, config.jwtSecret!) as JwtPayload;
+      if (decoded.exp && Date.now() < decoded.exp * 1000) {
+        const email = decoded.email;
+        const userData = await userQueries.getUserForJwt(email);
+        if (
+          userData &&
+          userData.email_verified &&
+          userData.status === "active"
+        ) {
+          req.decoded = {
+            ...decoded,
+            userId: String(userData.id),
+          };
+        }
+      }
+    }
+    return next();
+  } catch (error) {
+    return next();
+  }
+};

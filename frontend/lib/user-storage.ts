@@ -7,7 +7,7 @@ export interface StoredUser {
   bio: string;
 }
 
-export type SubscriptionPlan = "free" | "pro" | "agency";
+export type SubscriptionPlan = string | number;
 
 export interface StoredCredits {
   total: number;

@@ -9,6 +9,7 @@ import {
 } from "framer-motion";
 import { CheckCircle2, ArrowRight, Check } from "lucide-react";
 import { type SubscriptionPlan } from "@/lib/user-storage";
+import { getTokenFromCookie } from "@/lib/auth-client";
 
 export const PLANS: {
   id: SubscriptionPlan;
@@ -102,7 +103,12 @@ export function PlanCard({
 
   const handleAction = () => {
     if (isLanding) {
-      window.location.href = "/auth/signup";
+      const token = getTokenFromCookie();
+      if (token) {
+        window.location.href = "/dashboard/profile?tab=subscription";
+      } else {
+        window.location.href = "/auth/login";
+      }
       return;
     }
     onSelect?.(plan.id);

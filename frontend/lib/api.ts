@@ -141,6 +141,19 @@ export const api = {
         error: null;
       }>(`/user/ai-search/${id}`, "GET", undefined, true),
   },
+  subscription: {
+    getDetails: <TResponse>() => {
+      const token = getTokenFromCookie();
+      return apiRequest<TResponse>(
+        "/user/subscription/details",
+        "GET",
+        undefined,
+        !!token,
+      );
+    },
+    getPublicPlans: <TResponse>() =>
+      apiRequest<TResponse>("/user/subscription/details", "GET", undefined, false),
+  },
 };
 
 export function generateContent(
