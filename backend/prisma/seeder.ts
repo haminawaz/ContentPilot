@@ -1,7 +1,24 @@
+import bcrypt from "bcrypt";
 import prisma from "../src/lib/prisma";
 
 async function main() {
   return await prisma.$transaction(async (tx) => {
+    const adminEmail = process.env.ADMIN_EMAIL;
+    const adminPassword = process.env.ADMIN_PASSWORD;
+    if (!adminEmail || !adminPassword) {
+      throw new Error(
+        "ADMIN_EMAIL and ADMIN_PASSWORD must be set in the environment to seed the admin account",
+      );
+    }
+    const hashedPassword = await bcrypt.hash(adminPassword, 10);
+
+    await tx.admin.upsert({
+      where: { email: adminEmail },
+      update: {},
+      create: { email: adminEmail, password: hashedPassword },
+    });
+    console.log(`Admin ready: ${adminEmail}`);
+
     const plansData = [
       {
         plan_name: "Free",
