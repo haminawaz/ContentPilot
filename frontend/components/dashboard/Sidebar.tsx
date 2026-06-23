@@ -19,7 +19,7 @@ import { clearAuthCookie } from "@/lib/auth-client";
 import { getCredits, type StoredCredits } from "@/lib/user-storage";
 import { useState, useEffect } from "react";
 
-const NAV = [
+export const NAV = [
   {
     href: "/dashboard",
     label: "Overview",
@@ -43,7 +43,7 @@ const NAV = [
   },
 ];
 
-export function Sidebar() {
+export function SidebarContent({ onNavigate }: { onNavigate?: () => void }) {
   const router = useRouter();
   const pathname = usePathname();
   const [credits, setCredits] = useState<StoredCredits>({
@@ -64,6 +64,7 @@ export function Sidebar() {
   }, []);
 
   const handleLogout = () => {
+    onNavigate?.();
     clearAuthCookie();
     router.push("/auth/login");
     router.refresh();
@@ -79,7 +80,7 @@ export function Sidebar() {
         : "bg-signal-orange";
 
   return (
-    <aside className="hidden lg:flex flex-col w-72 shrink-0 bg-lifted-cream border-r border-ink-black/5 h-screen sticky top-0">
+    <>
       <div className="flex items-center gap-3 px-7 py-6 border-b border-ink-black/5">
         <Image
           src="/logo.png"
@@ -109,6 +110,7 @@ export function Sidebar() {
             <Link
               key={item.href}
               href={item.href}
+              onClick={onNavigate}
               className={cn(
                 "relative flex items-center gap-3 px-3 py-2.5 rounded-xl text-[14px] font-medium transition-colors",
                 active
@@ -138,6 +140,7 @@ export function Sidebar() {
       <div className="px-4 pb-2">
         <Link
           href="/dashboard/profile?tab=subscription"
+          onClick={onNavigate}
           className="block rounded-2xl border border-ink-black/8 bg-canvas-cream p-4 hover:bg-white transition-colors group"
         >
           <div className="flex items-center justify-between mb-2">
@@ -186,6 +189,14 @@ export function Sidebar() {
           Sign out
         </Button>
       </div>
+    </>
+  );
+}
+
+export function Sidebar() {
+  return (
+    <aside className="hidden lg:flex flex-col w-72 shrink-0 bg-lifted-cream border-r border-ink-black/5 h-screen sticky top-0">
+      <SidebarContent />
     </aside>
   );
 }

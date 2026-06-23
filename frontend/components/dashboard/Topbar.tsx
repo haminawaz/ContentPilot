@@ -5,6 +5,7 @@ import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { ChevronRight, Zap } from "lucide-react";
 import { getUser, getCredits, type StoredCredits } from "@/lib/user-storage";
+import { MobileSidebar } from "./MobileSidebar";
 
 const LABELS: Record<string, string> = {
   dashboard: "Overview",
@@ -74,8 +75,9 @@ export function Topbar() {
   return (
     <header className="sticky top-0 z-30 bg-canvas-cream/80 backdrop-blur-xl border-b border-ink-black/5">
       <div className="flex items-center justify-between gap-4 px-6 lg:px-10 h-16">
+        <MobileSidebar />
         <nav
-          className="flex items-center gap-1.5 text-[13px] text-slate-gray min-w-0"
+          className="flex items-center gap-1.5 text-[13px] text-slate-gray min-w-0 mr-auto"
           aria-label="Breadcrumb"
         >
           {breadcrumbs.map((crumb, i) => {
