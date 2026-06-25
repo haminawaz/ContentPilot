@@ -1,5 +1,14 @@
 import Joi from "joi";
 
+const blockedDomains = [
+  "mailinator.com",
+  "tempmail.com",
+  "guerrillamail.com",
+  "10minutemail.com",
+  "yopmail.com",
+  "trashmail.com",
+];
+
 const registerSchema = Joi.object({
   first_name: Joi.string().trim().required().min(2).max(50).messages({
     "string.min": "First name must be at least 2 characters long",
@@ -18,10 +27,19 @@ const registerSchema = Joi.object({
     .lowercase()
     .email({ minDomainSegments: 2 })
     .required()
+    .custom((value, helpers) => {
+      const domain = value.split("@")[1];
+      if (blockedDomains.includes(domain)) {
+        return helpers.error("string.blockedDomain");
+      }
+      return value;
+    })
     .messages({
       "string.email": "Enter a valid email address",
       "any.required": "Email is required",
       "string.empty": "Email is not allowed to be empty",
+      "string.blockedDomain":
+        "Temporary or fake email addresses are not allowed",
     }),
   phone: Joi.string()
     .trim()
@@ -58,10 +76,19 @@ const resendOTP = Joi.object({
     .lowercase()
     .email({ minDomainSegments: 2 })
     .required()
+    .custom((value, helpers) => {
+      const domain = value.split("@")[1];
+      if (blockedDomains.includes(domain)) {
+        return helpers.error("string.blockedDomain");
+      }
+      return value;
+    })
     .messages({
       "string.email": "Enter a valid email address",
       "any.required": "Email is required",
       "string.empty": "Email is not allowed to be empty",
+      "string.blockedDomain":
+        "Temporary or fake email addresses are not allowed",
     }),
 });
 
@@ -167,10 +194,19 @@ const forgotPassword = Joi.object({
     .lowercase()
     .email({ minDomainSegments: 2 })
     .required()
+    .custom((value, helpers) => {
+      const domain = value.split("@")[1];
+      if (blockedDomains.includes(domain)) {
+        return helpers.error("string.blockedDomain");
+      }
+      return value;
+    })
     .messages({
       "string.email": "Enter a valid email address",
       "any.required": "Email is required",
       "string.empty": "Email is not allowed to be empty",
+      "string.blockedDomain":
+        "Temporary or fake email addresses are not allowed",
     }),
 });
 
